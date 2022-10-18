@@ -8,6 +8,6 @@
 import SpriteKit
 import GameplayKit
 
-class IntroScene: SKScene {
+class IntroController: SKScene {
     
 }
