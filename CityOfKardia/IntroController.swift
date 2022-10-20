@@ -9,5 +9,10 @@ import SpriteKit
 import GameplayKit
 
 class IntroController: SKScene {
-    //heyyo
+    //tbc
+    
+    override func didMove(to view: SKView) {
+        
+    }
+    
 }
