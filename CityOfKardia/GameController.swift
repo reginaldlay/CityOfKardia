@@ -11,12 +11,12 @@ import GameplayKit
 class GameController: SKScene {
     
     override func didMove(to view: SKView) {
-        addHomeBackground()
-        addLogo()
-        addErryMascot()
-        addNewGameButton()
+        addNode(imageName: "homeBackground", name: "homeBackground", widthSize: 844, heightSize: 390, xPos: 0, yPos: 0, zPos: -1)
+        addNode(imageName: "logo", name: "logo", widthSize: 142, heightSize: 68, xPos: -319, yPos: 129, zPos: 0)
+        addNode(imageName: "erryMascot", name: "erryMascot", widthSize: 201.97, heightSize: 320, xPos: 0, yPos: 0, zPos: 0)
+        addNode(imageName: "newGameButton", name: "newGameButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -133, zPos: 0)
+        addNode(imageName: "continueButton", name: "continueButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -49, zPos: 0)
         
-        //tbc
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,48 +35,16 @@ class GameController: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //ganti button newGameButton jadi newGameButtonClicked
     }
-    
-    func addHomeBackground() {
-        let homeBackground = SKSpriteNode(imageNamed: "homeBackground")
-        homeBackground.name = "homeBackground"
-        homeBackground.size = CGSize(width: 844, height: 390)
-        homeBackground.position = CGPoint.zero
-        homeBackground.zPosition = -1
-        addChild(homeBackground)
-    }
-    
-    func addLogo(){
-        let logo = SKSpriteNode(imageNamed: "logo")
-        logo.name = "logo"
-        logo.size = CGSize(width: 142, height: 68)
-        logo.position = CGPoint(x: -319, y: 129)
-        addChild(logo)
-    }
-    
-    func addErryMascot() {
-        let erryMascot = SKSpriteNode(imageNamed: "erryMascot")
-        erryMascot.name = "erryMascot"
-        erryMascot.size = CGSize(width: 201.97, height: 320)
-        erryMascot.position = CGPoint.zero
-        addChild(erryMascot)
-    }
-    
-    func addNewGameButton() {
-        let newGameButton = SKSpriteNode(imageNamed: "newGameButton")
-        newGameButton.name = "newGameButton"
-        newGameButton.size = CGSize(width: 134, height: 60)
-        newGameButton.position = CGPoint(x: 323, y: -133)
-        addChild(newGameButton)
-    }
-    
-    func addContinueButton() {
-        let continueButton = SKSpriteNode(imageNamed: "continueButton")
-        continueButton.name = "continueButton"
-        continueButton.size = CGSize(width: 134, height: 60)
-        continueButton.position = CGPoint(x: 323, y: -49)
-        addChild(continueButton)
-    }
  
+    func addNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
+        let homeAsset = SKSpriteNode(imageNamed: imageName)
+        homeAsset.name = name
+        homeAsset.size = CGSize(width: widthSize, height: heightSize)
+        homeAsset.position = CGPoint(x: xPos, y: yPos)
+        homeAsset.zPosition = zPos
+        addChild(homeAsset)
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
