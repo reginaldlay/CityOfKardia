@@ -19,6 +19,8 @@
 		3956B51128FD01840070B52C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B50F28FD01840070B52C /* Main.storyboard */; };
 		3956B51328FD01850070B52C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51228FD01850070B52C /* Assets.xcassets */; };
 		3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51428FD01850070B52C /* LaunchScreen.storyboard */; };
+		6BE38F802906979800CBD247 /* Scene01.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BE38F7F2906979800CBD247 /* Scene01.sks */; };
+		6BE38F832906A01000CBD247 /* Scene01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE38F822906A01000CBD247 /* Scene01Controller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		3956B51028FD01840070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3956B51228FD01850070B52C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3956B51528FD01850070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6BE38F7F2906979800CBD247 /* Scene01.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene01.sks; sourceTree = "<group>"; };
+		6BE38F822906A01000CBD247 /* Scene01Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene01Controller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,20 +71,38 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
+				6BE38F81290697A000CBD247 /* Scene */,
+				6BE38F7C2906911700CBD247 /* Player */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
-				3901D83628FE8FD300071442 /* IntroScene.sks */,
 				3956B50928FD01840070B52C /* Actions.sks */,
 				3956B50B28FD01840070B52C /* GameController.swift */,
-				3901D83C28FE912B00071442 /* IntroController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				3901D83828FE904100071442 /* GameUIController.swift */,
-				3901D83A28FE906700071442 /* PlayerStateController.swift */,
 				3956B50F28FD01840070B52C /* Main.storyboard */,
 				3956B51228FD01850070B52C /* Assets.xcassets */,
 				3956B51428FD01850070B52C /* LaunchScreen.storyboard */,
 			);
 			path = CityOfKardia;
+			sourceTree = "<group>";
+		};
+		6BE38F7C2906911700CBD247 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				3901D83A28FE906700071442 /* PlayerStateController.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		6BE38F81290697A000CBD247 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3901D83628FE8FD300071442 /* IntroScene.sks */,
+				6BE38F7F2906979800CBD247 /* Scene01.sks */,
+				3901D83C28FE912B00071442 /* IntroController.swift */,
+				6BE38F822906A01000CBD247 /* Scene01Controller.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +166,7 @@
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
+				6BE38F802906979800CBD247 /* Scene01.sks in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
 				3956B50A28FD01840070B52C /* Actions.sks in Resources */,
@@ -159,6 +182,7 @@
 			files = (
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
+				6BE38F832906A01000CBD247 /* Scene01Controller.swift in Sources */,
 				3901D83928FE904100071442 /* GameUIController.swift in Sources */,
 				3901D83B28FE906700071442 /* PlayerStateController.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
