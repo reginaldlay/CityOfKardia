@@ -1,5 +1,5 @@
 //
-//  GameUIController.swift
+//  PlayerStateController.swift
 //  CityOfKardia
 //
 //  Created by Reginald Lay on 18/10/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameUIController: UIViewController {
+class PlayerStateController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
