@@ -19,6 +19,8 @@
 		3956B51128FD01840070B52C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B50F28FD01840070B52C /* Main.storyboard */; };
 		3956B51328FD01850070B52C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51228FD01850070B52C /* Assets.xcassets */; };
 		3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51428FD01850070B52C /* LaunchScreen.storyboard */; };
+		39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */; };
+		39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39642A2F290A91FB00A82C34 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		3956B51028FD01840070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3956B51228FD01850070B52C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3956B51528FD01850070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlayerModel.xcdatamodel; sourceTree = "<group>"; };
+		39642A2F290A91FB00A82C34 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				3901D83A28FE906700071442 /* PlayerStateController.swift */,
 				3956B50F28FD01840070B52C /* Main.storyboard */,
 				3956B51228FD01850070B52C /* Assets.xcassets */,
+				39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */,
+				39642A2F290A91FB00A82C34 /* CoreDataManager.swift */,
 				3956B51428FD01850070B52C /* LaunchScreen.storyboard */,
 			);
 			path = CityOfKardia;
@@ -161,7 +167,9 @@
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
 				3901D83928FE904100071442 /* GameUIController.swift in Sources */,
 				3901D83B28FE906700071442 /* PlayerStateController.swift in Sources */,
+				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
+				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +388,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */,
+			);
+			currentVersion = 39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */;
+			path = PlayerModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3956B4FA28FD01840070B52C /* Project object */;
 }
