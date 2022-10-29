@@ -37,7 +37,7 @@ class DialogueBox: SKNode {
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 36, height: 30, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17, fontName: "SFPro-Regular")
-        createLabel(text: "Name", xPos: -334.53, yPos: -157, zPos: 14, maxLayout: 100, lineAmount: 1, horizontal: .center, vertical: .baseline, name: "name_label", fontSize: 17, fontName: "Acme-Regular")
+        createLabel(text: "Name", xPos: -334.53, yPos: -160, zPos: 14, maxLayout: 100, lineAmount: 1, horizontal: .center, vertical: .baseline, name: "name_label", fontSize: 17, fontName: "Acme-Regular")
                 
         hideDialogue(state: true)
 //        startDialogue(dialogue_assets: ext_gate01)
@@ -192,7 +192,7 @@ class DialogueBox: SKNode {
         return [
             NSAttributedString.Key.strokeColor : strokeColor,
             NSAttributedString.Key.foregroundColor : insideColor,
-            NSAttributedString.Key.strokeWidth : strokeWidth,
+            NSAttributedString.Key.strokeWidth : -strokeWidth,
             NSAttributedString.Key.font : fontName
         ]
     }
