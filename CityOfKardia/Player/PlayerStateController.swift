@@ -11,86 +11,70 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+// MARK: Inisialisasi State Machine
 class PlayerStateController : GKState {
-    unowned var player : SKNode
+    unowned var player : PlayerNode
     
-    init(player: SKNode) {
+    init(player: PlayerNode) {
         self.player = player
         
         super.init()
     }
 }
 
-// FIXME: State saat sudah di tanah. Transisi dari state jumping msh ada bug / gamasuk kesini abis jumping.
-class LandingState : PlayerStateController {
+// MARK: State saat berjalan ke kanan
+class IsWalkingRightState : PlayerStateController {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is LandingState.Type, is JumpingState.Type : return false
-            default : return true
-        }
-    }
-
-    override func didEnter(from previousState: GKState?) {
-        stateMachine?.enter(IdleState.self)
-        print("land")
-    }
-}
-
-// FIXME: State lompat masih ngebug. Animasi ga jalan.
-class JumpingState : PlayerStateController {
-    
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-
-        if stateClass is IdleState.Type { return true }
-        return false
-        
-    }
-    
-    let jumpTexture : Array<SKTexture> = (1...4).map({return "Erry_Jump_\($0)"}).map(SKTexture.init)
-    lazy var jumpAction = { SKAction.animate(with: self.jumpTexture, timePerFrame: 0.1) }
-
-    override func didEnter(from previousState: GKState?) {
-        
-        player.removeAllActions()
-        player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300)) // lompat
-        player.run(jumpAction()) // animasi
-
-    }
-    
-}
-
-// MARK: State pas player idling
-class IdleState : PlayerStateController {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        switch stateClass {
-            case is LandingState.Type, is IdleState.Type : return false
+        case is IsWalkingRightState.Type : return false
             default : return true
         }
     }
     
-    let idleTexture : Array<SKTexture> = (1...4).map({return "Erry_Idle_\($0)"}).map(SKTexture.init)
-    lazy var IdleAction = { SKAction.repeatForever(.animate(with: self.idleTexture, timePerFrame: 0.2)) }
-    
     override func didEnter(from previousState: GKState?) {
-        player.removeAllActions()
-        player.run(IdleAction())
+        player.runMoveAnimation(direction: "right")
     }
 }
 
-// MARK: State saat player berjalan
-class WalkingState : PlayerStateController {
+// MARK: State saat berjalan ke kiri
+class IsWalkingLeftState : PlayerStateController {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-            case is LandingState.Type, is WalkingState.Type : return false
+        case is IsWalkingLeftState.Type : return false
             default : return true
         }
     }
     
-    let WalkingTexture : Array<SKTexture> = (1...12).map({return "Erry_Run_\($0)"}).map(SKTexture.init)
-    lazy var WalkingAction = { SKAction.repeatForever(.animate(with: self.WalkingTexture, timePerFrame: 0.1)) }
-    
     override func didEnter(from previousState: GKState?) {
-        player.removeAllActions()
-        player.run(WalkingAction())
+        player.runMoveAnimation(direction: "left")
     }
 }
+
+// MARK: State saat lompat
+class IsJumpingState : PlayerStateController {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        switch stateClass {
+            case is IsJumpingState.Type : return false
+            default : return true
+        }
+    }
+    
+    override func didEnter(from previousState: GKState?) {
+        player.jump()
+    }
+}
+
+// MARK: State saat idle
+class IsIdleState : PlayerStateController {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        switch stateClass {
+            case is IsIdleState.Type : return false
+            default : return true
+        }
+    }
+    
+    override func didEnter(from previousState: GKState?) {
+        player.runIdleAnimation()
+    }
+}
+

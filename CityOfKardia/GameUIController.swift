@@ -9,48 +9,56 @@ import GameplayKit
 
 class GameUIController: SKScene, SKPhysicsContactDelegate {
     
-    // Nodes
-    var player : SKNode?
-    var leftCtrl : SKNode?
-    var rightCtrl : SKNode?
-    var jump : SKNode?
-    var npc : SKNode?
+    // MARK: Inisialisasi variabel
+    var player : PlayerNode?
+    var NPC : SKNode?
     var logo : SKNode?
+    var playerState : GKStateMachine?
+    let cam = SKCameraNode()
     
-    // Movement & State
-    var moveLeft = false
-    var moveRight = false
-    var facingRight = true
-    let playerSpeed = 4.0
-    var playerStateMachine : GKStateMachine!
+    // MARK: Flag untuk player
+    var inContact = false // True saat playerNode melakukan contact dengan node lain
+    var grounded = true // True saat playerNode bersentuhan dengan tanah
     
-    // Flag
-    var inContact = false
+    // MARK: Flag untuk button press
+    var leftBtnIsPressed = false
+    var rightBtnIsPressed = false
+    var actionBtnIsPressed = false
     
     override func didMove(to view: SKView) {
-        player = childNode(withName: "Player")
-        leftCtrl = childNode(withName: "LeftButton")
-        rightCtrl = childNode(withName: "RightButton")
-        jump = childNode(withName: "ActionButton")
-        npc = childNode(withName: "Gatekeeper_2")
-        logo = childNode(withName: "Logo")
+        
+        self.camera = cam
+        
+        guard let unwrapCamera = self.camera else { return }
+        self.addChild(unwrapCamera)
+        unwrapCamera.zPosition = 100
+        
+        setupHUD()
+        
+        guard let unwrapPlayer = childNode(withName: "Player") as? PlayerNode,
+              let unwrapNPC = childNode(withName: "Gatekeeper_2"),
+              let unwrapLogo = childNode(withName: "Logo")
+        else { return }
+        
+        player = unwrapPlayer
+        NPC = unwrapNPC
+        logo = unwrapLogo
         
         physicsWorld.contactDelegate = self
         
-        playerStateMachine = GKStateMachine(states: [
-            JumpingState(player: player!),
-            IdleState(player: player!),
-            WalkingState(player: player!),
-            LandingState(player: player!)
-        ])
+        playerState = GKStateMachine(states:
+                                    [
+                                        IsJumpingState(player: unwrapPlayer),
+                                        IsWalkingLeftState(player: unwrapPlayer),
+                                        IsWalkingRightState(player: unwrapPlayer),
+                                        IsIdleState(player: unwrapPlayer)
+                                    ])
         
         logo?.isHidden = true
-        
-        playerStateMachine.enter(IdleState.self)
     }
 }
 
-// MARK: Logika saat ada input dari user
+// MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -58,98 +66,117 @@ extension GameUIController {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
             
-            if (node.name == "LeftButton") {
-                moveLeft = true
-            } else if (node.name == "RightButton") {
-                moveRight = true
-            } else if (node.name == "ActionButton") {
-                print("touched")
-                
-                if inContact {
-                    logo?.isHidden = false
-                } else {
-                    playerStateMachine.enter(JumpingState.self)
-                }
+            if (node.name == "leftButton") { leftBtnIsPressed = true }
+            else if (node.name == "rightButton") { rightBtnIsPressed = true }
+            
+            if (node.name == "actionButton") {
+                if inContact { logo?.isHidden = false }
+                    else { actionBtnIsPressed = true }
             }
+        
         }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Insert logic kalo butuh saat touchnya ngedrag
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             
-            if moveLeft || moveRight {
-                moveLeft = false
-                moveRight = false
-                player?.removeAllActions()
-                playerStateMachine.enter(IdleState.self)
-            }
-        
+            leftBtnIsPressed = false
+            rightBtnIsPressed = false
+            actionBtnIsPressed = false
+
     }
 }
 
-// MARK: Logika yang terjadi saat terjadi kontak antara dua node.
+// MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
-    
-    // Saat mulai kontak
     func didBegin(_ contact: SKPhysicsContact) {
         let bodyA = contact.bodyA.node?.name
         let bodyB = contact.bodyB.node?.name
         
-        if (bodyA == "Player" && bodyB == "Gatekeeper_2") || (bodyA == "Player" && bodyB == "Gatekeeper_2"){
+        if bodyA == player?.name && bodyB == NPC?.name {
+            inContact = true
+        } else if bodyB == player?.name && bodyA == NPC?.name {
             inContact = true
         }
+        
+        if bodyA == player?.name && bodyB == "Ground" {
+            grounded = true
+        } else if bodyB == player?.name && bodyA == "Ground" {
+            grounded = true
+        }
+        
     }
     
-    // Saat akhir kontak
     func didEnd(_ contact: SKPhysicsContact) {
         let bodyA = contact.bodyA.node?.name
         let bodyB = contact.bodyB.node?.name
         
-        if (bodyA == "Player" && bodyB == "Gatekeeper_2") || (bodyA == "Player" && bodyB == "Gatekeeper_2") {
+        if  bodyA == player?.name && bodyB == NPC?.name {
+            inContact = false
+            logo?.isHidden = true
+        } else if bodyB == player?.name && bodyA == NPC?.name {
             inContact = false
             logo?.isHidden = true
         }
+        
+        if bodyA == player?.name && bodyB == "Ground" {
+            grounded = false
+        } else if bodyB == player?.name && bodyA == "Ground" {
+            grounded = false
+        }
+    
     }
 }
 
-// MARK: Menjalankan animasi & logic menggunakan fungsi update.
+// MARK: Setup HUD
+extension GameUIController {
+    func setupHUD() {
+        addCameraChildNode(imageName: "LeftButton", name: "leftButton", widthSize: 60, heightSize: 60, xPos: -352, yPos: -133)
+        addCameraChildNode(imageName: "RightButton", name: "rightButton", widthSize: 60, heightSize: 60, xPos: -252, yPos: -133)
+        addCameraChildNode(imageName: "ActionButton", name: "actionButton", widthSize: 66, heightSize: 84, xPos: 349, yPos: -129)
+    }
+    
+    func addCameraChildNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat) {
+        let HUD = SKSpriteNode(imageNamed: imageName)
+        HUD.name = name
+        HUD.size = CGSize(width: widthSize, height: heightSize)
+        HUD.position = CGPoint(x: xPos, y: yPos)
+        HUD.zPosition = 100
+        camera?.addChild(HUD)
+    }
+}
+
+// MARK: Fungsi update
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
-        // X Velocity & states
-        if moveRight {
-            let displacement = CGVector(dx: playerSpeed, dy: 0)
-            let moveAction = SKAction.move(by: displacement, duration: 0)
-            player?.run(moveAction)
-            playerStateMachine.enter(WalkingState.self)
-        } else if moveLeft {
-            let displacement = CGVector(dx: playerSpeed * -1, dy: 0)
-            let moveAction = SKAction.move(by: displacement, duration: 0)
-            player?.run(moveAction)
-            playerStateMachine.enter(WalkingState.self)
-        } else if !moveLeft && !moveRight {
-            playerStateMachine.enter(IdleState.self)
+        if let player = player {
+            self.camera?.position = player.position
         }
         
-        // Flip texture when walking
-        if moveRight && !facingRight {
-            let flipTexturePositive = SKAction.scaleX(to: 1, duration: 0)
-            player?.run(flipTexturePositive)
-            facingRight = true
-        } else if moveLeft && facingRight {
-            let flipTextureNegative = SKAction.scaleX(to: -1, duration: 0)
-            player?.run(flipTextureNegative)
-            facingRight = false
+        if grounded {
+            if actionBtnIsPressed {
+                playerState?.enter(IsJumpingState.self)
+            }
+            
+            if leftBtnIsPressed {
+                
+                playerState?.enter(IsWalkingLeftState.self)
+                player?.move(direction: "left")
+                
+            } else if rightBtnIsPressed {
+                
+                playerState?.enter(IsWalkingRightState.self)
+                player?.move(direction: "right")
+                
+            }
+            
+            if !actionBtnIsPressed && !leftBtnIsPressed && !rightBtnIsPressed {
+                playerState?.enter(IsIdleState.self)
+            }
+        } else {
+            player?.runJumpAnimation()
         }
         
-        // Y velocity cap
-        let velocityY = player?.physicsBody?.velocity.dy ?? 0
-        if velocityY > 400 {
-            player?.physicsBody?.velocity.dy = 400
-        }
     }
-    
 }
