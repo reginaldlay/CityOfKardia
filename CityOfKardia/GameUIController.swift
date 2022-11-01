@@ -1,11 +1,11 @@
 //
-//  Kardia2
+//  GameUIController.swift
+//  CityOfKardia
 //
-//  Created by Farrel Brian on 13/10/22.
+//  Created by Reginald Lay on 18/10/22.
 //
 
-import SpriteKit
-import GameplayKit
+import UIKit
 
 class GameUIController: SKScene, SKPhysicsContactDelegate {
     
