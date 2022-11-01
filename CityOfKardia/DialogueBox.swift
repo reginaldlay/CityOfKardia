@@ -33,14 +33,13 @@ class DialogueBox: SKNode {
         createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 718, height: 98, name: "box")
         createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
         createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
-        createSprite(texture: "name-box", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
+        createSprite(texture: "", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 36, height: 30, name: "arrow")
         
-        createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17, fontName: "SFPro-Regular")
-        createLabel(text: "Name", xPos: -334.53, yPos: -160, zPos: 14, maxLayout: 100, lineAmount: 1, horizontal: .center, vertical: .baseline, name: "name_label", fontSize: 17, fontName: "Acme-Regular")
-                
+        createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
+        
         hideDialogue(state: true)
-//        startDialogue(dialogue_assets: ext_gate01)
+        startDialogue(dialogue_assets: ext_gate01)
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -59,10 +58,9 @@ class DialogueBox: SKNode {
         self.addChild(node)
     }
     
-    public func createLabel(text: String, xPos: Double, yPos: Double, zPos: CGFloat, maxLayout: CGFloat, lineAmount: Int, horizontal: SKLabelHorizontalAlignmentMode, vertical: SKLabelVerticalAlignmentMode, name: String, fontSize: Int, fontName: String) {
-        let node = SKLabelNode(fontNamed: fontName);
+    public func createLabel(text: String, xPos: Double, yPos: Double, zPos: CGFloat, maxLayout: CGFloat, lineAmount: Int, horizontal: SKLabelHorizontalAlignmentMode, vertical: SKLabelVerticalAlignmentMode, name: String, fontSize: Int) {
+        let node = SKLabelNode(text: text);
         node.name = name
-        node.text = text
         node.position = CGPoint(x: xPos, y: yPos)
         node.zPosition = CGFloat(zPos);
         node.horizontalAlignmentMode = horizontal
@@ -72,7 +70,7 @@ class DialogueBox: SKNode {
         node.numberOfLines = lineAmount;
         node.fontSize = CGFloat(fontSize)
         node.fontColor = .black
-//        node.fontName = fontName
+        node.fontName = "SF-Pro"
         self.addChild(node)
     }
     
@@ -88,7 +86,7 @@ class DialogueBox: SKNode {
         refSprite(name: "box").isHidden = state
         refSprite(name: "image_background").isHidden = state
         refSprite(name: "arrow").isHidden = state
-        refLabel(name: "name_label").isHidden = state
+//        refLabel(name: "name_label").isHidden = state
         refSprite(name: "name_box").isHidden = state
         
         if !state {
@@ -103,7 +101,7 @@ class DialogueBox: SKNode {
 
         refLabel(name: "label").text = "" // Empty Label
         refSprite(name: "image").texture = SKTexture(imageNamed: dialogue_assets[count].image ?? "")
-        refLabel(name: "name_label").attributedText = NSMutableAttributedString(string: dialogue_assets[count].name ?? "no name", attributes: stroke(strokeWidth: 7, insideColor: .white, strokeColor: UIColor(red: CGFloat(179/255.0), green: CGFloat(118/255.0), blue: CGFloat(104/255.0), alpha: 1.0), fontName: "Acme-Regular"))
+        refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
         typeLetter()
         
@@ -127,10 +125,6 @@ class DialogueBox: SKNode {
         timer?.invalidate() // stop the timer
         typing = false
         countType = 0
-    }
-    
-    internal func printTest() {
-        print("TESTDSAFAS")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -186,14 +180,5 @@ class DialogueBox: SKNode {
         let sequence = SKAction.sequence([up, down])
         let repeated = SKAction.repeatForever(sequence)
         arrow.run(repeated)
-    }
-    
-    public func stroke(strokeWidth: Float, insideColor: UIColor, strokeColor: UIColor, fontName: String) -> [NSAttributedString.Key: Any]{
-        return [
-            NSAttributedString.Key.strokeColor : strokeColor,
-            NSAttributedString.Key.foregroundColor : insideColor,
-            NSAttributedString.Key.strokeWidth : -strokeWidth,
-            NSAttributedString.Key.font : fontName
-        ]
     }
 }

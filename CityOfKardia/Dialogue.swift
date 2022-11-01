@@ -19,59 +19,85 @@ struct DialogueIntro {
     var label: String?
 }
 
-let erry = "Erry"
-let leona = "Leona"
-let satpam_01 = "Satpam 01"
-let satpam_02 = "Satpam 02"
-let senior = "Senior"
+enum erry: String {
+    case happy = "Erry/erry_happy"
+    case scared = "Erry/erry_scared"
+    case normal = "Erry/erry_normal"
+    case shocked = "Erry/erry_shocked"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
 
-let erry_happy = "Erry/erry_happy"
-let erry_scared = "Erry/erry_scared"
-let erry_normal = "Erry/erry_normal"
-let erry_shocked = "Erry/erry_shocked"
+enum leona: String {
+    case happy = "Leona/leona_happy"
+    case scared = "Leona/leona_scared"
+    case normal = "Leona/leona_normal"
+    case shocked = "Leona/leona_shocked"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
 
-let leona_happy = "Leona/leona_happy"
-let leona_scared = "Leona/leona_scared"
-let leona_normal = "Leona/leona_normal"
-let leona_shocked = "Leona/leona_shocked"
+enum gatekeeper: String {
+    case happy = "Gatekeeper/gatekeeper_happy"
+    case sad = "Gatekeeper/gatekeeper_sad"
+    case normal = "Gatekeeper/gatekeeper_normal"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
 
-let gatekeeper_happy = "Gatekeeper/gatekeeper_happy"
-let gatekeeper_sad = "Gatekeeper/gatekeeper_sad"
-let gatekeeper_normal = "Gatekeeper/gatekeeper_normal"
+enum nameBox: String {
+    case erry = "namebox_erry"
+    case leona = "namebox_leona"
+    case gk_01 = "namebox_01"
+    case gk_02 = "namebox_02"
+    case gk_03 = "namebox_03"
+    case senior = "namebox_senior"
+    case teller = "namebox_teller"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
 
 let ext_tubuh_manusia = [
-    DialogueIntro(image: erry_happy, label: "Darah merupakan jaringan yang sangat penting dalam tubuh manusia. Di dalam darah, terdapat beberapa komponen yang membentuk darah, salah satunya adalah Sel Darah Merah. Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
-    DialogueIntro(image: erry_happy, label: "Di dalam darah, terdapat beberapa komponen yang membentuk darah, salah satunya adalah Sel Darah Merah. Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
-    DialogueIntro(image: erry_happy, label: "Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
+    DialogueIntro(image: erry.happy.value, label: "Darah merupakan jaringan yang sangat penting dalam tubuh manusia. Di dalam darah, terdapat beberapa komponen yang membentuk darah, salah satunya adalah Sel Darah Merah. Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
+    DialogueIntro(image: erry.happy.value, label: "Di dalam darah, terdapat beberapa komponen yang membentuk darah, salah satunya adalah Sel Darah Merah. Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
+    DialogueIntro(image: erry.happy.value, label: "Sel Darah Merah bertugas untuk mengangkut oksigen dan karbondioksida yang diedarkan diseluruh tubuh!"),
 ]
 
 let ext_serambi_kanan = [
-    Dialogue(image: erry_shocked, label: "Aduh gawat...", name: erry),
-    Dialogue(image: erry_scared, label: "Aku telat!", name: erry),
-    Dialogue(image: erry_shocked, label: "Aku harus segera sampai.", name: erry)
+    Dialogue(image: erry.scared.value, label: "Aduh gawat...", name: nameBox.erry.value),
+    Dialogue(image: erry.shocked.value, label: "Aku telat!", name: nameBox.erry.value),
+    Dialogue(image: erry.scared.value, label: "Aku harus segera sampai.", name: nameBox.erry.value)
 ]
 
 let ext_gate01 = [
-    Dialogue(image: gatekeeper_normal, label: "Eh, aku tidak pernah melihat kamu disini. Kamu anak baru?", name: satpam_01),
-    Dialogue(image: erry_happy, label: "Eh, iya pak. Baru hari pertama menjadi anak magang divisi sel darah merah!", name: erry),
-    Dialogue(image: gatekeeper_happy, label: "Oh! Kalau begitu... SELAMAT DATANG DI KOTA KARDIA! Kota Kardia berfungsi untuk memompa darah ke seluruh tubuh dan menerima darah kembali seusai dari paru-paru", name: satpam_01),
-    Dialogue(image: erry_shocked, label: "Wow, ternyata kota ini keren sekali ya!", name: erry),
-    Dialogue(image: gatekeeper_normal, label: "Ya! Jadi, penting sekali untuk menjaga Kota Kardia untuk tetap sehat.", name: satpam_01),
-    Dialogue(image: gatekeeper_happy, label: "Sekali lagi, selamat datang ya, silahkan masuk.", name: satpam_01),
-    Dialogue(image: erry_scared, label: "Kalau begitu, saya lari lagi ya pak. Saya sudah dah mau terlambat.", name: erry),
-    Dialogue(image: gatekeeper_happy, label: "Semangat, dik!", name: satpam_01)
+    Dialogue(image: gatekeeper.normal.value, label: "Eh, aku tidak pernah melihat kamu disini. Kamu anak baru?", name: nameBox.gk_01.value),
+    Dialogue(image: erry.happy.value, label: "Eh, iya pak. Baru hari pertama menjadi anak magang divisi sel darah merah!", name: nameBox.erry.value),
+    Dialogue(image: gatekeeper.happy.value, label: "Oh! Kalau begitu... SELAMAT DATANG DI KOTA KARDIA! Kota Kardia berfungsi untuk memompa darah ke seluruh tubuh dan menerima darah kembali seusai dari paru-paru", name: nameBox.gk_01.value),
+    Dialogue(image: erry.shocked.value, label: "Wow, ternyata kota ini keren sekali ya!", name: nameBox.erry.value),
+    Dialogue(image: gatekeeper.normal.value, label: "Ya! Jadi, penting sekali untuk menjaga Kota Kardia untuk tetap sehat.", name: nameBox.gk_01.value),
+    Dialogue(image: gatekeeper.happy.value, label: "Sekali lagi, selamat datang ya, silahkan masuk.", name: nameBox.gk_01.value),
+    Dialogue(image: erry.scared.value, label: "Kalau begitu, saya lari lagi ya pak. Saya sudah dah mau terlambat.", name: nameBox.erry.value),
+    Dialogue(image: gatekeeper.happy.value, label: "Semangat, dik!", name: nameBox.gk_01.value)
 ]
 
 let int_gate01 = [
-    Dialogue(image: erry_shocked , label: "Aduh maaf, saya sedang terburu-buru. Sini, saya bantu bereskan kertas- kertasnya ya."),
-    Dialogue(image: erry_normal, label: "Sekali lagi, maaf ya, saya ceroboh."),
-    Dialogue(image: leona_normal, label: "Oh iya, tidak apa-apa. Terima kasih ya."),
-    Dialogue(image: erry_happy, label: "Saya ERRY, anak magang divisi sel darah merah."),
-    Dialogue(image: leona_normal, label: "Saya LEONA. Kebetulan, saya juga  anak magang di divisi sel darah putih."),
-    Dialogue(image: erry_normal, label: "Wah, halo LEONA, kebetulan saya sedang menuju ke Bilik Kanan. Apakah kamu juga mengarah kesana?"),
-    Dialogue(image: leona_shocked, label: "Ah, sayang sekali saya tidak mengarah kesana."),
-    Dialogue(image: erry_happy, label: "Ooh, baiklah. Kalau begitu saya lanjut jalan dulu ya. Senang berkenalan dengan kamu!"),
-    Dialogue(image: leona_happy, label: "Iya, hati-hati selalu ya. Sampai jumpa di lain waktu!"),
+    Dialogue(image: erry.shocked.value , label: "Aduh maaf, saya sedang terburu-buru. Sini, saya bantu bereskan kertas- kertasnya ya.", name: nameBox.erry.value),
+    Dialogue(image: erry.normal.value, label: "Sekali lagi, maaf ya, saya ceroboh.", name: nameBox.erry.value),
+    Dialogue(image: leona.normal.value, label: "Oh iya, tidak apa-apa. Terima kasih ya.", name: nameBox.leona.value),
+    Dialogue(image: erry.happy.value, label: "Saya ERRY, anak magang divisi sel darah merah.", name: nameBox.erry.value),
+    Dialogue(image: leona.happy.value, label: "Saya LEONA. Kebetulan, saya juga  anak magang di divisi sel darah putih.", name: nameBox.leona.value),
+    Dialogue(image: erry.normal.value, label: "Wah, halo LEONA, kebetulan saya sedang menuju ke Bilik Kanan. Apakah kamu juga mengarah kesana?", name: nameBox.erry.value),
+    Dialogue(image: leona.shocked.value, label: "Ah, sayang sekali saya tidak mengarah kesana."),
+    Dialogue(image: erry.happy.value, label: "Ooh, baiklah. Kalau begitu saya lanjut jalan dulu ya. Senang berkenalan dengan kamu!", name: nameBox.erry.value),
+    Dialogue(image: leona.happy.value, label: "Iya, hati-hati selalu ya. Sampai jumpa di lain waktu!", name: nameBox.leona.value),
 ]
 
 let int_guild = [

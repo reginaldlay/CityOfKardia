@@ -18,14 +18,6 @@ class IntroController: SKScene {
     let cam = SKCameraNode();
     
     override func didMove(to view: SKView) {
-        for family: String in UIFont.familyNames
-              {
-                  print(family)
-                  for names: String in UIFont.fontNames(forFamilyName: family)
-                  {
-                      print("== \(names)")
-                  }
-              }
         self.camera = cam
         self.addChild(self.camera!)
         self.camera!.zPosition = 50;
