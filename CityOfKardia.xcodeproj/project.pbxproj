@@ -21,6 +21,10 @@
 		3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51428FD01850070B52C /* LaunchScreen.storyboard */; };
 		39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */; };
 		39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39642A2F290A91FB00A82C34 /* CoreDataManager.swift */; };
+		A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A13290AC217009DA9FC /* DialogueBox.swift */; };
+		A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A14290AC217009DA9FC /* Dialogue.swift */; };
+		A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */; };
+		A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2ED0A1C290AE6F8009DA9FC /* SF-Pro.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,11 @@
 		3956B51528FD01850070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlayerModel.xcdatamodel; sourceTree = "<group>"; };
 		39642A2F290A91FB00A82C34 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A2ED0A13290AC217009DA9FC /* DialogueBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueBox.swift; sourceTree = "<group>"; };
+		A2ED0A14290AC217009DA9FC /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
+		A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Acme-Regular.ttf"; sourceTree = "<group>"; };
+		A2ED0A1A290AE499009DA9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A2ED0A1C290AE6F8009DA9FC /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +80,7 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
+				A2ED0A1A290AE499009DA9FC /* Info.plist */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
 				3901D83628FE8FD300071442 /* IntroScene.sks */,
@@ -85,8 +95,20 @@
 				39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */,
 				39642A2F290A91FB00A82C34 /* CoreDataManager.swift */,
 				3956B51428FD01850070B52C /* LaunchScreen.storyboard */,
+				A2ED0A14290AC217009DA9FC /* Dialogue.swift */,
+				A2ED0A13290AC217009DA9FC /* DialogueBox.swift */,
+				A2ED0A17290ADE95009DA9FC /* fonts */,
 			);
 			path = CityOfKardia;
+			sourceTree = "<group>";
+		};
+		A2ED0A17290ADE95009DA9FC /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */,
+				A2ED0A1C290AE6F8009DA9FC /* SF-Pro.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +171,10 @@
 			files = (
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
+				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
+				A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
 				3956B50A28FD01840070B52C /* Actions.sks in Resources */,
 			);
@@ -168,9 +192,11 @@
 				3901D83928FE904100071442 /* GameUIController.swift in Sources */,
 				3901D83B28FE906700071442 /* PlayerStateController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
+				A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
+				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,12 +345,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6UMVQ97QR;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CityOfKardia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,12 +374,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6UMVQ97QR;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CityOfKardia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
