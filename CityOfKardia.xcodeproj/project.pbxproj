@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3901D83728FE8FD300071442 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3901D83628FE8FD300071442 /* IntroScene.sks */; };
-		3901D83928FE904100071442 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901D83828FE904100071442 /* GameUIController.swift */; };
-		3901D83B28FE906700071442 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901D83A28FE906700071442 /* PlayerStateController.swift */; };
 		3901D83D28FE912B00071442 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901D83C28FE912B00071442 /* IntroController.swift */; };
 		3956B50628FD01840070B52C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956B50528FD01840070B52C /* AppDelegate.swift */; };
 		3956B50828FD01840070B52C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3956B50728FD01840070B52C /* GameScene.sks */; };
@@ -21,6 +19,11 @@
 		3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51428FD01850070B52C /* LaunchScreen.storyboard */; };
 		39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */; };
 		39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39642A2F290A91FB00A82C34 /* CoreDataManager.swift */; };
+		6B21C2A729124B6700DF3662 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A629124B6700DF3662 /* PlayerNode.swift */; };
+		6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A829124B7300DF3662 /* PlayerStateController.swift */; };
+		6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2AA29124BC200DF3662 /* GameUIController.swift */; };
+		6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B21C2AC29124C0700DF3662 /* SceneTest.sks */; };
+		6B21C2AF29124C1A00DF3662 /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2AE29124C1A00DF3662 /* SceneTestController.swift */; };
 		A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A13290AC217009DA9FC /* DialogueBox.swift */; };
 		A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A14290AC217009DA9FC /* Dialogue.swift */; };
 		A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */; };
@@ -29,8 +32,6 @@
 
 /* Begin PBXFileReference section */
 		3901D83628FE8FD300071442 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
-		3901D83828FE904100071442 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
-		3901D83A28FE906700071442 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
 		3901D83C28FE912B00071442 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
 		3956B50228FD01840070B52C /* CityOfKardia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityOfKardia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3956B50528FD01840070B52C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +44,11 @@
 		3956B51528FD01850070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlayerModel.xcdatamodel; sourceTree = "<group>"; };
 		39642A2F290A91FB00A82C34 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6B21C2A629124B6700DF3662 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
+		6B21C2A829124B7300DF3662 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
+		6B21C2AA29124BC200DF3662 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
+		6B21C2AC29124C0700DF3662 /* SceneTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SceneTest.sks; sourceTree = "<group>"; };
+		6B21C2AE29124C1A00DF3662 /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTestController.swift; sourceTree = "<group>"; };
 		A2ED0A13290AC217009DA9FC /* DialogueBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueBox.swift; sourceTree = "<group>"; };
 		A2ED0A14290AC217009DA9FC /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Acme-Regular.ttf"; sourceTree = "<group>"; };
@@ -80,7 +86,10 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
+				6B21C2A529124B2E00DF3662 /* Player */,
+				6B21C2A429124B2200DF3662 /* Scene */,
 				A2ED0A1A290AE499009DA9FC /* Info.plist */,
+				6B21C2AA29124BC200DF3662 /* GameUIController.swift */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
 				3901D83628FE8FD300071442 /* IntroScene.sks */,
@@ -88,8 +97,6 @@
 				3956B50B28FD01840070B52C /* GameController.swift */,
 				3901D83C28FE912B00071442 /* IntroController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
-				3901D83828FE904100071442 /* GameUIController.swift */,
-				3901D83A28FE906700071442 /* PlayerStateController.swift */,
 				3956B50F28FD01840070B52C /* Main.storyboard */,
 				3956B51228FD01850070B52C /* Assets.xcassets */,
 				39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */,
@@ -100,6 +107,24 @@
 				A2ED0A17290ADE95009DA9FC /* fonts */,
 			);
 			path = CityOfKardia;
+			sourceTree = "<group>";
+		};
+		6B21C2A429124B2200DF3662 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				6B21C2AC29124C0700DF3662 /* SceneTest.sks */,
+				6B21C2AE29124C1A00DF3662 /* SceneTestController.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		6B21C2A529124B2E00DF3662 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				6B21C2A629124B6700DF3662 /* PlayerNode.swift */,
+				6B21C2A829124B7300DF3662 /* PlayerStateController.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		A2ED0A17290ADE95009DA9FC /* fonts */ = {
@@ -174,6 +199,7 @@
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
+				6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */,
 				A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
 				3956B50A28FD01840070B52C /* Actions.sks in Resources */,
@@ -187,15 +213,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */,
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
-				3901D83928FE904100071442 /* GameUIController.swift in Sources */,
-				3901D83B28FE906700071442 /* PlayerStateController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
+				6B21C2A729124B6700DF3662 /* PlayerNode.swift in Sources */,
+				6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */,
 				A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
+				6B21C2AF29124C1A00DF3662 /* SceneTestController.swift in Sources */,
 				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
