@@ -35,14 +35,12 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         setupHUD()
         
-        guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode,
-              let unwrapNPC = childNode(withName: "gatekeeper_2"),
-              let unwrapLogo = childNode(withName: "logo")
+        guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
         else { return }
         
         player = unwrapPlayer
-        NPC = unwrapNPC
-        logo = unwrapLogo
+        
+//        print("player pos: \(player?.position.x)")
         
         physicsWorld.contactDelegate = self
         
@@ -55,13 +53,13 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
                                     ])
         
         logo?.isHidden = true
+        print("masuk didmove")
     }
 }
 
 // MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
@@ -75,14 +73,17 @@ extension GameUIController {
             }
         
         }
+        print("left button began: \(leftBtnIsPressed)")
+
         
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            
+      
             leftBtnIsPressed = false
             rightBtnIsPressed = false
             actionBtnIsPressed = false
+        print("left button end: \(leftBtnIsPressed)")
 
     }
 }
@@ -151,7 +152,11 @@ extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
         if let player = player {
-            self.camera?.position = player.position
+            print(player.position.x)
+            if(player.position.x > 0) {
+                self.camera?.position = player.position
+
+            }
         }
         
         if grounded {
