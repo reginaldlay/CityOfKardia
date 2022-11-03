@@ -86,34 +86,50 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
+				39FFAB642913BBFD00351F50 /* Controller */,
+				39FFAB652913BC7900351F50 /* Model */,
 				6B21C2A529124B2E00DF3662 /* Player */,
 				6B21C2A429124B2200DF3662 /* Scene */,
 				A2ED0A1A290AE499009DA9FC /* Info.plist */,
-				6B21C2AA29124BC200DF3662 /* GameUIController.swift */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
-				3956B50728FD01840070B52C /* GameScene.sks */,
-				3901D83628FE8FD300071442 /* IntroScene.sks */,
 				3956B50928FD01840070B52C /* Actions.sks */,
-				3956B50B28FD01840070B52C /* GameController.swift */,
-				3901D83C28FE912B00071442 /* IntroController.swift */,
-				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				3956B50F28FD01840070B52C /* Main.storyboard */,
-				3956B51228FD01850070B52C /* Assets.xcassets */,
-				39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */,
-				39642A2F290A91FB00A82C34 /* CoreDataManager.swift */,
 				3956B51428FD01850070B52C /* LaunchScreen.storyboard */,
-				A2ED0A14290AC217009DA9FC /* Dialogue.swift */,
-				A2ED0A13290AC217009DA9FC /* DialogueBox.swift */,
+				3956B51228FD01850070B52C /* Assets.xcassets */,
 				A2ED0A17290ADE95009DA9FC /* fonts */,
 			);
 			path = CityOfKardia;
 			sourceTree = "<group>";
 		};
+		39FFAB642913BBFD00351F50 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A2ED0A13290AC217009DA9FC /* DialogueBox.swift */,
+				3956B50B28FD01840070B52C /* GameController.swift */,
+				6B21C2AA29124BC200DF3662 /* GameUIController.swift */,
+				3956B50D28FD01840070B52C /* GameViewController.swift */,
+				3901D83C28FE912B00071442 /* IntroController.swift */,
+				6B21C2AE29124C1A00DF3662 /* SceneTestController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		39FFAB652913BC7900351F50 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */,
+				39642A2F290A91FB00A82C34 /* CoreDataManager.swift */,
+				A2ED0A14290AC217009DA9FC /* Dialogue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6B21C2A429124B2200DF3662 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				3956B50728FD01840070B52C /* GameScene.sks */,
+				3901D83628FE8FD300071442 /* IntroScene.sks */,
 				6B21C2AC29124C0700DF3662 /* SceneTest.sks */,
-				6B21C2AE29124C1A00DF3662 /* SceneTestController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
