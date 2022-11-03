@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class SceneBilikKananController: GameUIController {
+class BilikKananController: GameUIController {
     var leona: SKNode?
     var senior: SKNode?
     var gatekeeper01: SKNode?
@@ -33,7 +33,7 @@ class SceneBilikKananController: GameUIController {
 }
 
 //Touch
-extension SceneBilikKananController {
+extension BilikKananController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
     }
@@ -44,7 +44,7 @@ extension SceneBilikKananController {
 }
 
 //Contact antara objek
-extension SceneBilikKananController {
+extension BilikKananController {
     override func didBegin(_ contact: SKPhysicsContact) {
         super.didBegin(contact)
     }
@@ -55,7 +55,7 @@ extension SceneBilikKananController {
 }
 
 //Update
-extension SceneBilikKananController {
+extension BilikKananController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
     }
