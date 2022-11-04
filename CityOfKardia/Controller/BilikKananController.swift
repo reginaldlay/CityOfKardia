@@ -42,7 +42,7 @@ extension BilikKananController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            print("masuk touches began")
+            
             if (node.name == "actionButton") {
                 print("masuk action button \(inContact) \(npcIncontact)")
                 if inContact {
@@ -180,12 +180,11 @@ extension BilikKananController {
 extension BilikKananController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-        if let player = player {
-            //            print(player.position.x)
-            if(player.position.x > 0 && player.position.x < bound02!.position.x - 420) {
-                self.camera?.position = player.position
-            }
-        }
+//        if let player = player {
+//            if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+//                self.camera?.position = player.position
+//            }
+//        }
         
     }
 }

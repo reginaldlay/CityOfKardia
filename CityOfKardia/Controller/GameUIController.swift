@@ -15,6 +15,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var logo : SKNode?
     var playerState : GKStateMachine?
     let cam = SKCameraNode()
+    var playerYPos: CGFloat = 0 //Untuk camera supaya tidak ngikutin saat loncat
     
     // MARK: Flag untuk player
     var inContact = false // True saat playerNode melakukan contact dengan node lain
@@ -57,6 +58,8 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
                                     ])
         
         logo?.isHidden = true
+        playerYPos = player?.position.y ?? 0
+        
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -172,7 +175,7 @@ extension GameUIController {
         
         if let player = player {
             if(player.position.x > 0) {
-                self.camera?.position = player.position
+                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
             }
         }
         
