@@ -19,11 +19,15 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: Flag untuk player
     var inContact = false // True saat playerNode melakukan contact dengan node lain
     var grounded = true // True saat playerNode bersentuhan dengan tanah
+    var npcIncontact = "" //Nama NPC yang melakukan contact dengan player
     
     // MARK: Flag untuk button press
     var leftBtnIsPressed = false
     var rightBtnIsPressed = false
     var actionBtnIsPressed = false
+    
+    // MARK: Dialogue Init
+    let dialogue = DialogueBox()
     
     override func didMove(to view: SKView) {
         
@@ -34,15 +38,13 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         unwrapCamera.zPosition = 100
         
         setupHUD()
+        self.childNode(withName: "leftButton")?.isHidden = true
+        setupDialogue()
         
-        guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode,
-              let unwrapNPC = childNode(withName: "gatekeeper_2"),
-              let unwrapLogo = childNode(withName: "logo")
+        guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
         else { return }
         
         player = unwrapPlayer
-        NPC = unwrapNPC
-        logo = unwrapLogo
         
         physicsWorld.contactDelegate = self
         
@@ -56,12 +58,15 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         logo?.isHidden = true
     }
+    
+    public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
+        return abs(CGFloat(hypotf(Float(first.x - second.x), Float(first.y - second.y))))
+    }
 }
 
 // MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
@@ -75,57 +80,54 @@ extension GameUIController {
             }
         
         }
-        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            
             leftBtnIsPressed = false
             rightBtnIsPressed = false
             actionBtnIsPressed = false
-
     }
 }
 
 // MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
-    func didBegin(_ contact: SKPhysicsContact) {
-        let bodyA = contact.bodyA.node?.name
-        let bodyB = contact.bodyB.node?.name
-        
-        if bodyA == player?.name && bodyB == NPC?.name {
-            inContact = true
-        } else if bodyB == player?.name && bodyA == NPC?.name {
-            inContact = true
-        }
-        
-        if bodyA == player?.name && bodyB == "ground" {
-            grounded = true
-        } else if bodyB == player?.name && bodyA == "ground" {
-            grounded = true
-        }
-        
-    }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
-        let bodyA = contact.bodyA.node?.name
-        let bodyB = contact.bodyB.node?.name
-        
-        if  bodyA == player?.name && bodyB == NPC?.name {
-            inContact = false
-            logo?.isHidden = true
-        } else if bodyB == player?.name && bodyA == NPC?.name {
-            inContact = false
-            logo?.isHidden = true
-        }
-        
-        if bodyA == player?.name && bodyB == "ground" {
-            grounded = false
-        } else if bodyB == player?.name && bodyA == "ground" {
-            grounded = false
-        }
-    
-    }
+//    func didBegin(_ contact: SKPhysicsContact) {
+//        let bodyA = contact.bodyA.node?.name
+//        let bodyB = contact.bodyB.node?.name
+//
+//        if bodyA == player?.name && bodyB == NPC?.name {
+//            inContact = true
+//        } else if bodyB == player?.name && bodyA == NPC?.name {
+//            inContact = true
+//        }
+//
+//        if bodyA == player?.name && bodyB == "ground" {
+//            grounded = true
+//        } else if bodyB == player?.name && bodyA == "ground" {
+//            grounded = true
+//        }
+//
+//    }
+//
+//    func didEnd(_ contact: SKPhysicsContact) {
+//        let bodyA = contact.bodyA.node?.name
+//        let bodyB = contact.bodyB.node?.name
+//
+//        if  bodyA == player?.name && bodyB == NPC?.name {
+//            inContact = false
+//            logo?.isHidden = true
+//        } else if bodyB == player?.name && bodyA == NPC?.name {
+//            inContact = false
+//            logo?.isHidden = true
+//        }
+//        
+//        if bodyA == player?.name && bodyB == "ground" {
+//            grounded = false
+//        } else if bodyB == player?.name && bodyA == "ground" {
+//            grounded = false
+//        }
+//
+//    }
 }
 
 // MARK: Setup HUD
@@ -144,6 +146,24 @@ extension GameUIController {
         HUD.zPosition = 100
         camera?.addChild(HUD)
     }
+    
+    func hideControl(state: Bool) {
+        self.childNode(withName: "leftButton")?.isHidden = state
+        self.childNode(withName: "rightButton")?.isHidden = state
+        self.childNode(withName: "actionButton")?.isHidden = state
+    }
+    
+    func setupDialogue() {
+        dialogue.createDialogueNode()
+        dialogue.name = "dialogue"
+        self.camera?.addChild(dialogue)
+    }
+    
+    func showDialogue(assets: [Dialogue]) {
+        hideControl(state: true)
+        dialogue.startDialogue(dialogue_assets: assets)
+        dialogue.dialogueVisibility = true
+    }
 }
 
 // MARK: Fungsi update
@@ -151,7 +171,9 @@ extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
         if let player = player {
-            self.camera?.position = player.position
+            if(player.position.x > 0) {
+                self.camera?.position = player.position
+            }
         }
         
         if grounded {

@@ -20,10 +20,10 @@ struct DialogueIntro {
 }
 
 enum erry: String {
-    case happy = "Erry/erry_happy"
-    case scared = "Erry/erry_scared"
-    case normal = "Erry/erry_normal"
-    case shocked = "Erry/erry_shocked"
+    case happy = "erry_happy"
+    case scared = "erry_scared"
+    case normal = "erry_normal"
+    case shocked = "erry_shocked"
     
     var value: String {
         return self.rawValue
@@ -31,10 +31,10 @@ enum erry: String {
 }
 
 enum leona: String {
-    case happy = "Leona/leona_happy"
-    case scared = "Leona/leona_scared"
-    case normal = "Leona/leona_normal"
-    case shocked = "Leona/leona_shocked"
+    case happy = "leona_happy"
+    case scared = "leona_scared"
+    case normal = "leona_normal"
+    case shocked = "leona_shocked"
     
     var value: String {
         return self.rawValue
@@ -42,9 +42,9 @@ enum leona: String {
 }
 
 enum gatekeeper: String {
-    case happy = "Gatekeeper/gatekeeper_happy"
-    case sad = "Gatekeeper/gatekeeper_sad"
-    case normal = "Gatekeeper/gatekeeper_normal"
+    case happy = "gatekeeper_happy"
+    case sad = "gatekeeper_sad"
+    case normal = "gatekeeper_normal"
     
     var value: String {
         return self.rawValue
@@ -95,7 +95,7 @@ let int_gate01 = [
     Dialogue(image: erry.happy.value, label: "Saya ERRY, anak magang divisi sel darah merah.", name: nameBox.erry.value),
     Dialogue(image: leona.happy.value, label: "Saya LEONA. Kebetulan, saya juga  anak magang di divisi sel darah putih.", name: nameBox.leona.value),
     Dialogue(image: erry.normal.value, label: "Wah, halo LEONA, kebetulan saya sedang menuju ke Bilik Kanan. Apakah kamu juga mengarah kesana?", name: nameBox.erry.value),
-    Dialogue(image: leona.shocked.value, label: "Ah, sayang sekali saya tidak mengarah kesana."),
+    Dialogue(image: leona.shocked.value, label: "Ah, sayang sekali saya tidak mengarah kesana.", name: nameBox.leona.value),
     Dialogue(image: erry.happy.value, label: "Ooh, baiklah. Kalau begitu saya lanjut jalan dulu ya. Senang berkenalan dengan kamu!", name: nameBox.erry.value),
     Dialogue(image: leona.happy.value, label: "Iya, hati-hati selalu ya. Sampai jumpa di lain waktu!", name: nameBox.leona.value),
 ]

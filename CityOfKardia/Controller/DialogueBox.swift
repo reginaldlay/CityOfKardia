@@ -28,6 +28,9 @@ class DialogueBox: SKNode {
     var timer : Timer?
     var typing = false
     
+    //Dialogue Visibility
+    var dialogueVisibility = false
+    
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 718, height: 98, name: "box")
@@ -39,7 +42,6 @@ class DialogueBox: SKNode {
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         
         hideDialogue(state: true)
-        startDialogue(dialogue_assets: ext_gate01)
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -86,7 +88,6 @@ class DialogueBox: SKNode {
         refSprite(name: "box").isHidden = state
         refSprite(name: "image_background").isHidden = state
         refSprite(name: "arrow").isHidden = state
-//        refLabel(name: "name_label").isHidden = state
         refSprite(name: "name_box").isHidden = state
         
         if !state {
@@ -141,7 +142,7 @@ class DialogueBox: SKNode {
             else {
                 if !typing {
                     hideDialogue(state: true)
-                    count = 0
+                    count = 1
                 } else {
                     stopTyping()
                     refLabel(name: "label").text = dialogue_assets[count-1].label
