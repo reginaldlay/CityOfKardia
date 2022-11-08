@@ -39,7 +39,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         unwrapCamera.zPosition = 100
         
         setupHUD()
-        self.childNode(withName: "leftButton")?.isHidden = true
         setupDialogue()
         
         guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
@@ -77,9 +76,15 @@ extension GameUIController {
             if (node.name == "leftButton") { leftBtnIsPressed = true }
             else if (node.name == "rightButton") { rightBtnIsPressed = true }
             
-            if (node.name == "actionButton") {
-                if inContact { logo?.isHidden = false }
-                    else { actionBtnIsPressed = true }
+//            if (node.name == "actionButton") {
+//                if inContact { logo?.isHidden = false }
+//                    else { actionBtnIsPressed = true }
+//            }
+            // Touch Dialogue
+            if (dialogue.dialogueVisibility) {
+                dialogue.touchesBegan(touches, with: event);
+            } else if (!dialogue.dialogueVisibility) {
+                hideControl(state: false)
             }
         
         }
@@ -151,9 +156,17 @@ extension GameUIController {
     }
     
     func hideControl(state: Bool) {
-        self.childNode(withName: "leftButton")?.isHidden = state
-        self.childNode(withName: "rightButton")?.isHidden = state
-        self.childNode(withName: "actionButton")?.isHidden = state
+        self.camera?.childNode(withName: "leftButton")?.isHidden = state
+        self.camera?.childNode(withName: "rightButton")?.isHidden = state
+        self.camera?.childNode(withName: "actionButton")?.isHidden = state
+    }
+}
+
+// MARK: Setup Dialogue dan Kontak dengan NPC
+extension GameUIController {
+    func contactWith(state: Bool, npcName: String) {
+        inContact = state
+        npcIncontact = npcName
     }
     
     func setupDialogue() {
@@ -174,7 +187,7 @@ extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
         if let player = player {
-            if(player.position.x > 0) {
+            if(player.position.x > 0 ) {
                 self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
             }
         }

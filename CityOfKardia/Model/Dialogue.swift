@@ -51,6 +51,17 @@ enum gatekeeper: String {
     }
 }
 
+enum senior: String {
+    case happy = "senior_happy"
+    case shocked = "senior_shocked"
+    case normal = "senior_normal"
+    case confused = "senior_confused"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
+
 enum nameBox: String {
     case erry = "namebox_erry"
     case leona = "namebox_leona"
@@ -101,10 +112,10 @@ let int_gate01 = [
 ]
 
 let int_guild = [
-    Dialogue(image: "", label: "Halo, kamu Erry ya? Di daftar anak magang hanya kamu saja yang belum absen."),
-    Dialogue(image: "", label: "Iya, pak! Maaf, saya terlambat."),
-    Dialogue(image: "", label: "Baiklah, jangan diulangi lagi ya."),
-    Dialogue(image: "", label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang."),
+    Dialogue(image: senior.confused.value, label: "Halo, kamu Erry ya? Di daftar anak magang hanya kamu saja yang belum absen."),
+    Dialogue(image: erry.scared.value, label: "Iya, pak! Maaf, saya terlambat."),
+    Dialogue(image: senior.happy.value, label: "Baiklah, jangan diulangi lagi ya."),
+    Dialogue(image: seni, label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang."),
     Dialogue(image: "", label: "Baik, siap pak!")
 ]
 

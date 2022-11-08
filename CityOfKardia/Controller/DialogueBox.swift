@@ -33,11 +33,11 @@ class DialogueBox: SKNode {
     
     
     public func createDialogueNode () {
-        createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 718, height: 98, name: "box")
+        createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 796, height: 98, name: "box")
         createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
         createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
         createSprite(texture: "", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
-        createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 36, height: 30, name: "arrow")
+        createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         
@@ -142,35 +142,13 @@ class DialogueBox: SKNode {
             else {
                 if !typing {
                     hideDialogue(state: true)
+                    dialogueVisibility = false
                     count = 1
                 } else {
                     stopTyping()
                     refLabel(name: "label").text = dialogue_assets[count-1].label
                 }
 
-            }
-        }
-    }
-    public func touchDialogue () {
-        if !box.isHidden {
-            if count < dialogue_assets.count {
-                if typing {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                } else {
-                    changeDialogue(count: count, dialogue_assets: dialogue_assets)
-                    count+=1
-                }
-            }
-            else {
-                if !typing {
-                    hideDialogue(state: true)
-                    count = 0
-                } else {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                }
-               
             }
         }
     }

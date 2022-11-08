@@ -44,10 +44,12 @@ extension BilikKananController {
             let node = self.atPoint(location)
             
             if (node.name == "actionButton") {
-                print("masuk action button \(inContact) \(npcIncontact)")
                 if inContact {
                     switch(npcIncontact) {
                     case "leona":
+                        //IF BELUM PERNAH MASUK KE DIALOGNYA
+                       showDialogue(assets: int_gate01)
+                    case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                        showDialogue(assets: int_gate01)
                         
@@ -55,8 +57,6 @@ extension BilikKananController {
                         print("nope gaada ehhe")
                     }
                 }
-            } else if (dialogue.dialogueVisibility) {
-                dialogue.touchesBegan(touches, with: event);
             }
         }
     }
@@ -66,7 +66,7 @@ extension BilikKananController {
     }
 }
 
-//Contact antara objek
+//Contact dengan NPC
 extension BilikKananController {
     func didBegin(_ contact: SKPhysicsContact) {
         guard
@@ -79,43 +79,21 @@ extension BilikKananController {
         
         switch (bodyA, bodyB) {
             
-            
         case ("player", "leona"):
-            inContact = true
-            npcIncontact = "leona"
-            
+            contactWith(state: true, npcName: "leona")
         case ("leona", "player"):
-            inContact = true
-            npcIncontact = "leona"
-            
+            contactWith(state: true, npcName: "leona")
             
         case ("player", "senior"):
-            inContact = true
-            npcIncontact = "senior"
-            
+            contactWith(state: true, npcName: "senior")
         case ("senior", "player"):
-            inContact = true
-            npcIncontact = "senior"
-            
+            contactWith(state: true, npcName: "senior")
             
         case ("player", "gatekeeper01"):
-            inContact = true
-            npcIncontact = "gatekeeper01"
-            
+            contactWith(state: true, npcName: "gatekeeper01")
         case ("gatekeeper01", "player"):
-            inContact = true
-            npcIncontact = "gatekeeper01"
-            
-            
-        case ("player", "bound01"):
-            inContact = true
-            npcIncontact = "bound01"
-            
-        case ("bound01", "player"):
-            inContact = true
-            npcIncontact = "bound01"
-            
-            
+            contactWith(state: true, npcName: "gatekeeper01")
+
         default: break
         }
     }
@@ -131,48 +109,6 @@ extension BilikKananController {
         
         inContact = false
         npcIncontact = ""
-        
-        
-        //       switch (bodyA, bodyB) {
-        //
-        //       case ("player", "leona"):
-        //           inContact = false
-        //           npcIncontact = "leona"
-        //
-        //       case ("leona", "player"):
-        //           inContact = false
-        //           npcIncontact = "leona"
-        //
-        //
-        //       case ("player", "senior"):
-        //           inContact = false
-        //           npcIncontact = "senior"
-        //
-        //       case ("senior", "player"):
-        //           inContact = false
-        //           npcIncontact = "senior"
-        //
-        //
-        //       case ("player", "gatekeeper01"):
-        //           inContact = false
-        //           npcIncontact = "gatekeeper01"
-        //
-        //       case ("gatekeeper01", "player"):
-        //           inContact = false
-        //           npcIncontact = "gatekeeper01"
-        //
-        //
-        //       case ("player", "bound01"):
-        //           inContact = false
-        //           npcIncontact = "bound01"
-        //
-        //       case ("bound01", "player"):
-        //           inContact = false
-        //           npcIncontact = "bound01"
-        //
-        //
-        //       default: break
-        //       }
     }
 }
 
