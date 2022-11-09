@@ -44,7 +44,6 @@ class DialogueBox: SKNode {
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
-        dialogueBefore = dialogue_assets[count-1].label ?? "Empty String"
         hideDialogue(state: true)
     }
     
@@ -103,6 +102,8 @@ class DialogueBox: SKNode {
     
     private func changeDialogue(count: Int, dialogue_assets: [Dialogue]) {
         arrLabel = Array(dialogue_assets[count].label ?? "")
+        
+        dialogueBefore = dialogue_assets[count].label ?? "Empty String"
         
         refLabel(name: "label").text = "" // Empty Label
         refSprite(name: "image").texture = SKTexture(imageNamed: dialogue_assets[count].image ?? "")
