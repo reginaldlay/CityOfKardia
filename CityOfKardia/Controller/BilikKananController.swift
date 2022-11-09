@@ -51,12 +51,9 @@ extension BilikKananController {
                        showDialogue(assets: int_gate01)
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
-                       showDialogue(assets: int_gate01)
+                       showDialogue(assets: int_guild)
                     case "gatekeeper02":
-                        let riddle = SKReferenceNode(fileNamed: "Riddle")!
-                        dialogue.addChild(riddle)
-                        
-                       showDialogue(assets: int_gate01)
+                       showDialogue(assets: int_gate02)
                         
                     default:
                         print("nope gaada ehhe")

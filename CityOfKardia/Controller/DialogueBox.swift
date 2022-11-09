@@ -22,6 +22,7 @@ class DialogueBox: SKNode {
     
     var count = 1
     var dialogue_assets: [Dialogue] = []
+    var dialogueBefore = "" //Untuk keperluan change dialogue (count-1)
     
     //Typing Label Effect
     var arrLabel: [Character] = []
@@ -31,10 +32,8 @@ class DialogueBox: SKNode {
     
     //Dialogue Visibility
     var dialogueVisibility = false
-    
-    //Audio
-    var typingSFX: SKAudioNode!
-
+    var riddle: SKReferenceNode!
+    var riddleVisibility = false
     
     
     public func createDialogueNode () {
@@ -45,50 +44,8 @@ class DialogueBox: SKNode {
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
-        
-//        Audio
-//        let tempSFX = SKAudioNode(fileNamed: "typing_sfx.mp3")
-//        addChild(tempSFX)
-//        typingSFX = tempSFX
-//        
-//        let audioNode = SKAudioNode(fileNamed: "typingSFX.mp3")
-//           audioNode.autoplayLooped = true
-//           self.addChild(audioNode)
-//           let playAction = SKAction.play()
-//           audioNode.run(playAction)
-//
-    
-        
-//        guard let musicURL = Bundle.main.url(forResource: "typingSFX", withExtension: "mp3") else {
-//            print("ERROR WOY")
-//            return
-//        }
-//        typingSFX = SKAudioNode(url: musicURL)
-//        addChild(typingSFX)
-//        typingSFX.run(.play())
-//        testAudioNode()
-//        guard let audio = SKAudioNode(fileNamed: "TypingSFX.mp3") else {
-//            print("ERROR WOY")
-//            return
-//        }
-//        audio.autoplayLooped = false
-//        addChild(audio)
-
+        dialogueBefore = dialogue_assets[count-1].label ?? "Empty String"
         hideDialogue(state: true)
-    }
-    
-    func testAudioNode() {
-        let audioNode = SKAudioNode(fileNamed: "typingSFX.mp3")
-        audioNode.autoplayLooped = false
-        self.addChild(audioNode)
-//        let urlpath = Bundle.main.path(forResource: "typingSFX", ofType: "mp3")
-//        let audioURL = NSURL.fileURL(withPath: urlpath!)
-//
-//        let sound = SKAudioNode(url: audioURL)
-//        sound.name = "typingSFX"
-//        addChild(sound)
-//        typingSFX = sound
-//        typingSFX.run(SKAction.play())
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -136,7 +93,6 @@ class DialogueBox: SKNode {
         refSprite(name: "image_background").isHidden = state
         refSprite(name: "arrow").isHidden = state
         refSprite(name: "name_box").isHidden = state
-//        typingSFX?.isHidden = state
         
         if !state {
             animateArrow(arrow: refSprite(name: "arrow"))
@@ -147,13 +103,23 @@ class DialogueBox: SKNode {
     
     private func changeDialogue(count: Int, dialogue_assets: [Dialogue]) {
         arrLabel = Array(dialogue_assets[count].label ?? "")
-
+        
         refLabel(name: "label").text = "" // Empty Label
         refSprite(name: "image").texture = SKTexture(imageNamed: dialogue_assets[count].image ?? "")
         refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
         typeLetter()
         
+        if (dialogue_assets[count].riddle && !riddleVisibility) {
+            riddle = SKReferenceNode(fileNamed: "Riddle")!
+            self.addChild(riddle)
+            riddleVisibility = true
+        }
+    }
+    private func changeSpecificDialogueLabel(dialogue: String) {
+        arrLabel = Array(dialogue)
+        refLabel(name: "label").text = "" // Empty Label
+        typeLetter()
     }
     
     @objc private func typeLetter(){
@@ -161,20 +127,16 @@ class DialogueBox: SKNode {
             typing = true
             refLabel(name: "label").text = (refLabel(name:"label").text!) + String(arrLabel[countType])
             
-//            typingSFX.run(SKAction.play())
-//            typingSFX.autoplayLooped = true
-//            typingSFX.run(SKAction)
             timer?.invalidate()
             timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(DialogueBox().typeLetter), userInfo: nil, repeats: false)
             countType += 1
-
+            
         } else {
             stopTyping()
         }
     }
     
     private func stopTyping() {
-//        typingSFX?.autoplayLooped = false
         timer?.invalidate() // stop the timer
         typing = false
         countType = 0
@@ -182,25 +144,43 @@ class DialogueBox: SKNode {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !refSprite(name: "box").isHidden {
-            if count < dialogue_assets.count {
-                if typing {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                } else {
+            var wrongChoice = false
+            
+            if typing {
+                stopTyping()
+                refLabel(name: "label").text = dialogueBefore
+            } else if(!riddleVisibility && !typing) {
+                if count < dialogue_assets.count {
                     changeDialogue(count: count, dialogue_assets: dialogue_assets)
                     count+=1
                 }
-            }
-            else {
-                if !typing {
+                else {
                     hideDialogue(state: true)
                     dialogueVisibility = false
                     count = 1
-                } else {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
+                    dialogueBefore = dialogue_assets[count-1].label ?? "Empty string"
                 }
-
+            } else if (riddleVisibility && !wrongChoice) {
+                for touch in touches {
+                    let location = touch.location(in: self)
+                    let node = self.atPoint(location)
+                    
+                    if (node.name == "optPD") {
+                        var rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat! Ambillah ini karena kamu telah menjawabnya dengan benar."
+                        changeSpecificDialogueLabel(dialogue: rightResponse)
+                        dialogueBefore = rightResponse
+                        
+                        riddleVisibility = false
+                        wrongChoice = false
+                        riddle.removeFromParent()
+                    }
+                    else if (node.name == "optSDM" || node.name == "optSDP" || node.name == "optTrombosit"){
+                        refLabel(name: "label").text = "Jawabanmu kurang tepat, coba lagi."
+                        wrongChoice = true
+                    }
+                }
+            } else if (riddleVisibility && wrongChoice) {
+                changeDialogue(count: count-1, dialogue_assets: dialogue_assets)
             }
         }
     }

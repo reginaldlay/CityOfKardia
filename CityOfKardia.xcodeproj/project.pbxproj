@@ -26,7 +26,6 @@
 		A295965029139EC000DE128A /* BilikKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A295964F29139EC000DE128A /* BilikKananScene.sks */; };
 		A295965229139EE100DE128A /* BilikKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295965129139EE100DE128A /* BilikKananController.swift */; };
 		A2959654291501A400DE128A /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2959653291501A400DE128A /* SceneTestController.swift */; };
-		A2CAF7BC291BA23F00E06F70 /* typingSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E26DA1291A47160074B6B8 /* typingSFX.mp3 */; };
 		A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A13290AC217009DA9FC /* DialogueBox.swift */; };
 		A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A14290AC217009DA9FC /* Dialogue.swift */; };
 		A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */; };
@@ -55,7 +54,6 @@
 		A295964F29139EC000DE128A /* BilikKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BilikKananScene.sks; sourceTree = "<group>"; };
 		A295965129139EE100DE128A /* BilikKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilikKananController.swift; sourceTree = "<group>"; };
 		A2959653291501A400DE128A /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneTestController.swift; path = ../Scene/SceneTestController.swift; sourceTree = "<group>"; };
-		A2E26DA1291A47160074B6B8 /* typingSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = typingSFX.mp3; sourceTree = "<group>"; };
 		A2ED0A13290AC217009DA9FC /* DialogueBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueBox.swift; sourceTree = "<group>"; };
 		A2ED0A14290AC217009DA9FC /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Acme-Regular.ttf"; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
-				A2E26D9E291A41A00074B6B8 /* SFX */,
 				39FFAB642913BBFD00351F50 /* Controller */,
 				39FFAB652913BC7900351F50 /* Model */,
 				6B21C2A529124B2E00DF3662 /* Player */,
@@ -153,14 +150,6 @@
 				6B21C2A829124B7300DF3662 /* PlayerStateController.swift */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		A2E26D9E291A41A00074B6B8 /* SFX */ = {
-			isa = PBXGroup;
-			children = (
-				A2E26DA1291A47160074B6B8 /* typingSFX.mp3 */,
-			);
-			path = SFX;
 			sourceTree = "<group>";
 		};
 		A2ED0A17290ADE95009DA9FC /* fonts */ = {
@@ -233,7 +222,6 @@
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				A2F78635291A62DD009D958E /* Riddle.sks in Resources */,
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
-				A2CAF7BC291BA23F00E06F70 /* typingSFX.mp3 in Resources */,
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,

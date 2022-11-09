@@ -101,15 +101,17 @@ extension GameUIController {
             if (node.name == "leftButton") { leftBtnIsPressed = true }
             else if (node.name == "rightButton") { rightBtnIsPressed = true}
             
-//            if (node.name == "actionButton") {
-//                if inContact { logo?.isHidden = false }
-//                    else { actionBtnIsPressed = true }
-//            }
+            if (node.name == "actionButton") {
+                if inContact { logo?.isHidden = false }
+                    else { actionBtnIsPressed = true }
+            }
+            
             // Touch Dialogue
             if (dialogue.dialogueVisibility) {
                 dialogue.touchesBegan(touches, with: event);
-            } else if (!dialogue.dialogueVisibility) {
-                hideControl(state: false)
+                if (!dialogue.dialogueVisibility) {
+                    hideControl(state: false)
+                }
             }
         
         }
