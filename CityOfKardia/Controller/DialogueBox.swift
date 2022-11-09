@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class DialogueBox: SKNode {
     
@@ -31,6 +32,10 @@ class DialogueBox: SKNode {
     //Dialogue Visibility
     var dialogueVisibility = false
     
+    //Audio
+    var typingSFX: SKAudioNode!
+
+    
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 796, height: 98, name: "box")
@@ -41,7 +46,49 @@ class DialogueBox: SKNode {
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         
+//        Audio
+//        let tempSFX = SKAudioNode(fileNamed: "typing_sfx.mp3")
+//        addChild(tempSFX)
+//        typingSFX = tempSFX
+//        
+//        let audioNode = SKAudioNode(fileNamed: "typingSFX.mp3")
+//           audioNode.autoplayLooped = true
+//           self.addChild(audioNode)
+//           let playAction = SKAction.play()
+//           audioNode.run(playAction)
+//
+    
+        
+//        guard let musicURL = Bundle.main.url(forResource: "typingSFX", withExtension: "mp3") else {
+//            print("ERROR WOY")
+//            return
+//        }
+//        typingSFX = SKAudioNode(url: musicURL)
+//        addChild(typingSFX)
+//        typingSFX.run(.play())
+//        testAudioNode()
+//        guard let audio = SKAudioNode(fileNamed: "TypingSFX.mp3") else {
+//            print("ERROR WOY")
+//            return
+//        }
+//        audio.autoplayLooped = false
+//        addChild(audio)
+
         hideDialogue(state: true)
+    }
+    
+    func testAudioNode() {
+        let audioNode = SKAudioNode(fileNamed: "typingSFX.mp3")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+//        let urlpath = Bundle.main.path(forResource: "typingSFX", ofType: "mp3")
+//        let audioURL = NSURL.fileURL(withPath: urlpath!)
+//
+//        let sound = SKAudioNode(url: audioURL)
+//        sound.name = "typingSFX"
+//        addChild(sound)
+//        typingSFX = sound
+//        typingSFX.run(SKAction.play())
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -89,6 +136,7 @@ class DialogueBox: SKNode {
         refSprite(name: "image_background").isHidden = state
         refSprite(name: "arrow").isHidden = state
         refSprite(name: "name_box").isHidden = state
+//        typingSFX?.isHidden = state
         
         if !state {
             animateArrow(arrow: refSprite(name: "arrow"))
@@ -113,6 +161,9 @@ class DialogueBox: SKNode {
             typing = true
             refLabel(name: "label").text = (refLabel(name:"label").text!) + String(arrLabel[countType])
             
+//            typingSFX.run(SKAction.play())
+//            typingSFX.autoplayLooped = true
+//            typingSFX.run(SKAction)
             timer?.invalidate()
             timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(DialogueBox().typeLetter), userInfo: nil, repeats: false)
             countType += 1
@@ -123,6 +174,7 @@ class DialogueBox: SKNode {
     }
     
     private func stopTyping() {
+//        typingSFX?.autoplayLooped = false
         timer?.invalidate() // stop the timer
         typing = false
         countType = 0

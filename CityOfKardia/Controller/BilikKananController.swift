@@ -52,6 +52,11 @@ extension BilikKananController {
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                        showDialogue(assets: int_gate01)
+                    case "gatekeeper02":
+                        let riddle = SKReferenceNode(fileNamed: "Riddle")!
+                        dialogue.addChild(riddle)
+                        
+                       showDialogue(assets: int_gate01)
                         
                     default:
                         print("nope gaada ehhe")
@@ -89,10 +94,10 @@ extension BilikKananController {
         case ("senior", "player"):
             contactWith(state: true, npcName: "senior")
             
-        case ("player", "gatekeeper01"):
-            contactWith(state: true, npcName: "gatekeeper01")
-        case ("gatekeeper01", "player"):
-            contactWith(state: true, npcName: "gatekeeper01")
+        case ("player", "gatekeeper02"):
+            contactWith(state: true, npcName: "gatekeeper02")
+        case ("gatekeeper02", "player"):
+            contactWith(state: true, npcName: "gatekeeper02")
 
         default: break
         }

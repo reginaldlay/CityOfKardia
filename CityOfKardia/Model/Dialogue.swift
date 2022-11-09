@@ -115,12 +115,17 @@ let int_guild = [
     Dialogue(image: senior.confused.value, label: "Halo, kamu Erry ya? Di daftar anak magang hanya kamu saja yang belum absen."),
     Dialogue(image: erry.scared.value, label: "Iya, pak! Maaf, saya terlambat."),
     Dialogue(image: senior.happy.value, label: "Baiklah, jangan diulangi lagi ya."),
-    Dialogue(image: seni, label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang."),
-    Dialogue(image: "", label: "Baik, siap pak!")
+    Dialogue(image: senior.normal.value, label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang."),
+    Dialogue(image: erry.happy.value, label: "Baik, siap pak!")
 ]
 
 let int_guild_explanation = [
     Dialogue(image: "", label: "")
+]
+
+let int_gate02 = [
+    Dialogue(image: gatekeeper.normal.value, label: "Hai anak muda, menjaga gerbang membuatku bosan. Apakah kamu ingin bermain teka-teki bersamaku?", name: nameBox.gk_02.value),
+    Dialogue(image: gatekeeper.normal.value, label: "Hai anak muda, menjaga gerbang membuatku bosan. Apakah kamu ingin bermain teka-teki bersamaku?", name: nameBox.gk_02.value)
 ]
 
 let ext_gate03_1 = [

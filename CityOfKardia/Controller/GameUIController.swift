@@ -6,6 +6,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameUIController: SKScene, SKPhysicsContactDelegate {
     
@@ -30,8 +31,33 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: Dialogue Init
     let dialogue = DialogueBox()
     
+    let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
+//    private let playCollectSound = SKAction.playSoundFileNamed("typingSFX.mp3", waitForCompletion: false)
+//
+//    func collected() {
+//        let removeFromParent = SKAction.removeFromParent()
+//        let actionGroup = SKAction.group([playCollectSound, removeFromParent]);
+//        self.run(actionGroup)
+//    }
+    
     override func didMove(to view: SKView) {
-        
+//        collected()
+//        // Set up the background music audio node
+//        musicAudioNode.autoplayLooped = true
+//        musicAudioNode.isPositional = false
+//        // Add the audio node to the scene
+        if let audio = SKAudioNode(fileNamed: "typingSFX.mp3") {
+            addChild(audio)
+            audio.run(.play())
+        } else {
+            print("gagalll")
+        }
+       
+//        // Use an action to adjust the audio node's volume to 0
+//        musicAudioNode.run(SKAction.changeVolume(to: 1.0, duration: 10.0))
+//        // Run a delayed action on the scene that fades in the music
+//        run(SKAction.wait(forDuration: 1.0), completion: { [unowned self] in self.audioEngine.mainMixerNode.outputVolume = 1.0; self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2.0))
+//        })
         self.camera = cam
         
         guard let unwrapCamera = self.camera else { return }
@@ -58,7 +84,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         logo?.isHidden = true
         playerYPos = player?.position.y ?? 0
-        
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -74,7 +99,7 @@ extension GameUIController {
             let node = self.atPoint(location)
                     
             if (node.name == "leftButton") { leftBtnIsPressed = true }
-            else if (node.name == "rightButton") { rightBtnIsPressed = true }
+            else if (node.name == "rightButton") { rightBtnIsPressed = true}
             
 //            if (node.name == "actionButton") {
 //                if inContact { logo?.isHidden = false }
