@@ -19,6 +19,8 @@
 		3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3956B51428FD01850070B52C /* LaunchScreen.storyboard */; };
 		39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39642A27290A8EC000A82C34 /* PlayerModel.xcdatamodeld */; };
 		39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39642A2F290A91FB00A82C34 /* CoreDataManager.swift */; };
+		39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */; };
+		39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */; };
 		6B21C2A729124B6700DF3662 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A629124B6700DF3662 /* PlayerNode.swift */; };
 		6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A829124B7300DF3662 /* PlayerStateController.swift */; };
 		6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2AA29124BC200DF3662 /* GameUIController.swift */; };
@@ -46,6 +48,8 @@
 		3956B51528FD01850070B52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39642A28290A8EC000A82C34 /* PlayerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlayerModel.xcdatamodel; sourceTree = "<group>"; };
 		39642A2F290A91FB00A82C34 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateSerambiKananController.swift; sourceTree = "<group>"; };
+		39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GateSerambiKananScene.sks; sourceTree = "<group>"; };
 		6B21C2A629124B6700DF3662 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		6B21C2A829124B7300DF3662 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
 		6B21C2AA29124BC200DF3662 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				3956B50B28FD01840070B52C /* GameController.swift */,
 				6B21C2AA29124BC200DF3662 /* GameUIController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
+				39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */,
 				3901D83C28FE912B00071442 /* IntroController.swift */,
 				A2959653291501A400DE128A /* SceneTestController.swift */,
 			);
@@ -134,6 +139,7 @@
 			children = (
 				A295964F29139EC000DE128A /* BilikKananScene.sks */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
+				39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */,
 				3901D83628FE8FD300071442 /* IntroScene.sks */,
 				6B21C2AC29124C0700DF3662 /* SceneTest.sks */,
 			);
@@ -220,6 +226,7 @@
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
+				39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
 				6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */,
@@ -246,6 +253,7 @@
 				6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */,
 				A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
+				39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */,
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
 				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
