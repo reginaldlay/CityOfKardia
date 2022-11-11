@@ -31,6 +31,8 @@ class DialogueBox: SKNode {
     //Dialogue Visibility
     var dialogueVisibility = false
     
+    let typingSFX = SKAudioNode(fileNamed: "typingSFX")
+    
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 718, height: 98, name: "box")
@@ -42,6 +44,9 @@ class DialogueBox: SKNode {
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         
         hideDialogue(state: true)
+        
+        self.addChild(typingSFX)
+        typingSFX.run(.stop())
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -110,6 +115,9 @@ class DialogueBox: SKNode {
     
     @objc private func typeLetter(){
         if countType < arrLabel.count {
+            
+            typingSFX.run(.play())
+            
             typing = true
             refLabel(name: "label").text = (refLabel(name:"label").text!) + String(arrLabel[countType])
             
@@ -126,6 +134,7 @@ class DialogueBox: SKNode {
         timer?.invalidate() // stop the timer
         typing = false
         countType = 0
+        typingSFX.run(.stop())
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

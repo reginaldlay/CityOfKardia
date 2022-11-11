@@ -25,6 +25,10 @@
 		6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A829124B7300DF3662 /* PlayerStateController.swift */; };
 		6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2AA29124BC200DF3662 /* GameUIController.swift */; };
 		6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B21C2AC29124C0700DF3662 /* SceneTest.sks */; };
+		6BC63050291B9A180000AB1B /* Erry_Walk_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304D291B9A180000AB1B /* Erry_Walk_SFX.mp3 */; };
+		6BC63051291B9A190000AB1B /* Erry_Jump_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */; };
+		6BC63052291B9A190000AB1B /* COK_BGM_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304F291B9A180000AB1B /* COK_BGM_01.mp3 */; };
+		6BC63056291BA66B0000AB1B /* typingSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC63055291BA66B0000AB1B /* typingSFX.mp3 */; };
 		A295965029139EC000DE128A /* BilikKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A295964F29139EC000DE128A /* BilikKananScene.sks */; };
 		A295965229139EE100DE128A /* BilikKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295965129139EE100DE128A /* BilikKananController.swift */; };
 		A2959654291501A400DE128A /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2959653291501A400DE128A /* SceneTestController.swift */; };
@@ -54,6 +58,10 @@
 		6B21C2A829124B7300DF3662 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
 		6B21C2AA29124BC200DF3662 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
 		6B21C2AC29124C0700DF3662 /* SceneTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SceneTest.sks; sourceTree = "<group>"; };
+		6BC6304D291B9A180000AB1B /* Erry_Walk_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Erry_Walk_SFX.mp3; sourceTree = "<group>"; };
+		6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Erry_Jump_SFX.mp3; sourceTree = "<group>"; };
+		6BC6304F291B9A180000AB1B /* COK_BGM_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = COK_BGM_01.mp3; sourceTree = "<group>"; };
+		6BC63055291BA66B0000AB1B /* typingSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = typingSFX.mp3; sourceTree = "<group>"; };
 		A295964F29139EC000DE128A /* BilikKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BilikKananScene.sks; sourceTree = "<group>"; };
 		A295965129139EE100DE128A /* BilikKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilikKananController.swift; sourceTree = "<group>"; };
 		A2959653291501A400DE128A /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneTestController.swift; path = ../Scene/SceneTestController.swift; sourceTree = "<group>"; };
@@ -94,6 +102,7 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
+				6BC6304C291B9A050000AB1B /* SFX */,
 				39FFAB642913BBFD00351F50 /* Controller */,
 				39FFAB652913BC7900351F50 /* Model */,
 				6B21C2A529124B2E00DF3662 /* Player */,
@@ -153,6 +162,17 @@
 				6B21C2A829124B7300DF3662 /* PlayerStateController.swift */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		6BC6304C291B9A050000AB1B /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				6BC63055291BA66B0000AB1B /* typingSFX.mp3 */,
+				6BC6304F291B9A180000AB1B /* COK_BGM_01.mp3 */,
+				6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */,
+				6BC6304D291B9A180000AB1B /* Erry_Walk_SFX.mp3 */,
+			);
+			path = SFX;
 			sourceTree = "<group>";
 		};
 		A2ED0A17290ADE95009DA9FC /* fonts */ = {
@@ -222,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BC63051291B9A190000AB1B /* Erry_Jump_SFX.mp3 in Resources */,
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
@@ -229,9 +250,12 @@
 				39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
+				6BC63056291BA66B0000AB1B /* typingSFX.mp3 in Resources */,
+				6BC63052291B9A190000AB1B /* COK_BGM_01.mp3 in Resources */,
 				6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */,
 				A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
+				6BC63050291B9A180000AB1B /* Erry_Walk_SFX.mp3 in Resources */,
 				3956B50A28FD01840070B52C /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
