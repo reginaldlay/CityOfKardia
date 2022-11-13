@@ -12,13 +12,6 @@ class GateSerambiKananController: GameUIController {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        
-//        addNode(imageName: "kota_jantung_bg", name: "kota_jantung_bg", widthSize: 2391, heightSize: 391, xPos: -773.5, yPos: -0.5, zPos: -3)
-//        addNode(imageName: "kota_jantung_ground", name: "kota_jantung_ground", widthSize: 2391, heightSize: 143, xPos: -773.5, yPos: -123.5, zPos: -1)
-//        addNode(imageName: "gate_kiri", name: "gate_kiri", widthSize: 152, heightSize: 152, xPos: 236, yPos: 4, zPos: -2)
-//        addNode(imageName: "Erry_Idle_2", name: "player", widthSize: 75, heightSize: 100, xPos: -350, yPos: 3.1, zPos: 1)
-//        addNode(imageName: "gate_kanan", name: "gate_kanan", widthSize: 152, heightSize: 152, xPos: 346, yPos: 4, zPos: 2)
-//        addNode(imageName: "gatekeeper01", name: "gatekeeper01", widthSize: 165, heightSize: 165, xPos: 157.5, yPos: 17.5, zPos: 0)
     }
     
 }
@@ -26,6 +19,20 @@ class GateSerambiKananController: GameUIController {
 extension GateSerambiKananController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            
+            if (node.name == "actionButton") {
+                switch (npcIncontact) {
+                case "gatekeeper01":
+                    showDialogue(assets: ext_gate01)
+                    
+                default:
+                    print("EHHE")
+                }
+            }
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,14 +41,42 @@ extension GateSerambiKananController {
 }
 
 extension GateSerambiKananController {
-//    func addNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-//        let gateSerambiKananAsset = SKSpriteNode(imageNamed: imageName)
-//        gateSerambiKananAsset.name = name
-//        gateSerambiKananAsset.size = CGSize(width: widthSize, height: heightSize)
-//        gateSerambiKananAsset.position = CGPoint(x: xPos, y: yPos)
-//        gateSerambiKananAsset.zPosition = zPos
-//        addChild(gateSerambiKananAsset)
-//    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let bodyA = contact.bodyA.node?.name,
+              let bodyB = contact.bodyB.node?.name
+        else {
+            return
+        }
+        
+        print("Body A begin: \(bodyA)")
+        print("Body B begin: \(bodyB)")
+        
+        switch (bodyA, bodyB) {
+        case ("player", "bound_kiri"):
+            npcIncontact = "bound_kiri"
+            
+        case ("bound_kiri", "player"):
+            npcIncontact = "bound_kiri"
+            
+        case ("player", "bound_kanan"):
+            npcIncontact = "bound_kanan"
+            
+        case ("bound_kanan", "player"):
+            npcIncontact = "bound_kanan"
+            
+        case ("player", "gatekeeper01"):
+            npcIncontact = "gatekeeper01"
+            
+        case ("gatekeeper01", "player"):
+            npcIncontact = "gatekeeper01"
+            
+        default: break
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        npcIncontact = ""
+    }
 }
 
 extension GateSerambiKananController {
