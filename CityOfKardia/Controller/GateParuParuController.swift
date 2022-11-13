@@ -1,14 +1,14 @@
 //
-//  GateSerambiKananController.swift
+//  GateParuParuController.swift
 //  CityOfKardia
 //
-//  Created by Reginald Lay on 04/11/22.
+//  Created by Reginald Lay on 13/11/22.
 //
 
 import SpriteKit
 import GameplayKit
 
-class GateSerambiKananController: GameUIController {
+class GateParuParuController: GameUIController {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -16,7 +16,7 @@ class GateSerambiKananController: GameUIController {
     
 }
 
-extension GateSerambiKananController {
+extension GateParuParuController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -27,8 +27,8 @@ extension GateSerambiKananController {
             
             if (node.name == "actionButton") {
                 switch (npcIncontact) {
-                case ("gatekeeper01"):
-                    showDialogue(assets: ext_gate01)
+                case ("gatekeeper03"):
+                    showDialogue(assets: ext_gate03_2)
                     
                 default:
                     print("EHHE")
@@ -43,7 +43,7 @@ extension GateSerambiKananController {
     
 }
 
-extension GateSerambiKananController {
+extension GateParuParuController {
     
     func didBegin(_ contact: SKPhysicsContact) {
         guard let bodyA = contact.bodyA.node?.name,
@@ -68,11 +68,11 @@ extension GateSerambiKananController {
         case ("bound_kanan", "player"):
             npcIncontact = "bound_kanan"
             
-        case ("player", "gatekeeper01"):
-            npcIncontact = "gatekeeper01"
+        case ("player", "gatekeeper03"):
+            npcIncontact = "gatekeeper03"
             
-        case ("gatekeeper01", "player"):
-            npcIncontact = "gatekeeper01"
+        case ("gatekeeper03", "player"):
+            npcIncontact = "gatekeeper03"
             
         default: break
         }
@@ -84,7 +84,7 @@ extension GateSerambiKananController {
     
 }
 
-extension GateSerambiKananController {
+extension GateParuParuController {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)

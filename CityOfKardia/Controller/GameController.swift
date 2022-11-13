@@ -12,7 +12,7 @@ import CoreData
 class GameController: SKScene {
     
     override func didMove(to view: SKView) {
-        addNode(imageName: "homeBackground", name: "homeBackground", widthSize: 844, heightSize: 390, xPos: 0, yPos: 0, zPos: -1)
+        addNode(imageName: "home_bg", name: "home_bg", widthSize: 844, heightSize: 390, xPos: 0, yPos: 0, zPos: -1)
         addNode(imageName: "logo", name: "logo", widthSize: 142, heightSize: 68, xPos: -319, yPos: 129, zPos: 0)
         addNode(imageName: "erryMascot", name: "erryMascot", widthSize: 201.97, heightSize: 320, xPos: 0, yPos: 0, zPos: 0)
         addNode(imageName: "newGameButton", name: "newGameButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -133, zPos: 0)
