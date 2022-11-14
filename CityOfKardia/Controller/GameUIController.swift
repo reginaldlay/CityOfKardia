@@ -30,12 +30,18 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     
     // MARK: Dialogue Init
     let dialogue = DialogueBox()
+    var bubble: SKSpriteNode?
+    var tandaSeru: SKSpriteNode?
+    var initTandaSeruRotation: CGFloat = 0.0
+    var dialogueBubbleAtlas = SKTextureAtlas(named:"DialogueBubble");
+
+    
+    let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
     
     // MARK: BGM init
     let bgm = SKAudioNode(fileNamed: "COK_BGM_01")
     
     override func didMove(to view: SKView) {
-        
         self.camera = cam
         
         guard let unwrapCamera = self.camera else { return }
@@ -43,7 +49,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         unwrapCamera.zPosition = 100
         
         setupHUD()
-        self.childNode(withName: "leftButton")?.isHidden = true
         setupDialogue()
         
         guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
@@ -68,7 +73,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         bgm.isPositional = false
         bgm.run(.play())
         bgm.run(.changeVolume(to: 0.5, duration: 0))
-        
+    
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -84,11 +89,19 @@ extension GameUIController {
             let node = self.atPoint(location)
                     
             if (node.name == "leftButton") { leftBtnIsPressed = true }
-            else if (node.name == "rightButton") { rightBtnIsPressed = true }
+            else if (node.name == "rightButton") { rightBtnIsPressed = true}
             
             if (node.name == "actionButton") {
                 if inContact { logo?.isHidden = false }
                     else { actionBtnIsPressed = true }
+            }
+            
+            // Touch Dialogue
+            if (dialogue.dialogueVisibility) {
+                dialogue.touchesBegan(touches, with: event);
+                if (!dialogue.dialogueVisibility) {
+                    hideControl(state: false)
+                }
             }
         
         }
@@ -167,21 +180,84 @@ extension GameUIController {
     }
     
     func hideControl(state: Bool) {
-        self.childNode(withName: "leftButton")?.isHidden = state
-        self.childNode(withName: "rightButton")?.isHidden = state
-        self.childNode(withName: "actionButton")?.isHidden = state
+        self.camera?.childNode(withName: "leftButton")?.isHidden = state
+        self.camera?.childNode(withName: "rightButton")?.isHidden = state
+        self.camera?.childNode(withName: "actionButton")?.isHidden = state
+    }
+}
+
+// MARK: Setup Dialogue dan Kontak dengan NPC
+extension GameUIController {
+    public func createSprite(texture: String, xPos: Double, yPos: Double, zPos: CGFloat, width: CGFloat, height: CGFloat, name: String) {
+        let node = SKSpriteNode(imageNamed: texture);
+        node.name = name
+        node.position = CGPoint(x: xPos, y: yPos)
+        node.zPosition = CGFloat(zPos)
+        node.size = CGSize(width: width, height: height)
+        self.addChild(node)
     }
     
     func setupDialogue() {
         dialogue.createDialogueNode()
         dialogue.name = "dialogue"
         self.camera?.addChild(dialogue)
+        setupBubbleDialogue()
+    }
+    
+    func setupBubbleDialogue() {//Create Sprite
+        createSprite(texture: "bubble", xPos: 10, yPos: 10, zPos: 4, width: 68, height: 48, name: "bubble")
+        createSprite(texture: "seru", xPos: 10, yPos: 10, zPos: 5, width: 16, height: 24, name: "tandaSeru")
+        bubble = self.childNode(withName: "bubble") as? SKSpriteNode
+        tandaSeru = self.childNode(withName: "tandaSeru") as? SKSpriteNode
+        
+        hideBubble(state: true)
     }
     
     func showDialogue(assets: [Dialogue]) {
         hideControl(state: true)
         dialogue.startDialogue(dialogue_assets: assets)
         dialogue.dialogueVisibility = true
+    }
+    
+    func contactWith(state: Bool, npcName: String) {
+        inContact = state
+        npcIncontact = npcName
+        positioningBubble(hideState: !state, npc: npcName)
+    }
+    
+    func hideBubble(state: Bool) {
+        //Visibility
+        bubble?.isHidden = state
+        tandaSeru?.isHidden = state
+        tandaSeru?.removeAllActions()
+//        Add initial rotation pos
+        tandaSeru?.zRotation = 0
+    }
+    
+    func positioningBubble(hideState: Bool, npc: String) {
+        bubble?.position = CGPoint(x: (self.childNode(withName: npc) as! SKSpriteNode).position.x + 60, y:  (self.childNode(withName: npc) as! SKSpriteNode).position.y + 50)
+        tandaSeru?.position = CGPoint(x:  (self.childNode(withName: npc) as! SKSpriteNode).position.x + 58, y:(self.childNode(withName: npc) as! SKSpriteNode).position.y + 55)
+        
+        hideBubble(state: hideState)
+        
+        //Animate tanda seru
+        if !hideState {
+            animateTandaSeru(tandaSeru: tandaSeru ?? SKSpriteNode(imageNamed: ""))
+        }
+//        else {
+//            tandaSeru?.removeAllActions()
+//            tandaSeru?.zRotation = 0
+//        }
+    }
+    
+    
+    
+    func animateTandaSeru(tandaSeru: SKNode) {
+        let left = SKAction.rotate(byAngle: CGFloat.pi/3, duration: 0.5) //30 degrees
+        let right = SKAction.rotate(byAngle: -(CGFloat.pi/3), duration: 0.5)
+        let sequence = SKAction.sequence([right, left])
+        let repeated = SKAction.repeatForever(sequence)
+        tandaSeru.run(repeated)
     }
 }
 
@@ -190,7 +266,7 @@ extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
         if let player = player {
-            if(player.position.x > 0) {
+            if(player.position.x > 0 ) {
                 self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
             }
         }

@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class DialogueBox: SKNode {
     
@@ -21,6 +22,7 @@ class DialogueBox: SKNode {
     
     var count = 1
     var dialogue_assets: [Dialogue] = []
+    var dialogueBefore = "" //Untuk keperluan change dialogue (count-1)
     
     //Typing Label Effect
     var arrLabel: [Character] = []
@@ -30,19 +32,20 @@ class DialogueBox: SKNode {
     
     //Dialogue Visibility
     var dialogueVisibility = false
+    var riddle: SKReferenceNode!
+    var riddleVisibility = false
     
     let typingSFX = SKAudioNode(fileNamed: "typingSFX")
     
     
     public func createDialogueNode () {
-        createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 718, height: 98, name: "box")
+        createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 796, height: 98, name: "box")
         createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
         createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
         createSprite(texture: "", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
-        createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 36, height: 30, name: "arrow")
+        createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
-        
         hideDialogue(state: true)
         
         self.addChild(typingSFX)
@@ -50,10 +53,16 @@ class DialogueBox: SKNode {
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
-        return self.childNode(withName: name) as! SKSpriteNode
+        if let node = self.childNode(withName: name) as? SKSpriteNode {
+            return node
+        };
+        return SKSpriteNode(imageNamed: "logo.png")
     }
     public func refLabel(name: String) -> SKLabelNode {
-        return self.childNode(withName: name) as! SKLabelNode
+        if let node = self.childNode(withName: name) as? SKLabelNode {
+            return node
+        }
+        return SKLabelNode(text: "No label found")
     }
     
     public func createSprite(texture: String, xPos: Double, yPos: Double, zPos: CGFloat, width: CGFloat, height: CGFloat, name: String) {
@@ -104,13 +113,25 @@ class DialogueBox: SKNode {
     
     private func changeDialogue(count: Int, dialogue_assets: [Dialogue]) {
         arrLabel = Array(dialogue_assets[count].label ?? "")
-
+        
+        dialogueBefore = dialogue_assets[count].label ?? "Empty String"
+        
         refLabel(name: "label").text = "" // Empty Label
         refSprite(name: "image").texture = SKTexture(imageNamed: dialogue_assets[count].image ?? "")
         refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
         typeLetter()
         
+        if (dialogue_assets[count].riddle && !riddleVisibility) {
+            riddle = SKReferenceNode(fileNamed: "Riddle")!
+            self.addChild(riddle)
+            riddleVisibility = true
+        }
+    }
+    private func changeSpecificDialogueLabel(dialogue: String) {
+        arrLabel = Array(dialogue)
+        refLabel(name: "label").text = "" // Empty Label
+        typeLetter()
     }
     
     @objc private func typeLetter(){
@@ -124,7 +145,7 @@ class DialogueBox: SKNode {
             timer?.invalidate()
             timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(DialogueBox().typeLetter), userInfo: nil, repeats: false)
             countType += 1
-
+            
         } else {
             stopTyping()
         }
@@ -139,47 +160,43 @@ class DialogueBox: SKNode {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !refSprite(name: "box").isHidden {
-            if count < dialogue_assets.count {
-                if typing {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                } else {
+            var wrongChoice = false
+            
+            if typing {
+                stopTyping()
+                refLabel(name: "label").text = dialogueBefore
+            } else if(!riddleVisibility && !typing) {
+                if count < dialogue_assets.count {
                     changeDialogue(count: count, dialogue_assets: dialogue_assets)
                     count+=1
                 }
-            }
-            else {
-                if !typing {
+                else {
                     hideDialogue(state: true)
+                    dialogueVisibility = false
                     count = 1
-                } else {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
+                    dialogueBefore = dialogue_assets[count-1].label ?? "Empty string"
                 }
-
-            }
-        }
-    }
-    public func touchDialogue () {
-        if !box.isHidden {
-            if count < dialogue_assets.count {
-                if typing {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                } else {
-                    changeDialogue(count: count, dialogue_assets: dialogue_assets)
-                    count+=1
+            } else if (riddleVisibility && !wrongChoice) {
+                for touch in touches {
+                    let location = touch.location(in: self)
+                    let node = self.atPoint(location)
+                    
+                    if (node.name == "optPD") {
+                        let rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat! Ambillah ini karena kamu telah menjawabnya dengan benar."
+                        changeSpecificDialogueLabel(dialogue: rightResponse)
+                        dialogueBefore = rightResponse
+                        
+                        riddleVisibility = false
+                        wrongChoice = false
+                        riddle.removeFromParent()
+                    }
+                    else if (node.name == "optSDM" || node.name == "optSDP" || node.name == "optTrombosit"){
+                        refLabel(name: "label").text = "Jawabanmu kurang tepat, coba lagi."
+                        wrongChoice = true
+                    }
                 }
-            }
-            else {
-                if !typing {
-                    hideDialogue(state: true)
-                    count = 0
-                } else {
-                    stopTyping()
-                    refLabel(name: "label").text = dialogue_assets[count-1].label
-                }
-               
+            } else if (riddleVisibility && wrongChoice) {
+                changeDialogue(count: count-1, dialogue_assets: dialogue_assets)
             }
         }
     }

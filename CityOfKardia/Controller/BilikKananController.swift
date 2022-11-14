@@ -8,22 +8,26 @@
 import SpriteKit
 
 class BilikKananController: GameUIController {
-    var leona: SKNode?
-    var senior: SKNode?
-    var gatekeeper01: SKNode?
-    var gateKiri: SKNode?
+    var leona: SKSpriteNode?
+    var senior: SKSpriteNode?
+    var gatekeeper01: SKSpriteNode?
+    var gateKiri: SKSpriteNode?
     
-    var bound01: SKNode?
-    var bound02: SKNode?
+    var bound01: SKSpriteNode?
+    var bound02: SKSpriteNode?
+    var boundLeona: SKSpriteNode?
+    var boundSenior: SKSpriteNode?
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        guard let unwrapLeona = childNode(withName: "leona"),
-              let unwrapSenior = childNode(withName: "senior"),
-              let unwrapGatekeeper = childNode(withName: "gatekeeper01"),
-              let unwrapGateKiri = childNode(withName: "gate_kiri"),
-              let unwrapBound01 = childNode(withName: "bound01"),
-              let unwrapBound02 = childNode(withName: "bound02")
+        guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
+              let unwrapSenior = childNode(withName: "senior") as? SKSpriteNode,
+              let unwrapGatekeeper = childNode(withName: "gatekeeper02") as? SKSpriteNode,
+              let unwrapGateKiri = childNode(withName: "gate_kiri") as? SKSpriteNode,
+              let unwrapBound01 = childNode(withName: "bound01") as? SKSpriteNode,
+              let unwrapBound02 = childNode(withName: "bound02") as? SKSpriteNode,
+              let unwrapBoundLeona = childNode(withName: "boundLeona") as? SKSpriteNode,
+              let unwrapBoundSenior = childNode(withName: "boundSenior") as? SKSpriteNode
         else { return }
         
         leona = unwrapLeona
@@ -32,6 +36,8 @@ class BilikKananController: GameUIController {
         gateKiri = unwrapGateKiri
         bound01 = unwrapBound01
         bound02 = unwrapBound02
+        boundLeona = unwrapBoundLeona
+        boundSenior = unwrapBoundSenior
     }
 }
 
@@ -44,19 +50,23 @@ extension BilikKananController {
             let node = self.atPoint(location)
             
             if (node.name == "actionButton") {
-                print("masuk action button \(inContact) \(npcIncontact)")
                 if inContact {
                     switch(npcIncontact) {
                     case "leona":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
-                       showDialogue(assets: int_gate01)
+                        showDialogue(assets: int_gate01)
+                        boundLeona?.removeFromParent()
+                    case "senior":
+                        //IF BELUM PERNAH MASUK KE DIALOGNYA
+                        showDialogue(assets: int_guild)
+                        boundSenior?.removeFromParent()
+                    case "gatekeeper02":
+                        showDialogue(assets: int_gate02)
                         
                     default:
-                        print("nope gaada ehhe")
+                        print("NPC not found")
                     }
                 }
-            } else if (dialogue.dialogueVisibility) {
-                dialogue.touchesBegan(touches, with: event);
             }
         }
     }
@@ -66,7 +76,7 @@ extension BilikKananController {
     }
 }
 
-//Contact antara objek
+//Contact dengan NPC
 extension BilikKananController {
     func didBegin(_ contact: SKPhysicsContact) {
         guard
@@ -79,42 +89,20 @@ extension BilikKananController {
         
         switch (bodyA, bodyB) {
             
-            
         case ("player", "leona"):
-            inContact = true
-            npcIncontact = "leona"
-            
+            contactWith(state: true, npcName: "leona")
         case ("leona", "player"):
-            inContact = true
-            npcIncontact = "leona"
-            
+            contactWith(state: true, npcName: "leona")
             
         case ("player", "senior"):
-            inContact = true
-            npcIncontact = "senior"
-            
+            contactWith(state: true, npcName: "senior")
         case ("senior", "player"):
-            inContact = true
-            npcIncontact = "senior"
+            contactWith(state: true, npcName: "senior")
             
-            
-        case ("player", "gatekeeper01"):
-            inContact = true
-            npcIncontact = "gatekeeper01"
-            
-        case ("gatekeeper01", "player"):
-            inContact = true
-            npcIncontact = "gatekeeper01"
-            
-            
-        case ("player", "bound01"):
-            inContact = true
-            npcIncontact = "bound01"
-            
-        case ("bound01", "player"):
-            inContact = true
-            npcIncontact = "bound01"
-            
+        case ("player", "gatekeeper02"):
+            contactWith(state: true, npcName: "gatekeeper02")
+        case ("gatekeeper02", "player"):
+            contactWith(state: true, npcName: "gatekeeper02")
             
         default: break
         }
@@ -126,53 +114,13 @@ extension BilikKananController {
             let bodyB = contact.bodyB.node?.name
         else { return }
         
-        print("body A end: \(bodyA )")
-        print("body B end: \(bodyB )")
-        
         inContact = false
         npcIncontact = ""
-        
-        
-        //       switch (bodyA, bodyB) {
-        //
-        //       case ("player", "leona"):
-        //           inContact = false
-        //           npcIncontact = "leona"
-        //
-        //       case ("leona", "player"):
-        //           inContact = false
-        //           npcIncontact = "leona"
-        //
-        //
-        //       case ("player", "senior"):
-        //           inContact = false
-        //           npcIncontact = "senior"
-        //
-        //       case ("senior", "player"):
-        //           inContact = false
-        //           npcIncontact = "senior"
-        //
-        //
-        //       case ("player", "gatekeeper01"):
-        //           inContact = false
-        //           npcIncontact = "gatekeeper01"
-        //
-        //       case ("gatekeeper01", "player"):
-        //           inContact = false
-        //           npcIncontact = "gatekeeper01"
-        //
-        //
-        //       case ("player", "bound01"):
-        //           inContact = false
-        //           npcIncontact = "bound01"
-        //
-        //       case ("bound01", "player"):
-        //           inContact = false
-        //           npcIncontact = "bound01"
-        //
-        //
-        //       default: break
-        //       }
+        hideBubble(state: true)
+
+        print("body A begin: \(bodyA )")
+        print("body B begin: \(bodyB )")
+    
     }
 }
 
@@ -180,11 +128,11 @@ extension BilikKananController {
 extension BilikKananController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-//        if let player = player {
-//            if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
-//                self.camera?.position = player.position
-//            }
-//        }
+                if let player = player {
+                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+                        self.camera?.position = player.position
+                    }
+                }
         
     }
 }

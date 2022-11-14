@@ -12,6 +12,7 @@ struct Dialogue {
     var image: String?
     var label: String?
     var name: String? = "Name"
+    var riddle: Bool = false
 }
 
 struct DialogueIntro {
@@ -45,6 +46,17 @@ enum gatekeeper: String {
     case happy = "gatekeeper_happy"
     case sad = "gatekeeper_sad"
     case normal = "gatekeeper_normal"
+    
+    var value: String {
+        return self.rawValue
+    }
+}
+
+enum senior: String {
+    case happy = "senior_happy"
+    case shocked = "senior_shocked"
+    case normal = "senior_normal"
+    case confused = "senior_confused"
     
     var value: String {
         return self.rawValue
@@ -101,15 +113,22 @@ let int_gate01 = [
 ]
 
 let int_guild = [
-    Dialogue(image: "", label: "Halo, kamu Erry ya? Di daftar anak magang hanya kamu saja yang belum absen."),
-    Dialogue(image: "", label: "Iya, pak! Maaf, saya terlambat."),
-    Dialogue(image: "", label: "Baiklah, jangan diulangi lagi ya."),
-    Dialogue(image: "", label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang."),
-    Dialogue(image: "", label: "Baik, siap pak!")
+    Dialogue(image: senior.confused.value, label: "Halo, kamu Erry ya? Di daftar anak magang hanya kamu saja yang belum absen.", name: nameBox.senior.value),
+    Dialogue(image: erry.scared.value, label: "Iya, pak! Maaf, saya terlambat.", name: nameBox.erry.value),
+    Dialogue(image: senior.happy.value, label: "Baiklah, jangan diulangi lagi ya.", name: nameBox.senior.value),
+    Dialogue(image: senior.normal.value, label: "Nah, karena tinggal kamu saja yang belum dapat briefing, sekalian saya jelaskan tugas kamu langsung ya sekarang.", name: nameBox.senior.value),
+    Dialogue(image: erry.happy.value, label: "Baik, siap pak!", name: nameBox.erry.value)
 ]
 
 let int_guild_explanation = [
     Dialogue(image: "", label: "")
+]
+
+let int_gate02 = [
+    Dialogue(image: gatekeeper.normal.value, label: "Hai anak muda, menjaga gerbang membuatku bosan.", name: nameBox.gk_02.value),
+    Dialogue(image: gatekeeper.happy.value, label: "Apakah kamu ingin bermain teka-teki bersamaku?", name: nameBox.gk_02.value),
+//    Dialogue(image: gatekeeper.normal.value, label: "'Aku' ada di dalam tubuh manusia, dari kepala sampai kaki. Aku berbentuk cairan. Bisa didonasikan tapi bukan uang, bisa dipompa tapi bukan ban. Siapakah aku?", name: nameBox.gk_02.value),
+    Dialogue(image: gatekeeper.normal.value, label: "'Aku' ada di dalam tubuh manusia, dari kepala sampai kaki. Aku berbentuk cairan. Bisa didonasikan tapi bukan uang, bisa dipompa tapi bukan ban. Siapakah aku?", name: nameBox.gk_02.value, riddle: true),
 ]
 
 let ext_gate03_1 = [
