@@ -30,34 +30,15 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     
     // MARK: Dialogue Init
     let dialogue = DialogueBox()
+    var bubble: SKSpriteNode?
+    var tandaSeru: SKSpriteNode?
+    var initTandaSeruRotation: CGFloat = 0.0
+    var dialogueBubbleAtlas = SKTextureAtlas(named:"DialogueBubble");
+
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
-//    private let playCollectSound = SKAction.playSoundFileNamed("typingSFX.mp3", waitForCompletion: false)
-//
-//    func collected() {
-//        let removeFromParent = SKAction.removeFromParent()
-//        let actionGroup = SKAction.group([playCollectSound, removeFromParent]);
-//        self.run(actionGroup)
-//    }
     
     override func didMove(to view: SKView) {
-//        collected()
-//        // Set up the background music audio node
-//        musicAudioNode.autoplayLooped = true
-//        musicAudioNode.isPositional = false
-//        // Add the audio node to the scene
-        if let audio = SKAudioNode(fileNamed: "typingSFX.mp3") {
-            addChild(audio)
-            audio.run(.play())
-        } else {
-            print("gagalll")
-        }
-       
-//        // Use an action to adjust the audio node's volume to 0
-//        musicAudioNode.run(SKAction.changeVolume(to: 1.0, duration: 10.0))
-//        // Run a delayed action on the scene that fades in the music
-//        run(SKAction.wait(forDuration: 1.0), completion: { [unowned self] in self.audioEngine.mainMixerNode.outputVolume = 1.0; self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2.0))
-//        })
         self.camera = cam
         
         guard let unwrapCamera = self.camera else { return }
@@ -191,15 +172,29 @@ extension GameUIController {
 
 // MARK: Setup Dialogue dan Kontak dengan NPC
 extension GameUIController {
-    func contactWith(state: Bool, npcName: String) {
-        inContact = state
-        npcIncontact = npcName
+    public func createSprite(texture: String, xPos: Double, yPos: Double, zPos: CGFloat, width: CGFloat, height: CGFloat, name: String) {
+        let node = SKSpriteNode(imageNamed: texture);
+        node.name = name
+        node.position = CGPoint(x: xPos, y: yPos)
+        node.zPosition = CGFloat(zPos)
+        node.size = CGSize(width: width, height: height)
+        self.addChild(node)
     }
     
     func setupDialogue() {
         dialogue.createDialogueNode()
         dialogue.name = "dialogue"
         self.camera?.addChild(dialogue)
+        setupBubbleDialogue()
+    }
+    
+    func setupBubbleDialogue() {//Create Sprite
+        createSprite(texture: "bubble", xPos: 10, yPos: 10, zPos: 4, width: 68, height: 48, name: "bubble")
+        createSprite(texture: "seru", xPos: 10, yPos: 10, zPos: 5, width: 16, height: 24, name: "tandaSeru")
+        bubble = self.childNode(withName: "bubble") as? SKSpriteNode
+        tandaSeru = self.childNode(withName: "tandaSeru") as? SKSpriteNode
+        
+        hideBubble(state: true)
     }
     
     func showDialogue(assets: [Dialogue]) {
@@ -207,17 +202,58 @@ extension GameUIController {
         dialogue.startDialogue(dialogue_assets: assets)
         dialogue.dialogueVisibility = true
     }
+    
+    func contactWith(state: Bool, npcName: String) {
+        inContact = state
+        npcIncontact = npcName
+        positioningBubble(hideState: !state, npc: npcName)
+    }
+    
+    func hideBubble(state: Bool) {
+        //Visibility
+        bubble?.isHidden = state
+        tandaSeru?.isHidden = state
+        tandaSeru?.removeAllActions()
+//        Add initial rotation pos
+        tandaSeru?.zRotation = 0
+    }
+    
+    func positioningBubble(hideState: Bool, npc: String) {
+        bubble?.position = CGPoint(x: (self.childNode(withName: npc) as! SKSpriteNode).position.x + 60, y:  (self.childNode(withName: npc) as! SKSpriteNode).position.y + 50)
+        tandaSeru?.position = CGPoint(x:  (self.childNode(withName: npc) as! SKSpriteNode).position.x + 58, y:(self.childNode(withName: npc) as! SKSpriteNode).position.y + 55)
+        
+        hideBubble(state: hideState)
+        
+        //Animate tanda seru
+        if !hideState {
+            animateTandaSeru(tandaSeru: tandaSeru ?? SKSpriteNode(imageNamed: ""))
+        }
+//        else {
+//            tandaSeru?.removeAllActions()
+//            tandaSeru?.zRotation = 0
+//        }
+    }
+    
+    
+    
+    func animateTandaSeru(tandaSeru: SKNode) {
+        let left = SKAction.rotate(byAngle: CGFloat.pi/3, duration: 0.5) //30 degrees
+        let right = SKAction.rotate(byAngle: -(CGFloat.pi/3), duration: 0.5)
+        let sequence = SKAction.sequence([right, left])
+        let repeated = SKAction.repeatForever(sequence)
+        tandaSeru.run(repeated)
+    }
 }
 
 // MARK: Fungsi update
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
-        if let player = player {
-            if(player.position.x > 0 ) {
-                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
-            }
-        }
+//        if let player = player {
+//            if(player.position.x > 0 ) {
+//                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
+//            }
+//        }
         
         if grounded {
             if actionBtnIsPressed {
