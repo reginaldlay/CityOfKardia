@@ -20,6 +20,16 @@ class BilikKananController: GameUIController {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        //Give scene a name
+        if let view = self.view as? SKView {
+            if let currentScene = view.scene {
+                currentScene.name = "BilikKananScene"
+            } else {
+                print("Current scene is nil")
+            }
+        }
+        
         guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
               let unwrapSenior = childNode(withName: "senior") as? SKSpriteNode,
               let unwrapGatekeeper = childNode(withName: "gatekeeper02") as? SKSpriteNode,
@@ -126,14 +136,14 @@ extension BilikKananController {
 
 //Update
 extension BilikKananController {
-    override func update(_ currentTime: TimeInterval) {
-        super.update(currentTime)
-                if let player = player {
-                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
-                        self.camera?.position = player.position
-                    }
-                }
-        
-    }
+//    override func update(_ currentTime: TimeInterval) {
+//        super.update(currentTime)
+//                if let player = player {
+//                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+//                        self.camera?.position = player.position
+//                    }
+//                }
+//
+//    }
 }
 
