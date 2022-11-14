@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 class PlayerNode : SKSpriteNode {
     
@@ -17,6 +18,9 @@ class PlayerNode : SKSpriteNode {
     let WalkingTexture : Array<SKTexture> = (1...12).map({return "Erry_Run_\($0)"}).map(SKTexture.init)
     let idleTexture : Array<SKTexture> = (1...4).map({return "Erry_Idle_\($0)"}).map(SKTexture.init)
     var flipTexture : SKAction?
+    
+    // MARK: Player Sound FX
+    let playerWalkSFX = SKAudioNode(fileNamed: "Erry_Walk_SFX")
     
     // MARK: Fungsi untuk menggerakkan player di Y axis
     func jump() {
@@ -43,6 +47,12 @@ class PlayerNode : SKSpriteNode {
         }
         
         run(jumpAnimation!)
+    }
+    
+    // MARK: Fungsi untuk menjalankan sound fx lompat
+    func runJumpSFX() {
+        let jumpSFX = SKAction.playSoundFileNamed("Erry_Jump_SFX", waitForCompletion: false)
+        run(jumpSFX)
     }
     
     // MARK: Fungsi untuk menggerakkan player di X axis

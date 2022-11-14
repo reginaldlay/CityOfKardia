@@ -38,6 +38,9 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
     
+    // MARK: BGM init
+    let bgm = SKAudioNode(fileNamed: "COK_BGM_01")
+    
     override func didMove(to view: SKView) {
         self.camera = cam
         
@@ -65,6 +68,12 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         logo?.isHidden = true
         playerYPos = player?.position.y ?? 0
+        
+        addChild(bgm)
+        bgm.isPositional = false
+        bgm.run(.play())
+        bgm.run(.changeVolume(to: 0.5, duration: 0))
+    
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -102,6 +111,13 @@ extension GameUIController {
             leftBtnIsPressed = false
             rightBtnIsPressed = false
             actionBtnIsPressed = false
+    }
+}
+
+// MARK: Fungsi untuk menjalankan BGM
+extension GameUIController {
+    func runBGM() {
+        
     }
 }
 

@@ -32,11 +32,12 @@ class CoreDataManager {
         }
     }
     
-    func saveDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double) {
+    func saveDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double, erryMission: Int32) {
         let erry = Erry(context: persistentContainer.viewContext)
         erry.location = erryLocation
         erry.xpos = erryXPos
         erry.ypos = erryYPos
+        erry.mission = erryMission
         
         do {
             try persistentContainer.viewContext.save()
@@ -61,9 +62,9 @@ class CoreDataManager {
         }
     }
     
-    func updateDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double) {
+    func updateDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double, erryMission: Int32) {
         deleteDataErry()
-        saveDataErry(erryLocation: erryLocation, erryXPos: erryXPos, erryYPos: erryYPos)
+        saveDataErry(erryLocation: erryLocation, erryXPos: erryXPos, erryYPos: erryYPos, erryMission: erryMission)
     }
     
 }
