@@ -18,11 +18,6 @@ class BilikKananController: GameUIController {
     var boundLeona: SKSpriteNode?
     var boundSenior: SKSpriteNode?
     
-    //Bubble Dialogue
-//    var bubble: SKSpriteNode?
-//    var tandaSeru: SKSpriteNode?
-//    var initRotation: CGFloat = 0.0
-    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
@@ -33,8 +28,6 @@ class BilikKananController: GameUIController {
               let unwrapBound02 = childNode(withName: "bound02") as? SKSpriteNode,
               let unwrapBoundLeona = childNode(withName: "boundLeona") as? SKSpriteNode,
               let unwrapBoundSenior = childNode(withName: "boundSenior") as? SKSpriteNode
-//              let unwrapBubble = childNode(withName: "bubble") as? SKSpriteNode,
-//              let unwrapTandaSeru = childNode(withName: "tandaSeru") as? SKSpriteNode
         else { return }
         
         leona = unwrapLeona
@@ -45,10 +38,6 @@ class BilikKananController: GameUIController {
         bound02 = unwrapBound02
         boundLeona = unwrapBoundLeona
         boundSenior = unwrapBoundSenior
-//        bubble = unwrapBubble
-//        tandaSeru = unwrapTandaSeru
-        
-//        initRotation = tandaSeru?.zRotation ?? 0
     }
 }
 
@@ -146,36 +135,5 @@ extension BilikKananController {
                 }
         
     }
-}
-
-//Bubble Dialogue
-extension BilikKananController {
-//    private func hideBubble(state: Bool, npc: SKSpriteNode) {
-//        
-//        bubble?.position = CGPoint(x: npc.position.x + 60, y: npc.position.y + 30)
-//        tandaSeru?.position = CGPoint(x: npc.position.x + 60, y: npc.position.y + 30)
-//        
-//        print(npc.position.x)
-//        print(npc.position.y)
-//
-//        
-//        bubble?.isHidden = state
-//        tandaSeru?.isHidden = state
-//        
-//        if !state {
-//            animateTandaSeru(tandaSeru: self.childNode(withName: "tandaSeru")!)
-//        } else {
-//            self.childNode(withName: "tandaSeru")!.removeAllActions()
-//            self.childNode(withName: "tandaSeru")!.zRotation = initRotation
-//        }
-//    }
-//    
-//    private func animateTandaSeru(tandaSeru: SKNode) {
-//        let left = SKAction.rotate(byAngle: CGFloat.pi/3, duration: 0.5) //30 degrees
-//        let right = SKAction.rotate(byAngle: -(CGFloat.pi/3), duration: 0.5)
-//        let sequence = SKAction.sequence([right, left])
-//        let repeated = SKAction.repeatForever(sequence)
-//        tandaSeru.run(repeated)
-//    }
 }
 
