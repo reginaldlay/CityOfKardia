@@ -48,10 +48,16 @@ class DialogueBox: SKNode {
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
-        return self.childNode(withName: name) as! SKSpriteNode
+        if let node = self.childNode(withName: name) as? SKSpriteNode {
+            return node
+        };
+        return SKSpriteNode(imageNamed: "logo.png")
     }
     public func refLabel(name: String) -> SKLabelNode {
-        return self.childNode(withName: name) as! SKLabelNode
+        if let node = self.childNode(withName: name) as? SKLabelNode {
+            return node
+        }
+        return SKLabelNode(text: "No label found")
     }
     
     public func createSprite(texture: String, xPos: Double, yPos: Double, zPos: CGFloat, width: CGFloat, height: CGFloat, name: String) {
@@ -167,7 +173,7 @@ class DialogueBox: SKNode {
                     let node = self.atPoint(location)
                     
                     if (node.name == "optPD") {
-                        var rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat! Ambillah ini karena kamu telah menjawabnya dengan benar."
+                        let rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat! Ambillah ini karena kamu telah menjawabnya dengan benar."
                         changeSpecificDialogueLabel(dialogue: rightResponse)
                         dialogueBefore = rightResponse
                         
