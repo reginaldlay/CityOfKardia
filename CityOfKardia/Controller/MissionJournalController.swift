@@ -8,11 +8,11 @@
 import SpriteKit
 
 class MissionJournalController: SKScene {
-    override func didMove(to view: SKView) {
-        print("masuk isni!")
+        
+    override func sceneDidLoad() {
         if let mission1Desc = childNode(withName: "mission1_desc") as? SKLabelNode{
-            print("yuhu")
             mission1Desc.preferredMaxLayoutWidth = 280
         }
     }
+    
 }

@@ -36,6 +36,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     
     // MARK: Mission
     var missionJournal: SKReferenceNode?
+    var missionJournalController = MissionJournalController()
 
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
@@ -75,7 +76,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         addChild(bgm)
         bgm.isPositional = false
         bgm.run(.play())
-        bgm.run(.changeVolume(to: 0.5, duration: 0))
+        bgm.run(.changeVolume(to: 0.1, duration: 0))
     
     }
     
@@ -87,6 +88,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
 // MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
@@ -99,8 +101,12 @@ extension GameUIController {
                     else { actionBtnIsPressed = true }
             }
             
+            //Touch mission HUD
             if (node.name == "missionBg" || node.name == "missionLabel") {
                 hideMissionJournal(state: false)
+            }
+            if (node.name == "book_close") {
+                hideMissionJournal(state: true)
             }
             
             // Touch Dialogue

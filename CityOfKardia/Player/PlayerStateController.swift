@@ -34,6 +34,7 @@ class IsWalkingRightState : PlayerStateController {
     override func didEnter(from previousState: GKState?) {
         player.runMoveAnimation(direction: "right")
         player.addChild(player.playerWalkSFX)
+        player.playerWalkSFX.run(.changeVolume(to: 0.1, duration: 0.1))
         player.playerWalkSFX.run(.play())
     }
     
@@ -54,6 +55,7 @@ class IsWalkingLeftState : PlayerStateController {
     
     override func didEnter(from previousState: GKState?) {
         player.runMoveAnimation(direction: "left")
+        player.playerWalkSFX.run(.changeVolume(to: 0.1, duration: 0.1))
         player.addChild(player.playerWalkSFX)
         player.playerWalkSFX.run(.play())
     }
