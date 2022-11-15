@@ -33,6 +33,8 @@
 		6BC63051291B9A190000AB1B /* Erry_Jump_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */; };
 		6BC63052291B9A190000AB1B /* COK_BGM_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304F291B9A180000AB1B /* COK_BGM_01.mp3 */; };
 		6BC63056291BA66B0000AB1B /* typingSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC63055291BA66B0000AB1B /* typingSFX.mp3 */; };
+		A293D5732922822300E52253 /* MissionJournal.sks in Resources */ = {isa = PBXBuildFile; fileRef = A293D5722922822300E52253 /* MissionJournal.sks */; };
+		A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293D57429228E5B00E52253 /* MissionJournalController.swift */; };
 		A295965029139EC000DE128A /* BilikKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A295964F29139EC000DE128A /* BilikKananScene.sks */; };
 		A295965229139EE100DE128A /* BilikKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295965129139EE100DE128A /* BilikKananController.swift */; };
 		A2959654291501A400DE128A /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2959653291501A400DE128A /* SceneTestController.swift */; };
@@ -71,6 +73,8 @@
 		6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Erry_Jump_SFX.mp3; sourceTree = "<group>"; };
 		6BC6304F291B9A180000AB1B /* COK_BGM_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = COK_BGM_01.mp3; sourceTree = "<group>"; };
 		6BC63055291BA66B0000AB1B /* typingSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = typingSFX.mp3; sourceTree = "<group>"; };
+		A293D5722922822300E52253 /* MissionJournal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MissionJournal.sks; sourceTree = "<group>"; };
+		A293D57429228E5B00E52253 /* MissionJournalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionJournalController.swift; sourceTree = "<group>"; };
 		A295964F29139EC000DE128A /* BilikKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BilikKananScene.sks; sourceTree = "<group>"; };
 		A295965129139EE100DE128A /* BilikKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilikKananController.swift; sourceTree = "<group>"; };
 		A2959653291501A400DE128A /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneTestController.swift; path = ../Scene/SceneTestController.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */,
 				3901D83C28FE912B00071442 /* IntroController.swift */,
 				A2959653291501A400DE128A /* SceneTestController.swift */,
+				A293D57429228E5B00E52253 /* MissionJournalController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 				3901D83628FE8FD300071442 /* IntroScene.sks */,
 				6B21C2AC29124C0700DF3662 /* SceneTest.sks */,
 				A2F78634291A62DD009D958E /* Riddle.sks */,
+				A293D5722922822300E52253 /* MissionJournal.sks */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				3965EEF62920F7D000AB1D39 /* GateParuParuScene.sks in Resources */,
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
+				A293D5732922822300E52253 /* MissionJournal.sks in Resources */,
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
 				39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
@@ -288,6 +295,7 @@
 				6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */,
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
+				A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */,
 				A2959654291501A400DE128A /* SceneTestController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
 				A295965229139EE100DE128A /* BilikKananController.swift in Sources */,

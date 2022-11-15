@@ -48,6 +48,7 @@ class DialogueBox: SKNode {
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         hideDialogue(state: true)
         
+        typingSFX.run(.changeVolume(to: 0, duration: 0))
         self.addChild(typingSFX)
         typingSFX.run(.stop())
     }
@@ -137,6 +138,7 @@ class DialogueBox: SKNode {
     @objc private func typeLetter(){
         if countType < arrLabel.count {
             
+            typingSFX.run(.changeVolume(to: 0.3, duration: 0.5))
             typingSFX.run(.play())
             
             typing = true
