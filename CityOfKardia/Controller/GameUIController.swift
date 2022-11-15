@@ -216,6 +216,11 @@ extension GameUIController {
         self.camera?.childNode(withName: "rightButton")?.isHidden = state
         self.camera?.childNode(withName: "actionButton")?.isHidden = state
     }
+    
+    func hideMissionHUD(state: Bool) {
+        self.camera?.childNode(withName: "missionBg")?.isHidden = state
+        self.camera?.childNode(withName: "missionLabel")?.isHidden = state
+    }
 }
 
 // MARK: Setup Dialogue dan Kontak dengan NPC
@@ -339,7 +344,7 @@ extension GameUIController {
     func hideMissionJournal(state: Bool) {
         missionJournal?.isHidden = state
         hideControl(state: !state)
-        self.camera?.childNode(withName: "missionBg")?.isHidden = !state
-        self.camera?.childNode(withName: "missionLabel")?.isHidden = !state
+        hideMissionHUD(state: !state)
     }
+    
 }
