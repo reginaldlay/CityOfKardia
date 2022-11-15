@@ -26,11 +26,12 @@ class ArteriPulmonalisController: GameUIController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         if let player = player {
-//            var lastPos = player.position
-            print(player.position )
             // Kamera
-            if (player.position.y < -2) {
-                self.camera?.position = CGPoint(x: player.position.x , y: playerInitPos.y)
+            //Kalau jatuh (diminus 1 supaya aman ga masuk sini apabila di posisi normal)
+            if (player.position.y < playerInitPos.y - 1) {
+                self.camera?.position = CGPoint(x: 0 , y: playerInitPos.y)
+                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
+                
             } else if (player.position.x > 0 && player.position.y > -(self.size.height/2)) {
                 self.camera?.position = CGPoint(x: player.position.x , y: player.position.y)
             } else if (player.position.x < 0 && player.position.y > -(self.size.height/2)) {
