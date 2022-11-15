@@ -328,7 +328,7 @@ extension GameUIController {
 extension GameUIController {
     func setupMissionJournal() {
         if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
-            self.addChild(unwrapMissionJournal)
+            self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
             hideMissionJournal(state: true)
         } else {
