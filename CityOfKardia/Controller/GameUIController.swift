@@ -33,7 +33,10 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var bubble: SKSpriteNode?
     var tandaSeru: SKSpriteNode?
     var initTandaSeruRotation: CGFloat = 0.0
-    var dialogueBubbleAtlas = SKTextureAtlas(named:"DialogueBubble");
+    
+    // MARK: Mission
+    var missionJournal: SKReferenceNode?
+    var missionJournalController = MissionJournalController()
 
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
@@ -50,6 +53,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         setupHUD()
         setupDialogue()
+        setupMissionJournal()
         
         guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
         else { return }
@@ -72,7 +76,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         addChild(bgm)
         bgm.isPositional = false
         bgm.run(.play())
-        bgm.run(.changeVolume(to: 0.5, duration: 0))
+        bgm.run(.changeVolume(to: 0.1, duration: 0))
     
     }
     
@@ -84,6 +88,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
 // MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
@@ -94,6 +99,14 @@ extension GameUIController {
             if (node.name == "actionButton") {
                 if inContact { logo?.isHidden = false }
                     else { actionBtnIsPressed = true }
+            }
+            
+            //Touch mission HUD
+            if (node.name == "missionBg" || node.name == "missionLabel") {
+                hideMissionJournal(state: false)
+            }
+            if (node.name == "book_close") {
+                hideMissionJournal(state: true)
             }
             
             // Touch Dialogue
@@ -168,6 +181,8 @@ extension GameUIController {
         addCameraChildNode(imageName: "leftButton", name: "leftButton", widthSize: 60, heightSize: 60, xPos: -352, yPos: -133)
         addCameraChildNode(imageName: "rightButton", name: "rightButton", widthSize: 60, heightSize: 60, xPos: -252, yPos: -133)
         addCameraChildNode(imageName: "actionButton", name: "actionButton", widthSize: 66, heightSize: 84, xPos: 349, yPos: -129)
+        addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
+        addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 16)
     }
     
     func addCameraChildNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat) {
@@ -177,6 +192,23 @@ extension GameUIController {
         HUD.position = CGPoint(x: xPos, y: yPos)
         HUD.zPosition = 100
         camera?.addChild(HUD)
+    }
+
+    
+    public func addCameraLabelNode (xPos: Double, yPos: Double, zPos: CGFloat, maxLayout: CGFloat, lineAmount: Int, horizontal: SKLabelHorizontalAlignmentMode, vertical: SKLabelVerticalAlignmentMode, name: String, fontSize: Int) {
+        let node = SKLabelNode(text: "Initializing Label Mission");
+        node.name = name
+        node.position = CGPoint(x: xPos, y: yPos)
+        node.zPosition = CGFloat(zPos);
+        node.horizontalAlignmentMode = horizontal
+        node.verticalAlignmentMode = vertical
+        node.preferredMaxLayoutWidth = maxLayout
+        node.lineBreakMode = .byTruncatingTail
+        node.numberOfLines = lineAmount;
+        node.fontSize = CGFloat(fontSize)
+        node.fontColor = .darkGray
+        node.fontName = "SF-Pro"
+        camera?.addChild(node)
     }
     
     func hideControl(state: Bool) {
@@ -230,7 +262,7 @@ extension GameUIController {
         bubble?.isHidden = state
         tandaSeru?.isHidden = state
         tandaSeru?.removeAllActions()
-//        Add initial rotation pos
+        // Add initial rotation pos
         tandaSeru?.zRotation = 0
     }
     
@@ -244,13 +276,7 @@ extension GameUIController {
         if !hideState {
             animateTandaSeru(tandaSeru: tandaSeru ?? SKSpriteNode(imageNamed: ""))
         }
-//        else {
-//            tandaSeru?.removeAllActions()
-//            tandaSeru?.zRotation = 0
-//        }
     }
-    
-    
     
     func animateTandaSeru(tandaSeru: SKNode) {
         let left = SKAction.rotate(byAngle: CGFloat.pi/3, duration: 0.5) //30 degrees
@@ -304,5 +330,25 @@ extension GameUIController {
             player?.runJumpAnimation()
         }
         
+    }
+}
+
+//Mission HUD and Mission Journal
+extension GameUIController {
+    func setupMissionJournal() {
+        if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
+            self.camera?.addChild(unwrapMissionJournal)
+            missionJournal = unwrapMissionJournal
+            hideMissionJournal(state: true)
+        } else {
+            print("Error init mission journal!")
+        }
+    }
+    
+    func hideMissionJournal(state: Bool) {
+        missionJournal?.isHidden = state
+        hideControl(state: !state)
+        self.camera?.childNode(withName: "missionBg")?.isHidden = !state
+        self.camera?.childNode(withName: "missionLabel")?.isHidden = !state
     }
 }
