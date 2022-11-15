@@ -48,6 +48,8 @@ class BilikKananController: GameUIController {
         bound02 = unwrapBound02
         boundLeona = unwrapBoundLeona
         boundSenior = unwrapBoundSenior
+        
+        CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
     }
 }
 
@@ -113,6 +115,11 @@ extension BilikKananController {
             contactWith(state: true, npcName: "gatekeeper02")
         case ("gatekeeper02", "player"):
             contactWith(state: true, npcName: "gatekeeper02")
+            
+        case ("player", "bound02"):
+            moveScene(sceneName: "ArteriPulmonalisScene")
+        case ("bound02", "player"):
+            moveScene(sceneName: "ArteriPulmonalisScene")
             
         default: break
         }
