@@ -12,6 +12,7 @@ class ArteriPulmonalisController: GameUIController {
     var xPosCamera: Double = 0
     var yPosCamera: Double = 0
     var gameOverScene: SKReferenceNode?
+    var lastGround: SKSpriteNode?
     
     enum Order: String {
         case right = "right", left = "left", up = "up", down = "down"
@@ -21,32 +22,33 @@ class ArteriPulmonalisController: GameUIController {
         playerInitPos = player?.position ?? CGPoint(x: 0, y: 0)
         print(playerInitPos)
         xPosCamera = 680
-//        print(abs(playerInitPos.x))
+        //        print(abs(playerInitPos.x))
         yPosCamera = 300
         camera?.run(SKAction.scale(to: 2.5, duration: 0))
         
         if let platform01 = childNode(withName: "platform_1") as? SKSpriteNode,
-              let platform02 = childNode(withName: "platform_2") as? SKSpriteNode,
-              let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
-              let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
-              let platform05 = childNode(withName: "platform_5") as? SKSpriteNode,
-              let platform06 = childNode(withName: "platform_6") as? SKSpriteNode
+           let platform02 = childNode(withName: "platform_2") as? SKSpriteNode,
+           let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
+           let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
+           let platform05 = childNode(withName: "platform_5") as? SKSpriteNode,
+           let platform06 = childNode(withName: "platform_6") as? SKSpriteNode,
+           let unwrapLastGround = childNode(withName: "last_ground") as? SKSpriteNode
         {
-            print(platform01)
-            animateHorizontal(platform: platform01, order: Order.right.rawValue)
-            animateHorizontal(platform: platform02, order: Order.left.rawValue)
-            animateHorizontal(platform: platform03, order: Order.right.rawValue)
+            animateHorizontal(platform: platform01, order: Order.right.rawValue, xMove: 70, duration: 0.6)
+            animateHorizontal(platform: platform02, order: Order.left.rawValue, xMove: 70, duration: 0.6)
+            animateHorizontal(platform: platform03, order: Order.right.rawValue, xMove: 120, duration: 0.7)
             
             animateVertical(platform: platform04, order: Order.up.rawValue)
             animateVertical(platform: platform05, order: Order.down.rawValue)
             animateVertical(platform: platform06, order: Order.up.rawValue)
+            lastGround = unwrapLastGround
         }
     }
     
-    private func animateHorizontal (platform: SKSpriteNode, order: String) {
+    private func animateHorizontal (platform: SKSpriteNode, order: String, xMove: CGFloat, duration: TimeInterval) {
         var sequence: SKAction
-        let right = SKAction.moveBy(x: 70, y: 0, duration: 0.6)
-        let left =  SKAction.moveBy(x: -70, y: 0, duration: 0.6)
+        let right = SKAction.moveBy(x: xMove, y: 0, duration: duration)
+        let left =  SKAction.moveBy(x: -xMove, y: 0, duration: duration)
         if order == "right" {
             sequence = SKAction.sequence([right, left])
         } else {
@@ -58,8 +60,8 @@ class ArteriPulmonalisController: GameUIController {
     
     private func animateVertical (platform: SKSpriteNode, order: String) {
         var sequence: SKAction
-        let up = SKAction.moveBy(x: 0, y: 30, duration: 0.7)
-        let down =  SKAction.moveBy(x: 0, y: -30, duration: 0.7)
+        let up = SKAction.moveBy(x: 0, y: 50, duration: 0.7)
+        let down =  SKAction.moveBy(x: 0, y: -50, duration: 0.7)
         if order == "up" {
             sequence = SKAction.sequence([up, down])
         } else {
@@ -95,18 +97,23 @@ class ArteriPulmonalisController: GameUIController {
         if let player = player {
             // Kamera
             //Kalau jatuh (diminus 1 supaya aman ga masuk sini apabila di posisi normal)
-//            if (player.position.y < playerInitPos.y - 1) {
-//                self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
-//                print("masuk 1")
-//                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
-//
-//            }
+            //            if (player.position.y < playerInitPos.y - 1) {
+            //                self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
+            //                print("masuk 1")
+            //                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
+            //
+            //            }
             
-            if (player.position.x > 0 && player.position.y > -(self.size.height/2)) {
-//                print("masuk 2")
+            //diambil dari else if kedua dulu utk 952 nya, baru dimasukin ke kondisi atas2nya
+            if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < lastGround!.position.x - xPosCamera - 952 ) {
+//                print("masuk 1 \(lastGround!.position.x) - \(player.position.x)")
                 self.camera?.position = CGPoint(x: xPosCamera + player.position.x , y: yPosCamera)
-            } else  {
-//                print("masuk 3")
+            } else if (player.position.y > -(self.size.height/2) &&
+                       player.position.x > lastGround!.position.x - xPosCamera - 952) {
+//                print("masuk 2")
+                self.camera?.position = CGPoint(x: lastGround!.position.x - 952, y: yPosCamera)
+            } else {
+//                                print("masuk 3")
                 self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
             }
             
@@ -119,9 +126,9 @@ class ArteriPulmonalisController: GameUIController {
                     hideControl(state: true)
                     hideMissionHUD(state: true)
                 }
-            //Kalau player sudah ditengah layar
+                //Kalau player sudah ditengah layar
             }
-           
+            
         }
         
     }
