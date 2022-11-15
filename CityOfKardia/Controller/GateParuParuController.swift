@@ -12,6 +12,8 @@ class GateParuParuController: GameUIController {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
     }
     
 }

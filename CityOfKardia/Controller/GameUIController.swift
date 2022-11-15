@@ -261,6 +261,15 @@ extension GameUIController {
     }
 }
 
+extension GameUIController {
+    func moveScene(sceneName: String) {
+        if let nextScene = SKScene(fileNamed: sceneName) {
+            scene?.scaleMode = .aspectFill
+            scene?.view?.presentScene(nextScene)
+        }
+    }
+}
+
 // MARK: Fungsi update
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
