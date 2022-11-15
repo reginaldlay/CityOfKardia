@@ -291,11 +291,11 @@ extension GameUIController {
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
-        if let player = player {
-            if(player.position.x > 0 ) {
-                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
-            }
-        }
+//        if let player = player {
+//            if(player.position.x > 0 ) {
+//                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
+//            }
+//        }
         
         if grounded {
             if actionBtnIsPressed {
