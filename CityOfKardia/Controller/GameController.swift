@@ -16,21 +16,66 @@ class GameController: SKScene {
         addNode(imageName: "logo", name: "logo", widthSize: 142, heightSize: 68, xPos: -319, yPos: 129, zPos: 0)
         addNode(imageName: "erryMascot", name: "erryMascot", widthSize: 201.97, heightSize: 320, xPos: 0, yPos: 0, zPos: 0)
         addNode(imageName: "newGameButton", name: "newGameButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -133, zPos: 0)
-        addNode(imageName: "continueButton", name: "continueButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -49, zPos: 0)
         
+        if (CoreDataManager.shared.readDataErry().location != nil) {
+            addNode(imageName: "continueButton", name: "continueButton", widthSize: 134, heightSize: 60, xPos: 323, yPos: -49, zPos: 0)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            enumerateChildNodes(withName: "//*", using: { (node, stop) in
-                if node.name == "newGameButton" {
-                    if node.contains(touch.location(in: self)) {
-                        let introScene = IntroController(size: self.size)
-                        self.view?.presentScene(introScene) //nanti tambahin transisi
-                    }
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            
+            if (node.name == "newGameButton") {
+                if let nextScene = SKScene(fileNamed: "GateSerambiKananScene") { //nanti diubah jadi IntroScene kalo udah jadi ya
+                    self.scene?.scaleMode = .aspectFill
+                    self.scene?.view?.presentScene(nextScene)
                 }
-            })
+            }
+            else if (node.name == "continueButton") {
+                switch (CoreDataManager.shared.readDataErry().location) {
+                case ("GateSerambiKanan"):
+                    if let nextScene = SKScene(fileNamed: "GateSerambiKananScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("BilikKanan"):
+                    if let nextScene = SKScene(fileNamed: "BilikKananScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("ArteriPulmonalis"):
+                    if let nextScene = SKScene(fileNamed: "ArteriPulmonalisScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("Kapiler"):
+                    if let nextScene = SKScene(fileNamed: "KapilerScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("GateParuParu"):
+                    if let nextScene = SKScene(fileNamed: "GateParuParuScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("Alveolus"):
+                    if let nextScene = SKScene(fileNamed: "AlveolusScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                default: break
+                }
+            }
         }
+                
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

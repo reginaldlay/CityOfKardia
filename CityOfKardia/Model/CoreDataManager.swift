@@ -8,11 +8,14 @@
 import Foundation
 import UIKit
 import CoreData
+import SpriteKit
 
 class CoreDataManager {
     
     let persistentContainer: NSPersistentContainer!
     let viewContext: NSManagedObjectContext!
+    var erryMission: Int32 = 0
+    var erryDictionary: Int32 = 0
     static let shared = CoreDataManager()
     
     init () {
@@ -32,12 +35,11 @@ class CoreDataManager {
         }
     }
     
-    func saveDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double, erryMission: Int32) {
+    func saveDataErry(erryLocation: String) {
         let erry = Erry(context: persistentContainer.viewContext)
         erry.location = erryLocation
-        erry.xpos = erryXPos
-        erry.ypos = erryYPos
         erry.mission = erryMission
+        erry.dictionary = erryDictionary
         
         do {
             try persistentContainer.viewContext.save()
@@ -62,9 +64,18 @@ class CoreDataManager {
         }
     }
     
-    func updateDataErry(erryLocation: String, erryXPos: Double, erryYPos: Double, erryMission: Int32) {
+    func updateDataErry(erryLocation: String) {
         deleteDataErry()
-        saveDataErry(erryLocation: erryLocation, erryXPos: erryXPos, erryYPos: erryYPos, erryMission: erryMission)
+        saveDataErry(erryLocation: erryLocation)
+    }
+    
+    func checkpoint(locationName: String) {
+        if (readDataErry().location == nil) {
+            saveDataErry(erryLocation: locationName)
+        }
+        else {
+            updateDataErry(erryLocation: locationName)
+        }
     }
     
 }
