@@ -17,6 +17,8 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var playerState : GKStateMachine?
     let cam = SKCameraNode()
     var playerYPos: CGFloat = 0 //Untuk camera supaya tidak ngikutin saat loncat
+    var menu = Menu()
+    var musicIsOn = true
     
     // MARK: Flag untuk player
     var inContact = false // True saat playerNode melakukan contact dengan node lain
@@ -49,7 +51,8 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         guard let unwrapCamera = self.camera else { return }
         self.addChild(unwrapCamera)
-        unwrapCamera.zPosition = 100
+        
+        self.camera?.addChild(menu)
         
         setupHUD()
         setupDialogue()
@@ -105,8 +108,38 @@ extension GameUIController {
             if (node.name == "missionBg" || node.name == "missionLabel") {
                 hideMissionJournal(state: false)
             }
+            
             if (node.name == "book_close") {
                 hideMissionJournal(state: true)
+            }
+            
+            if node.name == "burgerButton" {
+                if let burger = self.camera?.childNode(withName: "burgerButton") {
+                    let pressedTexture = SKTexture(imageNamed: "burgerButtonClicked")
+                    burger.run(SKAction.setTexture(pressedTexture))
+                }
+            }
+            
+            if node.name == "menuExitButton" {
+                if let nodeName = node.name {
+                    menu.didPressAnimation(nodeName: nodeName)
+                }
+            }
+            
+            if node.name == "menuKeluarButton" {
+                if let nodeName = node.name {
+                    menu.didPressAnimation(nodeName: nodeName)
+                }
+            }
+            
+            if node.name == "menuKamusButton" {
+                if let nodeName = node.name {
+                    menu.didPressAnimation(nodeName: nodeName)
+                }
+            }
+            
+            if node.name == "menuMusicButton" {
+                menu.didPressMusicButton(musicIsOn: musicIsOn)
             }
             
             // Touch Dialogue
@@ -124,6 +157,54 @@ extension GameUIController {
             leftBtnIsPressed = false
             rightBtnIsPressed = false
             actionBtnIsPressed = false
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            
+            if node.name == "burgerButton" {
+                if let burger = self.camera?.childNode(withName: "burgerButton") {
+                    let pressedTexture = SKTexture(imageNamed: "burgerButton")
+                    burger.run(SKAction.setTexture(pressedTexture))
+                }
+                menu.setupMenu()
+                self.hideControl(state: true)
+            }
+            
+            if node.name == "menuExitButton" {
+                if let nodeName = node.name {
+                    menu.didEndPressAnimation(nodeName: nodeName)
+                }
+                
+                menu.removeAllChildren()
+                self.hideControl(state: false)
+            }
+            
+            if node.name == "menuKeluarButton" {
+                if let nodeName = node.name {
+                    menu.didEndPressAnimation(nodeName: nodeName)
+                }
+            }
+            
+            if node.name == "menuKamusButton" {
+                if let nodeName = node.name {
+                    menu.didEndPressAnimation(nodeName: nodeName)
+                }
+            }
+            
+            if node.name == "menuMusicButton" {
+                if musicIsOn {
+                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    bgm.run(.stop())
+                    musicIsOn = false
+                } else {
+                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    bgm.run(.play())
+                    musicIsOn = true
+                }
+            }
+            
+        }
     }
 }
 
@@ -182,6 +263,7 @@ extension GameUIController {
         addCameraChildNode(imageName: "rightButton", name: "rightButton", widthSize: 60, heightSize: 60, xPos: -252, yPos: -133)
         addCameraChildNode(imageName: "actionButton", name: "actionButton", widthSize: 66, heightSize: 84, xPos: 349, yPos: -129)
         addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
+        addCameraChildNode(imageName: "burgerButton", name: "burgerButton", widthSize: 38, heightSize: 40, xPos: 378, yPos: 150)
         addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 16)
     }
     
@@ -215,6 +297,7 @@ extension GameUIController {
         self.camera?.childNode(withName: "leftButton")?.isHidden = state
         self.camera?.childNode(withName: "rightButton")?.isHidden = state
         self.camera?.childNode(withName: "actionButton")?.isHidden = state
+        self.camera?.childNode(withName: "burgerButton")?.isHidden = state
     }
 }
 
