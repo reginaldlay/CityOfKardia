@@ -23,12 +23,12 @@
 		3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */; };
 		39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */; };
 		39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */; };
-		6B15BBE42921F86A007EC4CD /* KapilerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B15BBE32921F86A007EC4CD /* KapilerScene.sks */; };
-		6B15BBE62921F87A007EC4CD /* KapilerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B15BBE52921F87A007EC4CD /* KapilerController.swift */; };
-		6B21C2A729124B6700DF3662 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A629124B6700DF3662 /* PlayerNode.swift */; };
-		6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2A829124B7300DF3662 /* PlayerStateController.swift */; };
-		6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21C2AA29124BC200DF3662 /* GameUIController.swift */; };
 		6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B21C2AC29124C0700DF3662 /* SceneTest.sks */; };
+		6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FC29241D8A00902011 /* PlayerNode.swift */; };
+		6B4895FF29241DAC00902011 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FE29241DAC00902011 /* PlayerStateController.swift */; };
+		6B48960129241DD100902011 /* KapilerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B48960029241DD100902011 /* KapilerController.swift */; };
+		6B48960329241E0900902011 /* KapilerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B48960229241E0900902011 /* KapilerScene.sks */; };
+		6B48960529241E2C00902011 /* GameUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B48960429241E2C00902011 /* GameUIController.swift */; };
 		6B6D9BF42923E5DB00F736F1 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6D9BF32923E5DB00F736F1 /* Menu.swift */; };
 		6BC63050291B9A180000AB1B /* Erry_Walk_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304D291B9A180000AB1B /* Erry_Walk_SFX.mp3 */; };
 		6BC63051291B9A190000AB1B /* Erry_Jump_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */; };
@@ -64,12 +64,12 @@
 		3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateParuParuController.swift; sourceTree = "<group>"; };
 		39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateSerambiKananController.swift; sourceTree = "<group>"; };
 		39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GateSerambiKananScene.sks; sourceTree = "<group>"; };
-		6B15BBE32921F86A007EC4CD /* KapilerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KapilerScene.sks; sourceTree = "<group>"; };
-		6B15BBE52921F87A007EC4CD /* KapilerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KapilerController.swift; sourceTree = "<group>"; };
-		6B21C2A629124B6700DF3662 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
-		6B21C2A829124B7300DF3662 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
-		6B21C2AA29124BC200DF3662 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
 		6B21C2AC29124C0700DF3662 /* SceneTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SceneTest.sks; sourceTree = "<group>"; };
+		6B4895FC29241D8A00902011 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
+		6B4895FE29241DAC00902011 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
+		6B48960029241DD100902011 /* KapilerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KapilerController.swift; sourceTree = "<group>"; };
+		6B48960229241E0900902011 /* KapilerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KapilerScene.sks; sourceTree = "<group>"; };
+		6B48960429241E2C00902011 /* GameUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIController.swift; sourceTree = "<group>"; };
 		6B6D9BF32923E5DB00F736F1 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		6BC6304D291B9A180000AB1B /* Erry_Walk_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Erry_Walk_SFX.mp3; sourceTree = "<group>"; };
 		6BC6304E291B9A180000AB1B /* Erry_Jump_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Erry_Jump_SFX.mp3; sourceTree = "<group>"; };
@@ -137,16 +137,16 @@
 		39FFAB642913BBFD00351F50 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6B15BBE52921F87A007EC4CD /* KapilerController.swift */,
 				A295965129139EE100DE128A /* BilikKananController.swift */,
 				3956B50B28FD01840070B52C /* GameController.swift */,
-				6B21C2AA29124BC200DF3662 /* GameUIController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */,
 				39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */,
 				3901D83C28FE912B00071442 /* IntroController.swift */,
 				A2959653291501A400DE128A /* SceneTestController.swift */,
 				A293D57429228E5B00E52253 /* MissionJournalController.swift */,
+				6B48960029241DD100902011 /* KapilerController.swift */,
+				6B48960429241E2C00902011 /* GameUIController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -164,7 +164,7 @@
 		6B21C2A429124B2200DF3662 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				6B15BBE32921F86A007EC4CD /* KapilerScene.sks */,
+				6B48960229241E0900902011 /* KapilerScene.sks */,
 				A295964F29139EC000DE128A /* BilikKananScene.sks */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
 				3965EEF52920F7D000AB1D39 /* GateParuParuScene.sks */,
@@ -180,8 +180,8 @@
 		6B21C2A529124B2E00DF3662 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				6B21C2A629124B6700DF3662 /* PlayerNode.swift */,
-				6B21C2A829124B7300DF3662 /* PlayerStateController.swift */,
+				6B4895FC29241D8A00902011 /* PlayerNode.swift */,
+				6B4895FE29241DAC00902011 /* PlayerStateController.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -298,6 +298,7 @@
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
 				A293D5732922822300E52253 /* MissionJournal.sks in Resources */,
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
+				6B48960329241E0900902011 /* KapilerScene.sks in Resources */,
 				39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
@@ -305,7 +306,6 @@
 				6BC63052291B9A190000AB1B /* COK_BGM_01.mp3 in Resources */,
 				6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */,
 				A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */,
-				6B15BBE42921F86A007EC4CD /* KapilerScene.sks in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
 				6BC63050291B9A180000AB1B /* Erry_Walk_SFX.mp3 in Resources */,
 				3956B50A28FD01840070B52C /* Actions.sks in Resources */,
@@ -319,7 +319,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B21C2A929124B7300DF3662 /* PlayerStateController.swift in Sources */,
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
 				A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */,
@@ -327,16 +326,17 @@
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
 				6B6D9BF42923E5DB00F736F1 /* Menu.swift in Sources */,
 				A295965229139EE100DE128A /* BilikKananController.swift in Sources */,
-				6B21C2A729124B6700DF3662 /* PlayerNode.swift in Sources */,
-				6B21C2AB29124BC200DF3662 /* GameUIController.swift in Sources */,
 				A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */,
+				6B4895FF29241DAC00902011 /* PlayerStateController.swift in Sources */,
+				6B48960529241E2C00902011 /* GameUIController.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
 				39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */,
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
 				3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */,
-				6B15BBE62921F87A007EC4CD /* KapilerController.swift in Sources */,
 				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
+				6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */,
+				6B48960129241DD100902011 /* KapilerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +483,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FD4B7DH8HN;
+				DEVELOPMENT_TEAM = KMB6GC5NVA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityOfKardia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -513,7 +513,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FD4B7DH8HN;
+				DEVELOPMENT_TEAM = KMB6GC5NVA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityOfKardia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
