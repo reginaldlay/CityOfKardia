@@ -13,7 +13,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: Inisialisasi variabel
     var player : PlayerNode?
     var NPC : SKNode?
-    var logo : SKNode?
     var playerState : GKStateMachine?
     let cam = SKCameraNode()
     var playerYPos: CGFloat = 0 //Untuk camera supaya tidak ngikutin saat loncat
@@ -68,12 +67,11 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         playerState = GKStateMachine(states:
                                     [
                                         IsJumpingState(player: unwrapPlayer),
-                                        IsWalkingLeftState(player: unwrapPlayer),
-                                        IsWalkingRightState(player: unwrapPlayer),
-                                        IsIdleState(player: unwrapPlayer)
+                                        IsWalkingState(player: unwrapPlayer),
+                                        IsIdleState(player: unwrapPlayer),
+                                        IsFallingState(player: unwrapPlayer)
                                     ])
         
-        logo?.isHidden = true
         playerYPos = player?.position.y ?? 0
         
         addChild(bgm)
@@ -100,7 +98,7 @@ extension GameUIController {
             else if (node.name == "rightButton") { rightBtnIsPressed = true}
             
             if (node.name == "actionButton") {
-                if inContact { logo?.isHidden = false }
+                if inContact { }
                     else { actionBtnIsPressed = true }
             }
             
@@ -154,13 +152,34 @@ extension GameUIController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            leftBtnIsPressed = false
-            rightBtnIsPressed = false
-            actionBtnIsPressed = false
+        
+        for touch in touches {
+            let location = touch.location(in: self.camera!)
+            let node = self.atPoint(location)
+            
+            if location.x <= 0 {
+                leftBtnIsPressed = false
+                rightBtnIsPressed = false
+            } else {
+                actionBtnIsPressed = false
+            }
+        }
         
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
+            
+            if node.name == "leftButton" {
+                leftBtnIsPressed = false
+            }
+            
+            if node.name == "rightButton" {
+                rightBtnIsPressed = false
+            }
+            
+            if node.name == "actionButton" {
+                actionBtnIsPressed = false
+            }
             
             if node.name == "burgerButton" {
                 if let burger = self.camera?.childNode(withName: "burgerButton") {
@@ -217,43 +236,32 @@ extension GameUIController {
 
 // MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
-//    func didBegin(_ contact: SKPhysicsContact) {
-//        let bodyA = contact.bodyA.node?.name
-//        let bodyB = contact.bodyB.node?.name
+//        func didBegin(_ contact: SKPhysicsContact) {
+//            guard
+//                let bodyA = contact.bodyA.node?.name,
+//                let bodyB = contact.bodyB.node?.name
+//            else { return }
 //
-//        if bodyA == player?.name && bodyB == NPC?.name {
-//            inContact = true
-//        } else if bodyB == player?.name && bodyA == NPC?.name {
-//            inContact = true
+//            print("body A begin: \(bodyA )")
+//            print("body B begin: \(bodyB )")
+//
+//            switch (bodyA, bodyB) {
+//                case ("player", "ground") : grounded = true
+//                default : break
+//            }
 //        }
 //
-//        if bodyA == player?.name && bodyB == "ground" {
-//            grounded = true
-//        } else if bodyB == player?.name && bodyA == "ground" {
-//            grounded = true
+//        func didEnd(_ contact: SKPhysicsContact) {
+//            guard
+//                let bodyA = contact.bodyA.node?.name,
+//                let bodyB = contact.bodyB.node?.name
+//            else { return }
+//
+//            switch (bodyA, bodyB) {
+//                case ("player", "ground") : grounded = false
+//                default : break
+//            }
 //        }
-//
-//    }
-//
-//    func didEnd(_ contact: SKPhysicsContact) {
-//        let bodyA = contact.bodyA.node?.name
-//        let bodyB = contact.bodyB.node?.name
-//
-//        if  bodyA == player?.name && bodyB == NPC?.name {
-//            inContact = false
-//            logo?.isHidden = true
-//        } else if bodyB == player?.name && bodyA == NPC?.name {
-//            inContact = false
-//            logo?.isHidden = true
-//        }
-//        
-//        if bodyA == player?.name && bodyB == "ground" {
-//            grounded = false
-//        } else if bodyB == player?.name && bodyA == "ground" {
-//            grounded = false
-//        }
-//
-//    }
 }
 
 // MARK: Setup HUD
@@ -397,18 +405,29 @@ extension GameUIController {
         if grounded {
             if actionBtnIsPressed {
                 playerState?.enter(IsJumpingState.self)
-            }
-            
-            if leftBtnIsPressed {
                 
-                playerState?.enter(IsWalkingLeftState.self)
-                player?.move(direction: "left")
+                if leftBtnIsPressed {
+                    
+                    player?.move(direction: "left")
+                    
+                } else if rightBtnIsPressed {
+                    
+                    player?.move(direction: "right")
+                    
+                }
                 
-            } else if rightBtnIsPressed {
-                
-                playerState?.enter(IsWalkingRightState.self)
-                player?.move(direction: "right")
-                
+            } else {
+                if leftBtnIsPressed {
+                    
+                    playerState?.enter(IsWalkingState.self)
+                    player?.move(direction: "left")
+                    
+                } else if rightBtnIsPressed {
+                    
+                    playerState?.enter(IsWalkingState.self)
+                    player?.move(direction: "right")
+                    
+                }
             }
             
             if !actionBtnIsPressed && !leftBtnIsPressed && !rightBtnIsPressed {
@@ -416,6 +435,20 @@ extension GameUIController {
             }
         } else {
             player?.runJumpAnimation()
+            
+            if player?.physicsBody?.velocity.dy ?? 0 < 0 {
+                playerState?.enter(IsFallingState.self)
+            }
+            
+            if leftBtnIsPressed {
+                
+                player?.move(direction: "left")
+                
+            } else if rightBtnIsPressed {
+                
+                player?.move(direction: "right")
+                
+            }
         }
         
     }

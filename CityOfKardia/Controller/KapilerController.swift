@@ -88,37 +88,40 @@ extension KapilerController {
 }
 
 extension KapilerController {
-//    func didBegin(_ contact: SKPhysicsContact) {
-//        guard
-//            let bodyA = contact.bodyA.node?.name,
-//            let bodyB = contact.bodyB.node?.name
-//        else { return }
-//
-//        print("body A begin: \(bodyA )")
-//        print("body B begin: \(bodyB )")
-//        
-//        switch (bodyA, bodyB) {
-//            case ("player", "clot") : resetScene()
-//            case ("clot", "player") : resetScene()
-//            case ("player", "ground") : grounded = true
-//            default : break
-//        }
-//    }
-//    
-//    func didEnd(_ contact: SKPhysicsContact) {
-//        guard
-//            let bodyA = contact.bodyA.node?.name,
-//            let bodyB = contact.bodyB.node?.name
-//        else { return }
-//        
-//        switch (bodyA, bodyB) {
-//            case ("player", "ground") : grounded = false
-//            default : break
-//        }
-//    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+
+        print("body A begin: \(bodyA )")
+        print("body B begin: \(bodyB )")
+        
+        switch (bodyA, bodyB) {
+            case ("player", "clot") : resetScene()
+            case ("clot", "player") : resetScene()
+            case ("player", "ground") : grounded = true
+            default : break
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+        
+        switch (bodyA, bodyB) {
+            case ("player", "ground") : grounded = false
+            default : break
+        }
+    }
 }
 
 extension KapilerController {
-//    override func update(_ currentTime: TimeInterval) {
-//    }
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        
+        playerYPos = player?.position.y ?? 0
+    }
 }
