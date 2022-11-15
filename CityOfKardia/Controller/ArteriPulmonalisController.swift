@@ -60,8 +60,8 @@ class ArteriPulmonalisController: GameUIController {
     
     private func animateVertical (platform: SKSpriteNode, order: String) {
         var sequence: SKAction
-        let up = SKAction.moveBy(x: 0, y: 60, duration: 0.7)
-        let down =  SKAction.moveBy(x: 0, y: -60, duration: 0.7)
+        let up = SKAction.moveBy(x: 0, y: 80, duration: 0.7)
+        let down =  SKAction.moveBy(x: 0, y: -80, duration: 0.7)
         if order == "up" {
             sequence = SKAction.sequence([up, down])
         } else {
