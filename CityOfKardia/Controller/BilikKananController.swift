@@ -136,14 +136,14 @@ extension BilikKananController {
 
 //Update
 extension BilikKananController {
-//    override func update(_ currentTime: TimeInterval) {
-//        super.update(currentTime)
-//                if let player = player {
-//                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
-//                        self.camera?.position = player.position
-//                    }
-//                }
-//
-//    }
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+                if let player = player {
+                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+                        self.camera?.position = player.position
+                    }
+                }
+
+    }
 }
 
