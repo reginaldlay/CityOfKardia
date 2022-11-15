@@ -22,17 +22,17 @@ class PlayerStateController : GKState {
     }
 }
 
-// MARK: State saat berjalan ke kanan
-class IsWalkingRightState : PlayerStateController {
+// MARK: State saat berjalan
+class IsWalkingState : PlayerStateController {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is IsWalkingRightState.Type : return false
+        case is IsWalkingState.Type : return false
             default : return true
         }
     }
     
     override func didEnter(from previousState: GKState?) {
-        player.runMoveAnimation(direction: "right")
+        player.runMoveAnimation()
         player.addChild(player.playerWalkSFX)
         player.playerWalkSFX.run(.changeVolume(to: 0.1, duration: 0.1))
         player.playerWalkSFX.run(.play())
@@ -44,25 +44,16 @@ class IsWalkingRightState : PlayerStateController {
     }
 }
 
-// MARK: State saat berjalan ke kiri
-class IsWalkingLeftState : PlayerStateController {
+class IsFallingState : PlayerStateController {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is IsWalkingLeftState.Type : return false
+            case is IsJumpingState.Type : return false
             default : return true
         }
     }
     
     override func didEnter(from previousState: GKState?) {
-        player.runMoveAnimation(direction: "left")
-        player.playerWalkSFX.run(.changeVolume(to: 0.1, duration: 0.1))
-        player.addChild(player.playerWalkSFX)
-        player.playerWalkSFX.run(.play())
-    }
-    
-    override func willExit(to nextState: GKState) {
-        player.playerWalkSFX.run(.stop())
-        player.playerWalkSFX.removeFromParent()
+        
     }
 }
 

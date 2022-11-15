@@ -12,7 +12,9 @@ import AVFoundation
 class PlayerNode : SKSpriteNode {
     
     // MARK: Player attribute
-    let playerSpeed = CGFloat(250)
+    let playerSpeed = CGFloat(350)
+    let playerMaxJumpSpeed = CGFloat(350)
+    let playerStartingJumpImpulse = CGFloat(240)
     
     // MARK: Player texture
     let WalkingTexture : Array<SKTexture> = (1...12).map({return "Erry_Run_\($0)"}).map(SKTexture.init)
@@ -24,12 +26,20 @@ class PlayerNode : SKSpriteNode {
     
     // MARK: Fungsi untuk menggerakkan player di Y axis
     func jump() {
-        
+                
         let velocityY = physicsBody?.velocity.dy ?? 0
-        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-        if velocityY > 400 {
-            physicsBody?.velocity.dy = 400
+        let velocityX = physicsBody?.velocity.dx ?? 0
+        
+        physicsBody?.applyImpulse(CGVector(dx: 0, dy: playerStartingJumpImpulse))
+        if velocityY > playerMaxJumpSpeed {
+            self.physicsBody?.velocity.dy = playerMaxJumpSpeed
         }
+        
+        if velocityX > playerMaxJumpSpeed {
+            self.physicsBody?.velocity.dx = playerMaxJumpSpeed
+        }
+        
+        
         
     }
     
@@ -60,24 +70,21 @@ class PlayerNode : SKSpriteNode {
 
         if direction == "left" {
             physicsBody?.velocity.dx = playerSpeed * -1
+            flipTexture = SKAction.scaleX(to: -1, duration: 0)
         } else if direction == "right" {
             physicsBody?.velocity.dx = playerSpeed
+            flipTexture = SKAction.scaleX(to: 1, duration: 0)
         }
+        
+        run(flipTexture ?? SKAction.scaleX(to: 0, duration: 0))
         
     }
     
     // MARK: Fungsi untuk menjalankan animasi saat berjalan
-    func runMoveAnimation(direction: String) {
-        
-        if direction == "left" {
-            flipTexture = SKAction.scaleX(to: -1, duration: 0)
-        } else if direction == "right" {
-            flipTexture = SKAction.scaleX(to: 1, duration: 0)
-        }
+    func runMoveAnimation() {
         
         let WalkingAnimation = { SKAction.repeatForever(.animate(with: self.WalkingTexture, timePerFrame: 0.1)) }
         removeAllActions()
-        run(flipTexture ?? SKAction.scaleX(to: 0, duration: 0))
         run(WalkingAnimation())
         
     }
