@@ -9,11 +9,16 @@ import SpriteKit
 
 class ArteriPulmonalisController: GameUIController {
     var playerInitPos = CGPoint(x: 0, y: 0) //apabila player jatuh -> ulang ke posisi awal
+    var xPosCamera: Double = 0
+    var yPosCamera: Double = 0
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         playerInitPos = player?.position ?? CGPoint(x: 0, y: 0)
         print(playerInitPos)
-        
+        xPosCamera = 680
+//        print(abs(playerInitPos.x))
+        yPosCamera = 300
+        camera?.run(SKAction.scale(to: 2.5, duration: 0))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -28,14 +33,19 @@ class ArteriPulmonalisController: GameUIController {
         if let player = player {
             // Kamera
             //Kalau jatuh (diminus 1 supaya aman ga masuk sini apabila di posisi normal)
-            if (player.position.y < playerInitPos.y - 1) {
-                self.camera?.position = CGPoint(x: 0 , y: playerInitPos.y)
-                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
-                
-            } else if (player.position.x > 0 && player.position.y > -(self.size.height/2)) {
-                self.camera?.position = CGPoint(x: player.position.x , y: player.position.y)
-            } else if (player.position.x < 0 && player.position.y > -(self.size.height/2)) {
-                self.camera?.position = CGPoint(x: 0 , y: player.position.y)
+//            if (player.position.y < playerInitPos.y - 1) {
+//                self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
+//                print("masuk 1")
+//                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
+//
+//            }
+            
+            if (player.position.x > 0 && player.position.y > -(self.size.height/2)) {
+                print("masuk 2")
+                self.camera?.position = CGPoint(x: xPosCamera + player.position.x , y: yPosCamera)
+            } else  {
+                print("masuk 3")
+                self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
             }
             
             //Kalau jatuh, posisi player ulang dari awal
