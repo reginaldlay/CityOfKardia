@@ -23,7 +23,6 @@
 		3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */; };
 		39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */; };
 		39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */; };
-		6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6B21C2AC29124C0700DF3662 /* SceneTest.sks */; };
 		6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FC29241D8A00902011 /* PlayerNode.swift */; };
 		6B4895FF29241DAC00902011 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FE29241DAC00902011 /* PlayerStateController.swift */; };
 		6B48960129241DD100902011 /* KapilerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B48960029241DD100902011 /* KapilerController.swift */; };
@@ -40,7 +39,6 @@
 		A293D57929239D7600E52253 /* ArteriPulmonalisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293D57829239D7600E52253 /* ArteriPulmonalisController.swift */; };
 		A295965029139EC000DE128A /* BilikKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A295964F29139EC000DE128A /* BilikKananScene.sks */; };
 		A295965229139EE100DE128A /* BilikKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A295965129139EE100DE128A /* BilikKananController.swift */; };
-		A2959654291501A400DE128A /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2959653291501A400DE128A /* SceneTestController.swift */; };
 		A2BC1CE8292413E900823809 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE7292413E900823809 /* GameOver.sks */; };
 		A2BC1CEA292433D500823809 /* NewDictionary.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE9292433D500823809 /* NewDictionary.sks */; };
 		A2BC1CEC29243BA300823809 /* NewDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */; };
@@ -71,7 +69,6 @@
 		3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateParuParuController.swift; sourceTree = "<group>"; };
 		39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateSerambiKananController.swift; sourceTree = "<group>"; };
 		39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GateSerambiKananScene.sks; sourceTree = "<group>"; };
-		6B21C2AC29124C0700DF3662 /* SceneTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SceneTest.sks; sourceTree = "<group>"; };
 		6B4895FC29241D8A00902011 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		6B4895FE29241DAC00902011 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
 		6B48960029241DD100902011 /* KapilerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KapilerController.swift; sourceTree = "<group>"; };
@@ -88,7 +85,6 @@
 		A293D57829239D7600E52253 /* ArteriPulmonalisController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArteriPulmonalisController.swift; sourceTree = "<group>"; };
 		A295964F29139EC000DE128A /* BilikKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BilikKananScene.sks; sourceTree = "<group>"; };
 		A295965129139EE100DE128A /* BilikKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilikKananController.swift; sourceTree = "<group>"; };
-		A2959653291501A400DE128A /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneTestController.swift; path = ../Scene/SceneTestController.swift; sourceTree = "<group>"; };
 		A2BC1CE7292413E900823809 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		A2BC1CE9292433D500823809 /* NewDictionary.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewDictionary.sks; sourceTree = "<group>"; };
 		A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDictionaryController.swift; sourceTree = "<group>"; };
@@ -132,11 +128,11 @@
 		3956B50428FD01840070B52C /* CityOfKardia */ = {
 			isa = PBXGroup;
 			children = (
-				6B6D9BF12923E5BF00F736F1 /* Entity */,
-				6BC6304C291B9A050000AB1B /* SFX */,
 				39FFAB642913BBFD00351F50 /* Controller */,
+				6B6D9BF12923E5BF00F736F1 /* Entity */,
 				39FFAB652913BC7900351F50 /* Model */,
 				6B21C2A429124B2200DF3662 /* Scene */,
+				6BC6304C291B9A050000AB1B /* SFX */,
 				A2ED0A1A290AE499009DA9FC /* Info.plist */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
 				3956B50928FD01840070B52C /* Actions.sks */,
@@ -151,19 +147,18 @@
 		39FFAB642913BBFD00351F50 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A295965129139EE100DE128A /* BilikKananController.swift */,
-				3956B50B28FD01840070B52C /* GameController.swift */,
-				3956B50D28FD01840070B52C /* GameViewController.swift */,
-				3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */,
-				39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */,
 				3901D83C28FE912B00071442 /* IntroController.swift */,
-				A2959653291501A400DE128A /* SceneTestController.swift */,
-				A293D57429228E5B00E52253 /* MissionJournalController.swift */,
+				39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */,
+				A295965129139EE100DE128A /* BilikKananController.swift */,
+				A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */,
 				A293D57829239D7600E52253 /* ArteriPulmonalisController.swift */,
 				6B48960029241DD100902011 /* KapilerController.swift */,
+				3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */,
+				3956B50B28FD01840070B52C /* GameController.swift */,
+				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				6B48960429241E2C00902011 /* GameUIController.swift */,
 				A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */,
-				A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */,
+				A293D57429228E5B00E52253 /* MissionJournalController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,19 +176,18 @@
 		6B21C2A429124B2200DF3662 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				6B48960229241E0900902011 /* KapilerScene.sks */,
-				A295964F29139EC000DE128A /* BilikKananScene.sks */,
-				3956B50728FD01840070B52C /* GameScene.sks */,
-				3965EEF52920F7D000AB1D39 /* GateParuParuScene.sks */,
-				39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */,
 				3901D83628FE8FD300071442 /* IntroScene.sks */,
-				6B21C2AC29124C0700DF3662 /* SceneTest.sks */,
+				39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */,
+				A295964F29139EC000DE128A /* BilikKananScene.sks */,
+				A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */,
+				A293D5762923944B00E52253 /* ArteriPulmonalisScene.sks */,
+				6B48960229241E0900902011 /* KapilerScene.sks */,
+				3965EEF52920F7D000AB1D39 /* GateParuParuScene.sks */,
+				3956B50728FD01840070B52C /* GameScene.sks */,
 				A2F78634291A62DD009D958E /* Riddle.sks */,
 				A293D5722922822300E52253 /* MissionJournal.sks */,
-				A293D5762923944B00E52253 /* ArteriPulmonalisScene.sks */,
 				A2BC1CE7292413E900823809 /* GameOver.sks */,
 				A2BC1CE9292433D500823809 /* NewDictionary.sks */,
-				A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -329,7 +323,6 @@
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
 				6BC63056291BA66B0000AB1B /* typingSFX.mp3 in Resources */,
 				6BC63052291B9A190000AB1B /* COK_BGM_01.mp3 in Resources */,
-				6B21C2AD29124C0700DF3662 /* SceneTest.sks in Resources */,
 				A2ED0A1D290AE706009DA9FC /* SF-Pro.ttf in Resources */,
 				3956B51628FD01850070B52C /* LaunchScreen.storyboard in Resources */,
 				6BC63050291B9A180000AB1B /* Erry_Walk_SFX.mp3 in Resources */,
@@ -347,7 +340,6 @@
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
 				A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */,
-				A2959654291501A400DE128A /* SceneTestController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
 				6B6D9BF42923E5DB00F736F1 /* Menu.swift in Sources */,
 				A295965229139EE100DE128A /* BilikKananController.swift in Sources */,
