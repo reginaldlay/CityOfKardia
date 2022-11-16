@@ -10,6 +10,7 @@ import SpriteKit
 class AlveolusController : GameUIController {
     
     var boundKanan: SKNode?
+    var puzzle = Puzzle()
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -38,11 +39,37 @@ extension AlveolusController {
             if (node.name == "actionButton") {
                 switch (npcIncontact) {
                     
-                case ("machine")    : print(node.name)
-                    
+                case ("machine")    :
+                    self.camera?.addChild(puzzle)
+                    puzzle.setupPuzzle()
+                    hideControl(state: true)
                 case ("teller")     : showDialogue(assets: int_alveolus)
                     
                 default: break
+                }
+            }
+            
+            if node.name == "exitButton" {
+
+            }
+            
+            if !puzzle.winFlag {
+                switch node.name {
+                case "cable0": puzzle.rotateByHalfPi(node: node)
+                case "cable1": puzzle.rotateByHalfPi(node: node)
+                case "cable2": puzzle.rotateByHalfPi(node: node)
+                case "cable3": puzzle.rotateByHalfPi(node: node)
+                case "cable4": puzzle.rotateByHalfPi(node: node)
+                case "cable5": puzzle.rotateByHalfPi(node: node)
+                case "cable6": puzzle.rotateByHalfPi(node: node)
+                case "cable7": puzzle.rotateByHalfPi(node: node)
+                case "cable8": puzzle.rotateByHalfPi(node: node)
+                case "cable9": puzzle.rotateByHalfPi(node: node)
+                case "cable10": puzzle.rotateByHalfPi(node: node)
+                case "cable11": puzzle.rotateByHalfPi(node: node)
+                case "cable12": puzzle.rotateByHalfPi(node: node)
+                case "cable13": puzzle.rotateByHalfPi(node: node)
+                    default: break
                 }
             }
         }
@@ -51,6 +78,24 @@ extension AlveolusController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            
+            if node.name == "exitButton" {
+                puzzle.removeFromParent()
+                hideControl(state: false)
+            }
+        }
+        
+        for touch in touches {
+            let location = touch.location(in: self.puzzle)
+            let node = self.atPoint(location)
+            
+            puzzle.winFlag = puzzle.checkWinCondition()
+        }
+
     }
     
 }
@@ -72,8 +117,8 @@ extension AlveolusController {
         case ("teller", "player"):
             contactWith(state: true, npcName: "teller")
             
-        case ("player", "machine"): break
-        case ("machine", "player"): break
+        case ("player", "machine"): npcIncontact = "machine"
+        case ("machine", "player"): npcIncontact = "machine"
             
         default: break
         }
