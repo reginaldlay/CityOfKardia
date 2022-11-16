@@ -67,6 +67,7 @@ extension BilikKananController {
                     case "leona":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_gate01)
+                        dialogue.newWord = "leona"
                         boundLeona?.removeFromParent()
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
@@ -117,9 +118,9 @@ extension BilikKananController {
             contactWith(state: true, npcName: "gatekeeper02")
             
         case ("player", "bound02"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            moveScene(sceneName: "PreArteriPulmonalisScene")
         case ("bound02", "player"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            moveScene(sceneName: "PreArteriPulmonalisScene")
             
         default: break
         }

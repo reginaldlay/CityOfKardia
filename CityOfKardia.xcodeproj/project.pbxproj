@@ -43,6 +43,9 @@
 		A2959654291501A400DE128A /* SceneTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2959653291501A400DE128A /* SceneTestController.swift */; };
 		A2BC1CE8292413E900823809 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE7292413E900823809 /* GameOver.sks */; };
 		A2BC1CEA292433D500823809 /* NewDictionary.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE9292433D500823809 /* NewDictionary.sks */; };
+		A2BC1CEC29243BA300823809 /* NewDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */; };
+		A2BC1CEE2924E1DD00823809 /* PreArteriPulmonalisScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */; };
+		A2BC1CF02924E4DB00823809 /* PreArteriPulmonalisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */; };
 		A2ED0A15290AC218009DA9FC /* DialogueBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A13290AC217009DA9FC /* DialogueBox.swift */; };
 		A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED0A14290AC217009DA9FC /* Dialogue.swift */; };
 		A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */; };
@@ -88,6 +91,9 @@
 		A2959653291501A400DE128A /* SceneTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneTestController.swift; path = ../Scene/SceneTestController.swift; sourceTree = "<group>"; };
 		A2BC1CE7292413E900823809 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		A2BC1CE9292433D500823809 /* NewDictionary.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewDictionary.sks; sourceTree = "<group>"; };
+		A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDictionaryController.swift; sourceTree = "<group>"; };
+		A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PreArteriPulmonalisScene.sks; sourceTree = "<group>"; };
+		A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreArteriPulmonalisController.swift; sourceTree = "<group>"; };
 		A2ED0A13290AC217009DA9FC /* DialogueBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueBox.swift; sourceTree = "<group>"; };
 		A2ED0A14290AC217009DA9FC /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		A2ED0A18290ADED8009DA9FC /* Acme-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Acme-Regular.ttf"; sourceTree = "<group>"; };
@@ -156,6 +162,8 @@
 				A293D57829239D7600E52253 /* ArteriPulmonalisController.swift */,
 				6B48960029241DD100902011 /* KapilerController.swift */,
 				6B48960429241E2C00902011 /* GameUIController.swift */,
+				A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */,
+				A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 				A293D5762923944B00E52253 /* ArteriPulmonalisScene.sks */,
 				A2BC1CE7292413E900823809 /* GameOver.sks */,
 				A2BC1CE9292433D500823809 /* NewDictionary.sks */,
+				A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -303,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BC63051291B9A190000AB1B /* Erry_Jump_SFX.mp3 in Resources */,
+				A2BC1CEE2924E1DD00823809 /* PreArteriPulmonalisScene.sks in Resources */,
 				A2BC1CE8292413E900823809 /* GameOver.sks in Resources */,
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				A2F78635291A62DD009D958E /* Riddle.sks in Resources */,
@@ -346,10 +356,12 @@
 				6B4895FF29241DAC00902011 /* PlayerStateController.swift in Sources */,
 				6B48960529241E2C00902011 /* GameUIController.swift in Sources */,
 				3956B50E28FD01840070B52C /* GameViewController.swift in Sources */,
+				A2BC1CF02924E4DB00823809 /* PreArteriPulmonalisController.swift in Sources */,
 				39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */,
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
 				3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */,
+				A2BC1CEC29243BA300823809 /* NewDictionaryController.swift in Sources */,
 				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
 				6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */,
 				6B48960129241DD100902011 /* KapilerController.swift in Sources */,

@@ -38,6 +38,10 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: Mission
     var missionJournal: SKReferenceNode?
     var missionJournalController = MissionJournalController()
+    
+    // MARK: Popup New Dictionary
+//    var newDictionary: SKReferenceNode?
+//    var missionJournalController = MissionJournalController()
 
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
@@ -141,12 +145,14 @@ extension GameUIController {
             }
             
             // Touch Dialogue
-            if (dialogue.dialogueVisibility) {
+            if (dialogue.dialogueVisibility || dialogue.newWord != "") {
                 dialogue.touchesBegan(touches, with: event);
                 if (!dialogue.dialogueVisibility) {
                     hideControl(state: false)
                 }
             }
+            
+            //
         
         }
     }
@@ -473,3 +479,24 @@ extension GameUIController {
     }
     
 }
+
+// New Dictionary
+//extension GameUIController {
+//    func setupNewDictionary() {
+//        if let unwrapNewDictionary = SKReferenceNode(fileNamed: "NewDictionary") {
+//            self.camera?.addChild(unwrapNewDictionary)
+//            newDictionary = unwrapNewDictionary
+//            hideControl(state: true)
+//            hideMissionHUD(state: true)
+//        } else {
+//            print("Error init new dictionary!")
+//        }
+//    }
+//    
+////    func hideNewDictionary(state: Bool) {
+////        newDictionary?.isHidden = state
+////        hideControl(state: !state)
+////        hideMissionHUD(state: !state)
+////    }
+//    
+//}

@@ -35,7 +35,12 @@ class DialogueBox: SKNode {
     var riddle: SKReferenceNode!
     var riddleVisibility = false
     
+    //Audio Typing
     let typingSFX = SKAudioNode(fileNamed: "typingSFX")
+    
+    //New Dictionary
+    var newDictionary: SKReferenceNode?
+    var newWord = ""
     
     
     public func createDialogueNode () {
@@ -177,6 +182,12 @@ class DialogueBox: SKNode {
                     dialogueVisibility = false
                     count = 1
                     dialogueBefore = dialogue_assets[count-1].label ?? "Empty string"
+                    
+                    //Pop up new dictionary
+                    if (newWord != "") {
+                        print("new Word \(newWord)")
+                        setupNewDictionary()
+                    }
                 }
             } else if (riddleVisibility && !wrongChoice) {
                 for touch in touches {
@@ -200,6 +211,17 @@ class DialogueBox: SKNode {
             } else if (riddleVisibility && wrongChoice) {
                 changeDialogue(count: count-1, dialogue_assets: dialogue_assets)
             }
+        //New Dictionary
+        } else {
+            for touch in touches {
+                let location = touch.location(in: self)
+                let node = self.atPoint(location)
+//                print("node name dialogue \(node.name)")
+                if (node.name == "newdict_continue") {
+                    newDictionary?.removeFromParent()
+                    newWord = ""
+                }
+            }
         }
     }
     
@@ -210,4 +232,27 @@ class DialogueBox: SKNode {
         let repeated = SKAction.repeatForever(sequence)
         arrow.run(repeated)
     }
+}
+
+extension DialogueBox {
+    // New Dictionary
+        func setupNewDictionary() {
+            if let unwrapNewDictionary = SKReferenceNode(fileNamed: "NewDictionary") {
+                unwrapNewDictionary.name = "NewDictionary"
+                self.addChild(unwrapNewDictionary)
+                
+                newDictionary = unwrapNewDictionary
+                
+            } else {
+                print("Error init new dictionary!")
+            }
+        }
+        
+    //    func hideNewDictionary(state: Bool) {
+    //        newDictionary?.isHidden = state
+    //        hideControl(state: !state)
+    //        hideMissionHUD(state: !state)
+    //    }
+        
+    
 }
