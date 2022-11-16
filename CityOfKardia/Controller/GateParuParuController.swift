@@ -10,8 +10,18 @@ import GameplayKit
 
 class GateParuParuController: GameUIController {
     
+    var boundKanan: SKSpriteNode?
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
+        else {
+            return
+        }
+        boundKanan = unwrapBoundKanan
+        
+        player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
     }
@@ -30,7 +40,10 @@ extension GateParuParuController {
             if (node.name == "actionButton") {
                 switch (npcIncontact) {
                 case ("gatekeeper03"):
-                    showDialogue(assets: ext_gate03_2)
+                    showDialogue(assets: ext_gate03)
+                    
+                case ("gedung_alveolus_4"):
+                    moveScene(sceneName: "AlveolusScene")
                     
                 default:
                     print("EHHE")
@@ -47,7 +60,9 @@ extension GateParuParuController {
 
 extension GateParuParuController {
     
-    func didBegin(_ contact: SKPhysicsContact) {
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+        
         guard let bodyA = contact.bodyA.node?.name,
               let bodyB = contact.bodyB.node?.name
         else {
@@ -58,29 +73,25 @@ extension GateParuParuController {
         print("Body B begin: \(bodyB)")
         
         switch (bodyA, bodyB) {
-        case ("player", "bound_kiri"):
-            npcIncontact = "bound_kiri"
-            
-        case ("bound_kiri", "player"):
-            npcIncontact = "bound_kiri"
-            
-        case ("player", "bound_kanan"):
-            npcIncontact = "bound_kanan"
-            
-        case ("bound_kanan", "player"):
-            npcIncontact = "bound_kanan"
-            
         case ("player", "gatekeeper03"):
-            npcIncontact = "gatekeeper03"
+            contactWith(state: true, npcName: "gatekeeper03")
             
         case ("gatekeeper03", "player"):
-            npcIncontact = "gatekeeper03"
+            contactWith(state: true, npcName: "gatekeeper03")
+            
+        case ("player", "gedung_alveolus_4"):
+            npcIncontact = "gedung_alveolus_4"
+            
+        case ("gedung_alveolus_4", "player"):
+            npcIncontact = "gedung_alveolus_4"
             
         default: break
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
+        
         npcIncontact = ""
     }
     
@@ -90,6 +101,15 @@ extension GateParuParuController {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        
+        if let player = player {
+            if (player.position.x > 0 && player.position.x < boundKanan!.position.x - 422 ) {
+                self.camera?.position = CGPoint(x: player.position.x, y: 0)
+            }
+            else if (player.position.x > boundKanan!.position.x - 422){
+                self.camera?.position = CGPoint(x: boundKanan!.position.x - 422, y: 0)
+            }
+        }
     }
     
 }

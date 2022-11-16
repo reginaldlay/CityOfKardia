@@ -10,8 +10,18 @@ import GameplayKit
 
 class GateSerambiKananController: GameUIController {
     
+    var boundKanan: SKSpriteNode?
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
+        else {
+            return
+        }
+        boundKanan = unwrapBoundKanan
+        
+        player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
     }
@@ -47,7 +57,9 @@ extension GateSerambiKananController {
 
 extension GateSerambiKananController {
     
-    func didBegin(_ contact: SKPhysicsContact) {
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+        
         guard let bodyA = contact.bodyA.node?.name,
               let bodyB = contact.bodyB.node?.name
         else {
@@ -72,7 +84,9 @@ extension GateSerambiKananController {
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
+        
         inContact = false
         npcIncontact = ""
         hideBubble(state: true)
@@ -84,6 +98,15 @@ extension GateSerambiKananController {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        
+        if let player = player {
+            if (player.position.x > 0 && player.position.x < boundKanan!.position.x - 410 ) {
+                self.camera?.position = CGPoint(x: player.position.x, y: 0)
+            }
+            else if (player.position.x > boundKanan!.position.x - 410){
+                self.camera?.position = CGPoint(x: boundKanan!.position.x - 410, y: 0)
+            }
+        }
     }
     
 }

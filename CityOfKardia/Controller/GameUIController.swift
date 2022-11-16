@@ -236,32 +236,34 @@ extension GameUIController {
 
 // MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
-//        func didBegin(_ contact: SKPhysicsContact) {
-//            guard
-//                let bodyA = contact.bodyA.node?.name,
-//                let bodyB = contact.bodyB.node?.name
-//            else { return }
-//
-//            print("body A begin: \(bodyA )")
-//            print("body B begin: \(bodyB )")
-//
-//            switch (bodyA, bodyB) {
-//                case ("player", "ground") : grounded = true
-//                default : break
-//            }
-//        }
-//
-//        func didEnd(_ contact: SKPhysicsContact) {
-//            guard
-//                let bodyA = contact.bodyA.node?.name,
-//                let bodyB = contact.bodyB.node?.name
-//            else { return }
-//
-//            switch (bodyA, bodyB) {
-//                case ("player", "ground") : grounded = false
-//                default : break
-//            }
-//        }
+        func didBegin(_ contact: SKPhysicsContact) {
+            guard
+                let bodyA = contact.bodyA.node?.name,
+                let bodyB = contact.bodyB.node?.name
+            else { return }
+
+            print("body A begin: \(bodyA )")
+            print("body B begin: \(bodyB )")
+
+            switch (bodyA, bodyB) {
+            case ("player", "ground") : grounded = true
+            case ("ground", "player") : grounded = true
+            default : break
+            }
+        }
+
+        func didEnd(_ contact: SKPhysicsContact) {
+            guard
+                let bodyA = contact.bodyA.node?.name,
+                let bodyB = contact.bodyB.node?.name
+            else { return }
+
+            switch (bodyA, bodyB) {
+            case ("player", "ground") : grounded = false
+            case ("ground", "player") : grounded = false
+            default : break
+            }
+        }
 }
 
 // MARK: Setup HUD

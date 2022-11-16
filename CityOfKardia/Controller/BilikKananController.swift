@@ -49,6 +49,8 @@ class BilikKananController: GameUIController {
         boundLeona = unwrapBoundLeona
         boundSenior = unwrapBoundSenior
         
+        player?.playerStartingJumpImpulse = CGFloat(200)
+        
         CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
     }
 }
@@ -90,7 +92,9 @@ extension BilikKananController {
 
 //Contact dengan NPC
 extension BilikKananController {
-    func didBegin(_ contact: SKPhysicsContact) {
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+        
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
@@ -125,7 +129,9 @@ extension BilikKananController {
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
+        
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
