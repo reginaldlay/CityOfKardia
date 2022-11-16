@@ -131,6 +131,14 @@ let int_gate02 = [
     Dialogue(image: gatekeeper.normal.value, label: "'Aku' ada di dalam tubuh manusia, dari kepala sampai kaki. Aku berbentuk cairan. Bisa didonasikan tapi bukan uang, bisa dipompa tapi bukan ban. Siapakah aku?", name: nameBox.gk_02.value, riddle: true),
 ]
 
+let ext_pre_pulmonalis = [
+    Dialogue(image: erry.shocked.value, label: "Permisi, pak. Apa itu yang di belakang bapak?", name: nameBox.erry.value),
+    Dialogue(image: gatekeeper.normal.value, label: "Oh, ini namanya ....", name: nameBox.gk_03.value),
+    Dialogue(image: gatekeeper.normal.value, label: "Jadi, saat kamu melalui arteri pulmonalis dan kapiler, berhati-hatilah dengan ____ ini ya!", name: nameBox.gk_03.value),
+    Dialogue(image: gatekeeper.normal.value, label: "Jangan sampai mengenai ____ ini. Semangat, dik!", name: nameBox.gk_03.value),
+    Dialogue(image: erry.happy.value, label: "Terima kasih infonya, pak! Saya akan berhati-hati.", name: nameBox.erry.value),
+]
+
 let ext_gate03 = [
     Dialogue(image: "", label: "Halo, pak! Saya harus mengambil oksigen, nih!"),
     //Gatekeeper menjelaskan paru2

@@ -38,7 +38,11 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: Mission
     var missionJournal: SKReferenceNode?
     var missionJournalController = MissionJournalController()
-
+    
+    // MARK: Popup New Dictionary
+    //    var newDictionary: SKReferenceNode?
+    //    var missionJournalController = MissionJournalController()
+    
     
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
     
@@ -65,12 +69,12 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         playerState = GKStateMachine(states:
-                                    [
-                                        IsJumpingState(player: unwrapPlayer),
-                                        IsWalkingState(player: unwrapPlayer),
-                                        IsIdleState(player: unwrapPlayer),
-                                        IsFallingState(player: unwrapPlayer)
-                                    ])
+                                        [
+                                            IsJumpingState(player: unwrapPlayer),
+                                            IsWalkingState(player: unwrapPlayer),
+                                            IsIdleState(player: unwrapPlayer),
+                                            IsFallingState(player: unwrapPlayer)
+                                        ])
         
         playerYPos = player?.position.y ?? 0
         
@@ -78,7 +82,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         bgm.isPositional = false
         bgm.run(.play())
         bgm.run(.changeVolume(to: 0.1, duration: 0))
-    
+        
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -93,13 +97,13 @@ extension GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-                    
+            
             if (node.name == "leftButton") { leftBtnIsPressed = true }
             else if (node.name == "rightButton") { rightBtnIsPressed = true}
             
             if (node.name == "actionButton") {
                 if inContact { }
-                    else { actionBtnIsPressed = true }
+                else { actionBtnIsPressed = true }
             }
             
             //Touch mission HUD
@@ -141,13 +145,15 @@ extension GameUIController {
             }
             
             // Touch Dialogue
-            if (dialogue.dialogueVisibility) {
+            if (dialogue.dialogueVisibility || dialogue.newWord != "") {
                 dialogue.touchesBegan(touches, with: event);
                 if (!dialogue.dialogueVisibility) {
                     hideControl(state: false)
                 }
             }
-        
+            
+            //
+            
         }
     }
     
@@ -236,34 +242,31 @@ extension GameUIController {
 
 // MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
-        func didBegin(_ contact: SKPhysicsContact) {
-            guard
-                let bodyA = contact.bodyA.node?.name,
-                let bodyB = contact.bodyB.node?.name
-            else { return }
-
-            print("body A begin: \(bodyA )")
-            print("body B begin: \(bodyB )")
-
-            switch (bodyA, bodyB) {
-            case ("player", "ground") : grounded = true
-            case ("ground", "player") : grounded = true
-            default : break
-            }
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+        
+        switch (bodyA, bodyB) {
+        case ("player", "ground") : grounded = true
+        case ("ground", "player") : grounded = true
+        default : break
         }
-
-        func didEnd(_ contact: SKPhysicsContact) {
-            guard
-                let bodyA = contact.bodyA.node?.name,
-                let bodyB = contact.bodyB.node?.name
-            else { return }
-
-            switch (bodyA, bodyB) {
-            case ("player", "ground") : grounded = false
-            case ("ground", "player") : grounded = false
-            default : break
-            }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+        
+        switch (bodyA, bodyB) {
+        case ("player", "ground") : grounded = false
+        case ("ground", "player") : grounded = false
+        default : break
         }
+    }
 }
 
 // MARK: Setup HUD
@@ -285,7 +288,7 @@ extension GameUIController {
         HUD.zPosition = 100
         camera?.addChild(HUD)
     }
-
+    
     
     public func addCameraLabelNode (xPos: Double, yPos: Double, zPos: CGFloat, maxLayout: CGFloat, lineAmount: Int, horizontal: SKLabelHorizontalAlignmentMode, vertical: SKLabelVerticalAlignmentMode, name: String, fontSize: Int) {
         let node = SKLabelNode(text: "Initializing Label Mission");
@@ -308,6 +311,11 @@ extension GameUIController {
         self.camera?.childNode(withName: "rightButton")?.isHidden = state
         self.camera?.childNode(withName: "actionButton")?.isHidden = state
         self.camera?.childNode(withName: "burgerButton")?.isHidden = state
+    }
+    
+    func hideMissionHUD(state: Bool) {
+        self.camera?.childNode(withName: "missionBg")?.isHidden = state
+        self.camera?.childNode(withName: "missionLabel")?.isHidden = state
     }
 }
 
@@ -393,11 +401,11 @@ extension GameUIController {
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
-        if let player = player {
-            if(player.position.x > 0 ) {
-                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
-            }
-        }
+        //        if let player = player {
+        //            if(player.position.x > 0 ) {
+        //                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
+        //            }
+        //        }
         
         if grounded {
             if actionBtnIsPressed {
@@ -466,7 +474,7 @@ extension GameUIController {
     func hideMissionJournal(state: Bool) {
         missionJournal?.isHidden = state
         hideControl(state: !state)
-        self.camera?.childNode(withName: "missionBg")?.isHidden = !state
-        self.camera?.childNode(withName: "missionLabel")?.isHidden = !state
+        hideMissionHUD(state: !state)
     }
+    
 }

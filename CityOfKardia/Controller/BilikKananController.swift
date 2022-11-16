@@ -21,15 +21,6 @@ class BilikKananController: GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        //Give scene a name
-        if let view = self.view as? SKView {
-            if let currentScene = view.scene {
-                currentScene.name = "BilikKananScene"
-            } else {
-                print("Current scene is nil")
-            }
-        }
-        
         guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
               let unwrapSenior = childNode(withName: "senior") as? SKSpriteNode,
               let unwrapGatekeeper = childNode(withName: "gatekeeper02") as? SKSpriteNode,
@@ -69,6 +60,7 @@ extension BilikKananController {
                     case "leona":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_gate01)
+                        dialogue.newWord = "leona"
                         boundLeona?.removeFromParent()
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
@@ -99,10 +91,7 @@ extension BilikKananController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-        
-        print("body A begin: \(bodyA )")
-        print("body B begin: \(bodyB )")
-        
+    
         switch (bodyA, bodyB) {
             
         case ("player", "leona"):
@@ -121,9 +110,9 @@ extension BilikKananController {
             contactWith(state: true, npcName: "gatekeeper02")
             
         case ("player", "bound02"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            moveScene(sceneName: "PreArteriPulmonalisScene")
         case ("bound02", "player"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            moveScene(sceneName: "PreArteriPulmonalisScene")
             
         default: break
         }
@@ -131,32 +120,23 @@ extension BilikKananController {
     
     override func didEnd(_ contact: SKPhysicsContact) {
         super.didEnd(contact)
-        
-        guard
-            let bodyA = contact.bodyA.node?.name,
-            let bodyB = contact.bodyB.node?.name
-        else { return }
-        
+
         inContact = false
         npcIncontact = ""
         hideBubble(state: true)
-
-        print("body A begin: \(bodyA )")
-        print("body B begin: \(bodyB )")
-    
     }
 }
 
 //Update
 extension BilikKananController {
-//    override func update(_ currentTime: TimeInterval) {
-//        super.update(currentTime)
-//                if let player = player {
-//                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
-//                        self.camera?.position = player.position
-//                    }
-//                }
-//
-//    }
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+                if let player = player {
+                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+                        self.camera?.position = CGPoint(x: player.position.x, y: 0)
+                    }
+                }
+
+    }
 }
 
