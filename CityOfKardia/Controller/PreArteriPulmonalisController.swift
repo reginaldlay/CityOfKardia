@@ -32,8 +32,8 @@ class PreArteriPulmonalisController: GameUIController {
         }
     }
     
-    func didBegin(_ contact: SKPhysicsContact) {
-//        super.didBegin(contact)
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
@@ -53,8 +53,8 @@ class PreArteriPulmonalisController: GameUIController {
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
-//        super.didEnd(contact)
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
         inContact = false
         npcIncontact = ""
         hideBubble(state: true)

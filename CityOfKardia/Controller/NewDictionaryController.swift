@@ -13,6 +13,6 @@ class NewDictionaryController: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("masuk sini touch new dict")
+        
     }
 }

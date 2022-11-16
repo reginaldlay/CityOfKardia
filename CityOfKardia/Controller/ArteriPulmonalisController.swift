@@ -12,7 +12,7 @@ class ArteriPulmonalisController: GameUIController {
     var xPosCamera: Double = 0
     var yPosCamera: Double = 0
     var gameOverScene: SKReferenceNode?
-    var lastGround: SKSpriteNode?
+    var bound02: SKSpriteNode?
     
     enum Order: String {
         case right = "right", left = "left", up = "up", down = "down"
@@ -32,7 +32,7 @@ class ArteriPulmonalisController: GameUIController {
            let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
            let platform05 = childNode(withName: "platform_5") as? SKSpriteNode,
            let platform06 = childNode(withName: "platform_6") as? SKSpriteNode,
-           let unwrapLastGround = childNode(withName: "last_ground") as? SKSpriteNode
+           let unwrapBound02 = childNode(withName: "bound02") as? SKSpriteNode
         {
             animateHorizontal(platform: platform01, order: Order.right.rawValue, xMove: 70, duration: 0.6)
             animateHorizontal(platform: platform02, order: Order.left.rawValue, xMove: 70, duration: 0.6)
@@ -41,7 +41,7 @@ class ArteriPulmonalisController: GameUIController {
             animateVertical(platform: platform04, order: Order.up.rawValue)
             animateVertical(platform: platform05, order: Order.down.rawValue)
             animateVertical(platform: platform06, order: Order.up.rawValue)
-            lastGround = unwrapLastGround
+            bound02 = unwrapBound02
         }
     }
     
@@ -71,6 +71,7 @@ class ArteriPulmonalisController: GameUIController {
         platform.run(repeated)
     }
     
+    //Touch
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         for touch in touches {
@@ -92,6 +93,48 @@ class ArteriPulmonalisController: GameUIController {
         super.touchesEnded(touches, with: event)
     }
     
+    //Contact
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+        
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+        
+        enumerateChildNodes(withName: "platform*") { node, _ in
+            if(bodyA == node.name || bodyB == node.name){
+                self.grounded = true
+            }
+        }
+        switch (bodyA, bodyB) {
+        case ("player", "platform_1") : grounded = true
+        case ("ground", "player") : grounded = true
+        default : break
+            
+        }
+        
+    }
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
+        guard
+            let bodyA = contact.bodyA.node?.name,
+            let bodyB = contact.bodyB.node?.name
+        else { return }
+        
+        enumerateChildNodes(withName: "platform*") { node, _ in
+            if(bodyA == node.name || bodyB == node.name){
+                self.grounded = false
+            }
+        }
+        
+        switch (bodyA, bodyB) {
+        case ("player", "ground") : grounded = false
+        case ("ground", "player") : grounded = false
+        default : break
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         if let player = player {
@@ -105,15 +148,14 @@ class ArteriPulmonalisController: GameUIController {
             //            }
             
             //diambil dari else if kedua dulu utk 952 nya, baru dimasukin ke kondisi atas2nya
-            if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < lastGround!.position.x - xPosCamera - 952 ) {
-//                print("masuk 1 \(lastGround!.position.x) - \(player.position.x)")
+            if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < bound02!.position.x - xPosCamera - 1045.739 ) {
+                //                print("masuk 1 \(lastGround!.position.x) - \(player.position.x)")
                 self.camera?.position = CGPoint(x: xPosCamera + player.position.x , y: yPosCamera)
-            } else if (player.position.y > -(self.size.height/2) &&
-                       player.position.x > lastGround!.position.x - xPosCamera - 952) {
-//                print("masuk 2")
-                self.camera?.position = CGPoint(x: lastGround!.position.x - 952, y: yPosCamera)
+            } else if (player.position.y > -(self.size.height/2) && player.position.x > bound02!.position.x - xPosCamera - 1045.739) {
+                //                print("masuk 2")
+                self.camera?.position = CGPoint(x: bound02!.position.x - 1045.739, y: yPosCamera)
             } else {
-//                                print("masuk 3")
+                //                                print("masuk 3")
                 self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
             }
             
@@ -126,10 +168,10 @@ class ArteriPulmonalisController: GameUIController {
                     hideControl(state: true)
                     hideMissionHUD(state: true)
                 }
-                //Kalau player sudah ditengah layar
             }
             
         }
         
     }
 }
+
