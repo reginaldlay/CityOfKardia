@@ -23,7 +23,7 @@ class PreArteriPulmonalisController: GameUIController {
                     switch(npcIncontact) {
                     case "gatekeeper03":
                         showDialogue(assets: ext_pre_pulmonalis)
-                        dialogue.newWord = "blood_clot"
+                        dialogue.showPopupNewDictionary(newWord: "penggumpalan_darah")
                     default:
                         print("NPC not found")
                     }

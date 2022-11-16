@@ -60,7 +60,7 @@ extension BilikKananController {
                     case "leona":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_gate01)
-                        dialogue.newWord = "leona"
+                        dialogue.showPopupNewDictionary(newWord: "sel_darah_putih")
                         boundLeona?.removeFromParent()
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
