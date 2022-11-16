@@ -12,9 +12,9 @@ import AVFoundation
 class PlayerNode : SKSpriteNode {
     
     // MARK: Player attribute
-    let playerSpeed = CGFloat(350)
-    let playerMaxJumpSpeed = CGFloat(350)
-    let playerStartingJumpImpulse = CGFloat(240)
+    var playerSpeed = CGFloat(350)
+    var playerMaxJumpSpeed = CGFloat(350)
+    var playerStartingJumpImpulse = CGFloat(240)
     
     // MARK: Player texture
     let WalkingTexture : Array<SKTexture> = (1...12).map({return "Erry_Run_\($0)"}).map(SKTexture.init)

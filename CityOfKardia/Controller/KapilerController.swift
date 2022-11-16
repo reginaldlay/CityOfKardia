@@ -18,6 +18,7 @@ class KapilerController : GameUIController {
         setupWall()
         setupObs()
         
+        player?.playerStartingJumpImpulse = CGFloat(240)
     }
     
 }
@@ -88,7 +89,9 @@ extension KapilerController {
 }
 
 extension KapilerController {
-    func didBegin(_ contact: SKPhysicsContact) {
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+        
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
@@ -100,19 +103,19 @@ extension KapilerController {
         switch (bodyA, bodyB) {
             case ("player", "clot") : resetScene()
             case ("clot", "player") : resetScene()
-            case ("player", "ground") : grounded = true
             default : break
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
+    override func didEnd(_ contact: SKPhysicsContact) {
+        super.didEnd(contact)
+        
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
         
         switch (bodyA, bodyB) {
-            case ("player", "ground") : grounded = false
             default : break
         }
     }

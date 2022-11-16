@@ -131,12 +131,9 @@ let int_gate02 = [
     Dialogue(image: gatekeeper.normal.value, label: "'Aku' ada di dalam tubuh manusia, dari kepala sampai kaki. Aku berbentuk cairan. Bisa didonasikan tapi bukan uang, bisa dipompa tapi bukan ban. Siapakah aku?", name: nameBox.gk_02.value, riddle: true),
 ]
 
-let ext_gate03_1 = [
+let ext_gate03 = [
     Dialogue(image: "", label: "Halo, pak! Saya harus mengambil oksigen, nih!"),
     //Gatekeeper menjelaskan paru2
-]
-
-let ext_gate03_2 = [
     Dialogue(image: "", label: "Kalau saya ingin mengambil oksigen, di mana ya tempatnya?", name: "Erry"),
     Dialogue(image: "", label: " Oh! Kamu bisa langsung masuk ke ruangan ALVEOLUS! untuk menemui si Teller, dia akan menjelaskan semuanya lebih lanjut di sana~", name: "Satpam 03"),
     Dialogue(image: "", label: "Teller paru-paru akan menjelaskan semuanya lebih lanjut di sana~", name: "Satpam 03"),
