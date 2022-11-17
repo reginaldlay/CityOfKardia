@@ -59,7 +59,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         setupHUD()
         setupDialogue()
-        setupMissionJournal()
         
         guard let unwrapPlayer = childNode(withName: "player") as? PlayerNode
         else { return }
@@ -93,7 +92,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
 // MARK: Fungsi saat ada input dari user / touch
 extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
@@ -108,11 +106,16 @@ extension GameUIController {
             
             //Touch mission HUD
             if (node.name == "missionBg" || node.name == "missionLabel") {
-                hideMissionJournal(state: false)
+                setupMissionJournal()
             }
             
             if (node.name == "book_close") {
-                hideMissionJournal(state: true)
+                let refChildren = missionJournal?.children.first
+                if let closeButton = refChildren?.childNode(withName: "book_close" ) as? SKSpriteNode {
+                    closeButton.texture = SKTexture(imageNamed: "menuExitButtonClicked")
+                } else {
+                    print("Error change exit button texture")
+                }
             }
             
             if node.name == "burgerButton" {
@@ -229,6 +232,11 @@ extension GameUIController {
                 }
             }
             
+            if (node.name == "book_close") {
+                missionJournal?.removeFromParent()
+                hideControl(state: false)
+            }
+            
         }
     }
 }
@@ -275,9 +283,9 @@ extension GameUIController {
         addCameraChildNode(imageName: "leftButton", name: "leftButton", widthSize: 60, heightSize: 60, xPos: -352, yPos: -133)
         addCameraChildNode(imageName: "rightButton", name: "rightButton", widthSize: 60, heightSize: 60, xPos: -252, yPos: -133)
         addCameraChildNode(imageName: "actionButton", name: "actionButton", widthSize: 66, heightSize: 84, xPos: 349, yPos: -129)
-        addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
         addCameraChildNode(imageName: "burgerButton", name: "burgerButton", widthSize: 38, heightSize: 40, xPos: 378, yPos: 150)
-        addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 16)
+        addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
+        addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 12)
     }
     
     func addCameraChildNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat) {
@@ -311,12 +319,14 @@ extension GameUIController {
         self.camera?.childNode(withName: "rightButton")?.isHidden = state
         self.camera?.childNode(withName: "actionButton")?.isHidden = state
         self.camera?.childNode(withName: "burgerButton")?.isHidden = state
-    }
-    
-    func hideMissionHUD(state: Bool) {
         self.camera?.childNode(withName: "missionBg")?.isHidden = state
         self.camera?.childNode(withName: "missionLabel")?.isHidden = state
     }
+    
+//    func hideMissionHUD(state: Bool) {
+//        self.camera?.childNode(withName: "missionBg")?.isHidden = state
+//        self.camera?.childNode(withName: "missionLabel")?.isHidden = state
+//    }
 }
 
 // MARK: Setup Dialogue dan Kontak dengan NPC
@@ -410,28 +420,18 @@ extension GameUIController {
         if grounded {
             if actionBtnIsPressed {
                 playerState?.enter(IsJumpingState.self)
-                
                 if leftBtnIsPressed {
-                    
                     player?.move(direction: "left")
-                    
                 } else if rightBtnIsPressed {
-                    
                     player?.move(direction: "right")
-                    
                 }
-                
             } else {
                 if leftBtnIsPressed {
-                    
                     playerState?.enter(IsWalkingState.self)
                     player?.move(direction: "left")
-                    
                 } else if rightBtnIsPressed {
-                    
                     playerState?.enter(IsWalkingState.self)
                     player?.move(direction: "right")
-                    
                 }
             }
             
@@ -444,15 +444,10 @@ extension GameUIController {
             if player?.physicsBody?.velocity.dy ?? 0 < 0 {
                 playerState?.enter(IsFallingState.self)
             }
-            
             if leftBtnIsPressed {
-                
                 player?.move(direction: "left")
-                
             } else if rightBtnIsPressed {
-                
                 player?.move(direction: "right")
-                
             }
         }
         
@@ -463,18 +458,18 @@ extension GameUIController {
 extension GameUIController {
     func setupMissionJournal() {
         if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
+            hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
-            hideMissionJournal(state: true)
         } else {
             print("Error init mission journal!")
         }
     }
     
-    func hideMissionJournal(state: Bool) {
-        missionJournal?.isHidden = state
-        hideControl(state: !state)
-        hideMissionHUD(state: !state)
+    func changeOngoingMission(text: Mission) {
+        if let mission = self.camera?.childNode(withName: "missionLabel") as? SKLabelNode {
+            mission.text = text.rawValue
+        }
     }
     
 }
