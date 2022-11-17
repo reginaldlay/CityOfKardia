@@ -19,6 +19,9 @@ class KapilerController : GameUIController {
         setupObs()
         
         player?.playerStartingJumpImpulse = CGFloat(240)
+        
+        CoreDataManager.shared.checkpoint(locationName: "Kapiler")
+        
         changeOngoingMission(text: .kapiler)
     }
     

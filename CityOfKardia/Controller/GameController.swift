@@ -28,7 +28,7 @@ class GameController: SKScene {
             let node = self.atPoint(location)
             
             if (node.name == "newGameButton") {
-                if let nextScene = SKScene(fileNamed: "GateSerambiKananScene") { //nanti diubah jadi IntroScene kalo udah jadi ya
+                if let nextScene = SKScene(fileNamed: "IntroScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }

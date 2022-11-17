@@ -54,6 +54,8 @@ class ArteriPulmonalisController: GameUIController {
             animateVertical(platform: platform06, order: Order.up.rawValue)
             bound02 = unwrapBound02
         }
+    
+        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
         
         //Setup change ongoing mission
         changeOngoingMission(text: .ap)
