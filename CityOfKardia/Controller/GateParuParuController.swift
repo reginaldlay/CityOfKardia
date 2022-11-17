@@ -24,6 +24,8 @@ class GateParuParuController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
+        
+        changeOngoingMission(text: .gateP_1)
     }
     
 }
@@ -41,7 +43,7 @@ extension GateParuParuController {
                 switch (npcIncontact) {
                 case ("gatekeeper03"):
                     showDialogue(assets: ext_gate03)
-                    
+                    changeOngoingMission(text: .gateP_2)
                 case ("gedung_alveolus_4"):
                     moveScene(sceneName: "AlveolusScene")
                     

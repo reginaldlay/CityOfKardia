@@ -43,6 +43,8 @@ class BilikKananController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
+        
+        changeOngoingMission(text: .bk_masuk)
     }
 }
 
@@ -62,6 +64,7 @@ extension BilikKananController {
                         showDialogue(assets: int_gate01)
                         dialogue.showPopupNewDictionary(newWord: "sel_darah_putih")
                         boundLeona?.removeFromParent()
+                        changeOngoingMission(text: .bk_guild)
                     case "senior":
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_guild)
