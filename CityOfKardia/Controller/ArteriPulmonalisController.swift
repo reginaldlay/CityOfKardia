@@ -43,6 +43,8 @@ class ArteriPulmonalisController: GameUIController {
             animateVertical(platform: platform06, order: Order.up.rawValue)
             bound02 = unwrapBound02
         }
+        
+        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
     }
     
     private func animateHorizontal (platform: SKSpriteNode, order: String, xMove: CGFloat, duration: TimeInterval) {

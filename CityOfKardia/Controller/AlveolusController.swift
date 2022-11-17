@@ -21,8 +21,7 @@ class AlveolusController : GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(200)
         
-//        CoreDataManager.shared.checkpoint(locationName: "Alveolus")
-
+        CoreDataManager.shared.checkpoint(locationName: "Alveolus")
     }
     
 }
