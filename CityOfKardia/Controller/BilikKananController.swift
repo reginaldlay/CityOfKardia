@@ -43,8 +43,6 @@ class BilikKananController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
-        
-        changeOngoingMission(text: .bk_masuk)
     }
 }
 
@@ -68,9 +66,9 @@ extension BilikKananController {
                         //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_guild)
                         boundSenior?.removeFromParent()
-                        changeOngoingMission(text: .bk_guild)
                     case "gatekeeper02":
                         showDialogue(assets: int_gate02)
+                        
                     default:
                         print("NPC not found")
                     }

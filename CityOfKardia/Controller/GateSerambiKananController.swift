@@ -24,8 +24,6 @@ class GateSerambiKananController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
-        
-        changeOngoingMission(text: .gateSK_1)
     }
     
 }
@@ -43,7 +41,7 @@ extension GateSerambiKananController {
                 switch (npcIncontact) {
                 case ("gatekeeper01"):
                     showDialogue(assets: ext_gate01)
-                    changeOngoingMission(text: .gateSK_2)
+                    
                 default:
                     print("EHHE")
                 }

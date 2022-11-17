@@ -13,39 +13,28 @@ class ArteriPulmonalisController: GameUIController {
     var yPosCamera: Double = 0
     var gameOverScene: SKReferenceNode?
     var bound02: SKSpriteNode?
-    var terjebak = 0
     
     enum Order: String {
         case right = "right", left = "left", up = "up", down = "down"
     }
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        
-        //Setup Particle
-        if let particle = SKReferenceNode(fileNamed: "StarParticles"){
-            particle.position = CGPoint(x: self.size.width*1.5, y: self.size.height*1.5)
-            self.addChild(particle)
-        }
-        
-        // Setup player's initial position
         playerInitPos = player?.position ?? CGPoint(x: 0, y: 0)
         print(playerInitPos)
         xPosCamera = 680
+        //        print(abs(playerInitPos.x))
         yPosCamera = 300
         camera?.run(SKAction.scale(to: 2.5, duration: 0))
         
-        //Setup Nodes
         if let platform01 = childNode(withName: "platform_1") as? SKSpriteNode,
            let platform02 = childNode(withName: "platform_2") as? SKSpriteNode,
            let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
            let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
            let platform05 = childNode(withName: "platform_5") as? SKSpriteNode,
            let platform06 = childNode(withName: "platform_6") as? SKSpriteNode,
-           let platform12 = childNode(withName: "platform_12") as? SKSpriteNode,
            let unwrapBound02 = childNode(withName: "bound02") as? SKSpriteNode
         {
             animateHorizontal(platform: platform01, order: Order.right.rawValue, xMove: 70, duration: 0.6)
-            animateHorizontal(platform: platform12, order: Order.right.rawValue, xMove: 140, duration: 0.7)
             animateHorizontal(platform: platform02, order: Order.left.rawValue, xMove: 70, duration: 0.6)
             animateHorizontal(platform: platform03, order: Order.right.rawValue, xMove: 120, duration: 0.7)
             
@@ -54,11 +43,8 @@ class ArteriPulmonalisController: GameUIController {
             animateVertical(platform: platform06, order: Order.up.rawValue)
             bound02 = unwrapBound02
         }
-    
-        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
         
-        //Setup change ongoing mission
-        changeOngoingMission(text: .ap)
+        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
     }
     
     private func animateHorizontal (platform: SKSpriteNode, order: String, xMove: CGFloat, duration: TimeInterval) {
@@ -93,17 +79,14 @@ class ArteriPulmonalisController: GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            
             if (node.name == "gameover_quit") {
                 print("gameover quit")
-                terjebak = 0
-
             } else if (node.name == "gameover_tryagain") {
                 if let child = self.camera?.childNode(withName: "gameOver") {
                     child.removeFromParent()
-                    terjebak = 0
                 }
                 hideControl(state: false)
+                hideMissionHUD(state: false)
             }
             
         }
@@ -126,16 +109,9 @@ class ArteriPulmonalisController: GameUIController {
                 self.grounded = true
             }
         }
-        
         switch (bodyA, bodyB) {
         case ("player", "platform_1") : grounded = true
         case ("ground", "player") : grounded = true
-            
-        case ("player", "clot"): terjebak = 1
-        case ("clot", "player"): terjebak = 1
-            
-        case ("player", "bound02"): moveScene(sceneName: "KapilerScene")
-        case ("bound02", "player"): moveScene(sceneName: "KapilerScene")
         default : break
             
         }
@@ -165,8 +141,17 @@ class ArteriPulmonalisController: GameUIController {
         super.update(currentTime)
         if let player = player {
             // Kamera
+            //Kalau jatuh (diminus 1 supaya aman ga masuk sini apabila di posisi normal)
+            //            if (player.position.y < playerInitPos.y - 1) {
+            //                self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
+            //                print("masuk 1")
+            //                print("\(player.position) ------ \(camera?.position)------ \(playerInitPos.y)")
+            //
+            //            }
+            
             //diambil dari else if kedua dulu utk 952 nya, baru dimasukin ke kondisi atas2nya
             if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < bound02!.position.x - xPosCamera - 1045.739 ) {
+                //                print("masuk 1 \(lastGround!.position.x) - \(player.position.x)")
                 self.camera?.position = CGPoint(x: xPosCamera + player.position.x , y: yPosCamera)
             } else if (player.position.y > -(self.size.height/2) && player.position.x > bound02!.position.x - xPosCamera - 1045.739) {
                 //                print("masuk 2")
@@ -183,26 +168,12 @@ class ArteriPulmonalisController: GameUIController {
                     gameOverScene.name = "gameOver"
                     self.camera?.addChild(gameOverScene)
                     hideControl(state: true)
-                }
-            }
-            
-            if (terjebak == 1) {
-                player.position = playerInitPos
-                if let gameOverScene = SKReferenceNode(fileNamed: "GameOver") {
-                    terjebak = 2
-                    gameOverScene.name = "gameOver"
-                    let children = gameOverScene.children.first
-                    if let background = children?.childNode(withName: "gameover_bg") as? SKSpriteNode {
-                        background.texture = SKTexture(imageNamed: "terjebak_bg")
-                        self.camera?.addChild(gameOverScene)
-                        hideControl(state: true)
-                    } else {
-                        print("gagal masuk clot")
-                    }
+                    hideMissionHUD(state: true)
                 }
             }
             
         }
+        
     }
 }
 
