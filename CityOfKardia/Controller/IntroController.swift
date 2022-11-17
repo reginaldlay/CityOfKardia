@@ -12,6 +12,7 @@ import AVFoundation
 class IntroController: SKScene {
     
     override func didMove(to view: SKView) {
+        print("test")
         if let urlStr = Bundle.main.path(forResource: "IntroVideo", ofType: "mp4") {
             let url = NSURL(fileURLWithPath: urlStr)
             print(url)
@@ -23,6 +24,8 @@ class IntroController: SKScene {
             addChild(introVideo)
             
             introVideo.play()
+        } else {
+            print("gagal")
         }
     }
     
