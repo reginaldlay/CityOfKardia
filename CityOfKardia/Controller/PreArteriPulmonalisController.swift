@@ -14,6 +14,9 @@ class PreArteriPulmonalisController: GameUIController {
         CoreDataManager.shared.checkpoint(locationName: "PreArteriPulmonalis")
         
         changeOngoingMission(text: .pre_ap)
+        
+        // Add nama map
+        addCameraChildNode(imageName: "lokasi_arteri_pulmonalis", name: "lokasi_arteri_pulmonalis", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
