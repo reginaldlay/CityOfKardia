@@ -15,7 +15,7 @@ class DialogueBox: SKNode {
     var box: SKSpriteNode!
     var name_box: SKSpriteNode!
     var arrow: SKSpriteNode!
-    var image_background: SKSpriteNode!
+//    var image_background: SKSpriteNode!
     var name_label: SKLabelNode!
     
     var dialogueAtlas = SKTextureAtlas(named:"Dialogue");
@@ -44,8 +44,8 @@ class DialogueBox: SKNode {
     
     
     public func createDialogueNode () {
-        createSprite(texture: "dialogue-box", xPos: 23.7, yPos: -115.14, zPos: 3, width: 796, height: 98, name: "box")
-        createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
+        createSprite(texture: "dialogue-box", xPos: 0, yPos: -118.14, zPos: 3, width: 796, height: 135, name: "box")    
+//        createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
         createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
         createSprite(texture: "", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
@@ -53,9 +53,10 @@ class DialogueBox: SKNode {
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
         hideDialogue(state: true)
         
-        typingSFX.run(.changeVolume(to: 0, duration: 0))
-        self.addChild(typingSFX)
-        typingSFX.run(.stop())
+        typingSFX.name = "typingSFX"
+//        typingSFX.run(.changeVolume(to: 0, duration: 0))
+//        self.addChild(typingSFX)
+//        typingSFX.run(.stop())
     }
     
     public func refSprite(name: String) -> SKSpriteNode {
@@ -106,7 +107,7 @@ class DialogueBox: SKNode {
         refSprite(name: "image").isHidden = state
         refLabel(name: "label").isHidden = state
         refSprite(name: "box").isHidden = state
-        refSprite(name: "image_background").isHidden = state
+//        refSprite(name: "image_background").isHidden = state
         refSprite(name: "arrow").isHidden = state
         refSprite(name: "name_box").isHidden = state
         
@@ -126,6 +127,10 @@ class DialogueBox: SKNode {
         refSprite(name: "image").texture = SKTexture(imageNamed: dialogue_assets[count].image ?? "")
         refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
+        self.addChild(typingSFX)
+        typingSFX.run(.changeVolume(to: 0.3, duration: 0.5))
+        typingSFX.run(.play())
+        
         typeLetter()
         
         if (dialogue_assets[count].riddle && !riddleVisibility) {
@@ -143,9 +148,6 @@ class DialogueBox: SKNode {
     @objc private func typeLetter(){
         if countType < arrLabel.count {
             
-            typingSFX.run(.changeVolume(to: 0.3, duration: 0.5))
-            typingSFX.run(.play())
-            
             typing = true
             refLabel(name: "label").text = (refLabel(name:"label").text!) + String(arrLabel[countType])
             
@@ -162,7 +164,8 @@ class DialogueBox: SKNode {
         timer?.invalidate() // stop the timer
         typing = false
         countType = 0
-        typingSFX.run(.stop())
+//        typingSFX.run(.stop())
+        childNode(withName: "typingSFX")?.removeFromParent()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -185,7 +188,6 @@ class DialogueBox: SKNode {
                     
                     //Pop up new dictionary
                     if (newWord != "") {
-                        print("new Word \(newWord)")
                         setupNewDictionary()
                     }
                 }
@@ -260,14 +262,6 @@ extension DialogueBox {
     
     public func showPopupNewDictionary(newWord: String) {
         self.newWord = newWord
-       
     }
-    
-    //    func hideNewDictionary(state: Bool) {
-    //        newDictionary?.isHidden = state
-    //        hideControl(state: !state)
-    //        hideMissionHUD(state: !state)
-    //    }
-    
     
 }

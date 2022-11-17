@@ -19,10 +19,15 @@ class ArteriPulmonalisController: GameUIController {
     }
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        if let particle = SKReferenceNode(fileNamed: "StarParticles"){
+            particle.position = CGPoint(x: self.size.width*1.5, y: self.size.height*1.5)
+            self.addChild(particle)
+        }
+        
         playerInitPos = player?.position ?? CGPoint(x: 0, y: 0)
         print(playerInitPos)
         xPosCamera = 680
-        //        print(abs(playerInitPos.x))
         yPosCamera = 300
         camera?.run(SKAction.scale(to: 2.5, duration: 0))
         

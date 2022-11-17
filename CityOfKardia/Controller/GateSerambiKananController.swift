@@ -24,6 +24,8 @@ class GateSerambiKananController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
+        
+        changeOngoingMission(text: .gateSK)
     }
     
 }
