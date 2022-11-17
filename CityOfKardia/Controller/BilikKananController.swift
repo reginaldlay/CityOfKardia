@@ -46,7 +46,7 @@ class BilikKananController: GameUIController {
         
         changeOngoingMission(text: .bk_masuk)
         
-        addCameraChildNode(imageName: "lokasi_bilik_kanan", name: "lokasi_bilik_kanan", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        addCameraChildNode(imageName: "lokasi_bilik_kanan", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
 }
 

@@ -28,7 +28,7 @@ class GateParuParuController: GameUIController {
         changeOngoingMission(text: .gateP_1)
         
         // Add nama map
-        addCameraChildNode(imageName: "lokasi_paru", name: "lokasi_paru", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        addCameraChildNode(imageName: "lokasi_paru", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
     
 }

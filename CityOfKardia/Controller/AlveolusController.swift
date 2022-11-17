@@ -24,7 +24,7 @@ class AlveolusController : GameUIController {
         CoreDataManager.shared.checkpoint(locationName: "Alveolus")
         
         // Add nama map
-        addCameraChildNode(imageName: "lokasi_alveolus", name: "lokasi_alveolus", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        addCameraChildNode(imageName: "lokasi_alveolus", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
     
 }

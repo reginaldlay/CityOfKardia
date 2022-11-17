@@ -81,12 +81,12 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         bgm.isPositional = false
         bgm.run(.play())
         bgm.run(.changeVolume(to: 0.1, duration: 0))
-        
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
         return abs(CGFloat(hypotf(Float(first.x - second.x), Float(first.y - second.y))))
     }
+    
 }
 
 // MARK: Fungsi saat ada input dari user / touch
@@ -323,6 +323,7 @@ extension GameUIController {
         self.camera?.childNode(withName: "burgerButton")?.isHidden = state
         self.camera?.childNode(withName: "missionBg")?.isHidden = state
         self.camera?.childNode(withName: "missionLabel")?.isHidden = state
+        self.camera?.childNode(withName: "lokasi")?.isHidden = state
     }
 }
 
