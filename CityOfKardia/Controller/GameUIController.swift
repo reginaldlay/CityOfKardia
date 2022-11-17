@@ -197,7 +197,6 @@ extension GameUIController {
                 }
                 menu.setupMenu()
                 self.hideControl(state: true)
-                self.hideMissionHUD(state: true)
             }
             
             if node.name == "menuExitButton" {
@@ -207,8 +206,6 @@ extension GameUIController {
                 
                 menu.removeAllChildren()
                 self.hideControl(state: false)
-                self.hideMissionHUD(state: false)
-                
             }
             
             if node.name == "menuKeluarButton" {
@@ -238,7 +235,6 @@ extension GameUIController {
             if (node.name == "book_close") {
                 missionJournal?.removeFromParent()
                 hideControl(state: false)
-                hideMissionHUD(state: false)
             }
             
         }
@@ -323,12 +319,14 @@ extension GameUIController {
         self.camera?.childNode(withName: "rightButton")?.isHidden = state
         self.camera?.childNode(withName: "actionButton")?.isHidden = state
         self.camera?.childNode(withName: "burgerButton")?.isHidden = state
-    }
-    
-    func hideMissionHUD(state: Bool) {
         self.camera?.childNode(withName: "missionBg")?.isHidden = state
         self.camera?.childNode(withName: "missionLabel")?.isHidden = state
     }
+    
+//    func hideMissionHUD(state: Bool) {
+//        self.camera?.childNode(withName: "missionBg")?.isHidden = state
+//        self.camera?.childNode(withName: "missionLabel")?.isHidden = state
+//    }
 }
 
 // MARK: Setup Dialogue dan Kontak dengan NPC
@@ -461,7 +459,6 @@ extension GameUIController {
     func setupMissionJournal() {
         if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
             hideControl(state: true)
-            hideMissionHUD(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
         } else {
@@ -469,12 +466,6 @@ extension GameUIController {
         }
     }
     
-    func hideMissionJournal(state: Bool) {
-        missionJournal?.isHidden = state
-        hideControl(state: !state)
-        print(!state)
-        hideMissionHUD(state: !state)
-    }
     func changeOngoingMission(text: Mission) {
         if let mission = self.camera?.childNode(withName: "missionLabel") as? SKLabelNode {
             mission.text = text.rawValue

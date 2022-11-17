@@ -19,6 +19,7 @@ class KapilerController : GameUIController {
         setupObs()
         
         player?.playerStartingJumpImpulse = CGFloat(240)
+        changeOngoingMission(text: .kapiler)
     }
     
 }

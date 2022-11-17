@@ -10,6 +10,7 @@ import SpriteKit
 class PreArteriPulmonalisController: GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        changeOngoingMission(text: .pre_ap)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
