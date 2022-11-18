@@ -479,11 +479,9 @@ extension GameUIController {
                 changeAssetsColor(parent: children, nodeName: "mission_selected")
                 changeAssetsColor(parent: children, nodeName: "dictionary_deselected")
                 changeAssetsColor(parent: children, nodeName: "mission2_locked")
-                if let title = children.childNode(withName: "mission1_title") as? SKLabelNode {
-                    title.fontColor = ColorLiteral
-                }
+                changeLabelColor(parent: children, nodeName: "mission1_title")
             }
-
+            
             hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
@@ -495,6 +493,19 @@ extension GameUIController {
     func changeOngoingMission(text: Mission) {
         if let mission = self.camera?.childNode(withName: "missionLabel") as? SKLabelNode {
             mission.text = text.rawValue
+        }
+    }
+    
+    func changeLabelColor(parent: SKNode, nodeName: String) {
+        if let node = parent.childNode(withName: nodeName) as? SKLabelNode {
+            let sceneName = getCurrentScene();
+            if (sceneName == "BilikKananScene" || sceneName == "GateSerambiKananScene") {
+                node.fontColor =  rgbColor(red: 157, green: 115, blue: 105)
+            } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
+                node.fontColor =  rgbColor(red: 121, green: 135, blue: 171)
+            } else if (sceneName == "GateParuParuScene" || sceneName == "AlveolusScene" ){
+                node.fontColor =  rgbColor(red: 131, green: 118, blue: 161)
+            }
         }
     }
     
@@ -518,5 +529,9 @@ extension GameUIController {
             }
         }
         return "Error get current scene"
+    }
+    
+    func rgbColor(red: Double, green: Double, blue: Double) -> UIColor {
+        return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
     }
 }
