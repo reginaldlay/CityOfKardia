@@ -24,6 +24,11 @@ class GateSerambiKananController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
+        
+        changeOngoingMission(text: .gateSK_1)
+        
+        // Add nama map
+        addCameraChildNode(imageName: "lokasi_serambi_kanan", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
     
 }
@@ -41,7 +46,7 @@ extension GateSerambiKananController {
                 switch (npcIncontact) {
                 case ("gatekeeper01"):
                     showDialogue(assets: ext_gate01)
-                    
+                    changeOngoingMission(text: .gateSK_2)
                 default:
                     print("EHHE")
                 }

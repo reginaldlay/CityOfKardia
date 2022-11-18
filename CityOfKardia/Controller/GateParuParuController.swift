@@ -24,6 +24,11 @@ class GateParuParuController: GameUIController {
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
+        
+        changeOngoingMission(text: .gateP_1)
+        
+        // Add nama map
+        addCameraChildNode(imageName: "lokasi_paru", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
     }
     
 }
@@ -41,7 +46,7 @@ extension GateParuParuController {
                 switch (npcIncontact) {
                 case ("gatekeeper03"):
                     showDialogue(assets: ext_gate03)
-                    
+                    changeOngoingMission(text: .gateP_2)
                 case ("gedung_alveolus_4"):
                     moveScene(sceneName: "AlveolusScene")
                     
