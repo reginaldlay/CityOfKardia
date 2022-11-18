@@ -10,7 +10,6 @@
 		3901D83728FE8FD300071442 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3901D83628FE8FD300071442 /* IntroScene.sks */; };
 		3901D83D28FE912B00071442 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901D83C28FE912B00071442 /* IntroController.swift */; };
 		39147B3329277B170084D176 /* IntroVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 39147B3229277B170084D176 /* IntroVideo.mp4 */; };
-		3938015B29269AFA00D3D7F6 /* IntroVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3938015A29269AFA00D3D7F6 /* IntroVideo.mp4 */; };
 		3938015D29269E4900D3D7F6 /* EndingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938015C29269E4900D3D7F6 /* EndingController.swift */; };
 		3938015F29269E5C00D3D7F6 /* EndingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3938015E29269E5C00D3D7F6 /* EndingScene.sks */; };
 		3956B50628FD01840070B52C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956B50528FD01840070B52C /* AppDelegate.swift */; };
@@ -65,7 +64,6 @@
 		3901D83628FE8FD300071442 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
 		3901D83C28FE912B00071442 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
 		39147B3229277B170084D176 /* IntroVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IntroVideo.mp4; sourceTree = "<group>"; };
-		3938015A29269AFA00D3D7F6 /* IntroVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IntroVideo.mp4; sourceTree = "<group>"; };
 		3938015C29269E4900D3D7F6 /* EndingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndingController.swift; sourceTree = "<group>"; };
 		3938015E29269E5C00D3D7F6 /* EndingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndingScene.sks; sourceTree = "<group>"; };
 		3956B50228FD01840070B52C /* CityOfKardia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityOfKardia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,7 +130,6 @@
 		39147B30292777DB0084D176 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				3938015A29269AFA00D3D7F6 /* IntroVideo.mp4 */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -369,7 +366,6 @@
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				3965EEF62920F7D000AB1D39 /* GateParuParuScene.sks in Resources */,
 				A2BC1CEA292433D500823809 /* NewDictionary.sks in Resources */,
-				3938015B29269AFA00D3D7F6 /* IntroVideo.mp4 in Resources */,
 				A2AA169129269D8A00C528A9 /* StarParticles.sks in Resources */,
 				A293D5772923944B00E52253 /* ArteriPulmonalisScene.sks in Resources */,
 				A295965029139EC000DE128A /* BilikKananScene.sks in Resources */,
