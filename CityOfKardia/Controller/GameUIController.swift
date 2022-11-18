@@ -111,11 +111,10 @@ extension GameUIController {
             }
             
             if (node.name == "book_close") {
-                let refChildren = missionJournal?.children.first
-                if let closeButton = refChildren?.childNode(withName: "book_close" ) as? SKSpriteNode {
-                    closeButton.texture = SKTexture(imageNamed: "menuExitButtonClicked")
+                if let refChildren = missionJournal?.children.first {
+                    changeAssetsColor(parent: refChildren, nodeName: "book_close", imageName: "book_close_pressed")
                 } else {
-                    print("Error change exit button texture")
+                    print("Error close button texture")
                 }
             }
             
@@ -509,15 +508,23 @@ extension GameUIController {
         }
     }
     
-    func changeAssetsColor(parent: SKNode, nodeName: String) {
+    func changeAssetsColor(parent: SKNode, nodeName: String, imageName: String = "") {
+        var textureName = ""
+        
+        if (imageName != "") {
+            textureName = imageName
+        } else {
+            textureName = nodeName
+        }
+        
         if let node = parent.childNode(withName: nodeName) as? SKSpriteNode {
             let sceneName = getCurrentScene();
             if (sceneName == "BilikKananScene" || sceneName == "GateSerambiKananScene") {
-                node.texture = SKTexture(imageNamed: "red_\(nodeName)")
+                node.texture = SKTexture(imageNamed: "red_\(textureName)")
             } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
-                node.texture = SKTexture(imageNamed: "blue_\(nodeName)")
+                node.texture = SKTexture(imageNamed: "blue_\(textureName)")
             } else if (sceneName == "GateParuParuScene" || sceneName == "AlveolusScene" ){
-                node.texture = SKTexture(imageNamed: "purple_\(nodeName)")
+                node.texture = SKTexture(imageNamed: "purple_\(textureName)")
             }
         }
     }
