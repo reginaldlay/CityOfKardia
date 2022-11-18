@@ -12,8 +12,12 @@ class GateParuParuController: GameUIController {
     
     var boundKanan: SKSpriteNode?
     
+    var validGatekeeper04 = false
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        CoreDataManager.shared.erryMission = 9
         
         guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
         else {
@@ -23,12 +27,12 @@ class GateParuParuController: GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(200)
         
-        CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
-        
         changeOngoingMission(text: .gateP_1)
         
         // Add nama map
         addCameraChildNode(imageName: "lokasi_paru", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        
+        CoreDataManager.shared.checkpoint(locationName: "GateParuParu")
     }
     
 }
@@ -47,8 +51,15 @@ extension GateParuParuController {
                 case ("gatekeeper03"):
                     showDialogue(assets: ext_gate03)
                     changeOngoingMission(text: .gateP_2)
+                    if (validGatekeeper04 == false) {
+                        CoreDataManager.shared.erryMission = 10
+                        validGatekeeper04 = true
+                    }
+                    
                 case ("gedung_alveolus_4"):
-                    moveScene(sceneName: "AlveolusScene")
+                    if (CoreDataManager.shared.erryMission == 10) {
+                        moveScene(sceneName: "AlveolusScene")
+                    }
                     
                 default:
                     print("EHHE")

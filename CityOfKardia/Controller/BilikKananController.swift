@@ -18,8 +18,14 @@ class BilikKananController: GameUIController {
     var boundLeona: SKSpriteNode?
     var boundSenior: SKSpriteNode?
     
+    var validLeona = false
+    var validSenior = false
+    var validGatekeeper02 = false
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        CoreDataManager.shared.erryMission = 3
         
         guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
               let unwrapSenior = childNode(withName: "senior") as? SKSpriteNode,
@@ -42,11 +48,11 @@ class BilikKananController: GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(200)
         
-        CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
-        
         changeOngoingMission(text: .bk_masuk)
         
         addCameraChildNode(imageName: "lokasi_bilik_kanan", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        
+        CoreDataManager.shared.checkpoint(locationName: "BilikKanan")
     }
 }
 
@@ -62,17 +68,29 @@ extension BilikKananController {
                 if inContact {
                     switch(npcIncontact) {
                     case "leona":
-                        //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_gate01)
-                        dialogue.showPopupNewDictionary(newWord: "sel_darah_putih")
                         boundLeona?.removeFromParent()
-                        changeOngoingMission(text: .bk_guild)
+                        if (validLeona == false) {
+                            dialogue.showPopupNewDictionary(newWord: "sel_darah_putih")
+                            CoreDataManager.shared.erryMission = 4
+                            validLeona = true
+                        }
+                        
                     case "senior":
-                        //IF BELUM PERNAH MASUK KE DIALOGNYA
                         showDialogue(assets: int_guild)
                         boundSenior?.removeFromParent()
+                        changeOngoingMission(text: .bk_guild)
+                        if (validSenior == false) {
+                            CoreDataManager.shared.erryMission = 5
+                            validSenior = true
+                        }
+                        
                     case "gatekeeper02":
                         showDialogue(assets: int_gate02)
+                        if (validGatekeeper02 == false) {
+                            CoreDataManager.shared.erryMission = 6
+                            validGatekeeper02 = true
+                        }
                         
                     default:
                         print("NPC not found")
@@ -115,9 +133,13 @@ extension BilikKananController {
             contactWith(state: true, npcName: "gatekeeper02")
             
         case ("player", "bound02"):
-            moveScene(sceneName: "PreArteriPulmonalisScene")
+            if (CoreDataManager.shared.erryMission == 6) {
+                moveScene(sceneName: "PreArteriPulmonalisScene")
+            }
         case ("bound02", "player"):
-            moveScene(sceneName: "PreArteriPulmonalisScene")
+            if (CoreDataManager.shared.erryMission == 6) {
+                moveScene(sceneName: "PreArteriPulmonalisScene")
+            }
             
         default: break
         }

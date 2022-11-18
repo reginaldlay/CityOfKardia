@@ -8,15 +8,20 @@
 import SpriteKit
 
 class PreArteriPulmonalisController: GameUIController {
+    
+    var validGatekeeper03 = false
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        CoreDataManager.shared.checkpoint(locationName: "PreArteriPulmonalis")
+        CoreDataManager.shared.erryMission = 7
         
         changeOngoingMission(text: .pre_ap)
         
         // Add nama map
         addCameraChildNode(imageName: "lokasi_arteri_pulmonalis", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        
+        CoreDataManager.shared.checkpoint(locationName: "PreArteriPulmonalis")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,7 +35,12 @@ class PreArteriPulmonalisController: GameUIController {
                     switch(npcIncontact) {
                     case "gatekeeper03":
                         showDialogue(assets: ext_pre_pulmonalis)
-                        dialogue.showPopupNewDictionary(newWord: "penggumpalan_darah")
+                        if (validGatekeeper03 == false) {
+                            dialogue.showPopupNewDictionary(newWord: "penggumpalan_darah")
+                            CoreDataManager.shared.erryMission = 8
+                            validGatekeeper03 = true
+                        }
+                        
                     default:
                         print("NPC not found")
                     }
@@ -53,9 +63,14 @@ class PreArteriPulmonalisController: GameUIController {
             contactWith(state: true, npcName: "gatekeeper03")
             
         case ("player", "bound02"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            if (CoreDataManager.shared.erryMission == 8) {
+                moveScene(sceneName: "ArteriPulmonalisScene")
+            }
         case ("bound02", "player"):
-            moveScene(sceneName: "ArteriPulmonalisScene")
+            if (CoreDataManager.shared.erryMission == 8) {
+                moveScene(sceneName: "ArteriPulmonalisScene")
+            }
+            
         default: break
         }
     }
