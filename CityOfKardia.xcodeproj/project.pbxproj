@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3901D83728FE8FD300071442 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3901D83628FE8FD300071442 /* IntroScene.sks */; };
 		3901D83D28FE912B00071442 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901D83C28FE912B00071442 /* IntroController.swift */; };
+		39147B3329277B170084D176 /* IntroVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 39147B3229277B170084D176 /* IntroVideo.mp4 */; };
+		3938015D29269E4900D3D7F6 /* EndingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938015C29269E4900D3D7F6 /* EndingController.swift */; };
+		3938015F29269E5C00D3D7F6 /* EndingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3938015E29269E5C00D3D7F6 /* EndingScene.sks */; };
 		3956B50628FD01840070B52C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956B50528FD01840070B52C /* AppDelegate.swift */; };
 		3956B50828FD01840070B52C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3956B50728FD01840070B52C /* GameScene.sks */; };
 		3956B50A28FD01840070B52C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3956B50928FD01840070B52C /* Actions.sks */; };
@@ -60,6 +63,9 @@
 /* Begin PBXFileReference section */
 		3901D83628FE8FD300071442 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
 		3901D83C28FE912B00071442 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
+		39147B3229277B170084D176 /* IntroVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IntroVideo.mp4; sourceTree = "<group>"; };
+		3938015C29269E4900D3D7F6 /* EndingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndingController.swift; sourceTree = "<group>"; };
+		3938015E29269E5C00D3D7F6 /* EndingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndingScene.sks; sourceTree = "<group>"; };
 		3956B50228FD01840070B52C /* CityOfKardia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityOfKardia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3956B50528FD01840070B52C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3956B50728FD01840070B52C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -121,11 +127,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39147B30292777DB0084D176 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		39147B3129277AF70084D176 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				39147B3229277B170084D176 /* IntroVideo.mp4 */,
+			);
+			name = Video;
+			path = SFX/Video;
+			sourceTree = "<group>";
+		};
 		3956B4F928FD01840070B52C = {
 			isa = PBXGroup;
 			children = (
 				3956B50428FD01840070B52C /* CityOfKardia */,
 				3956B50328FD01840070B52C /* Products */,
+				39147B30292777DB0084D176 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +168,7 @@
 				39FFAB652913BC7900351F50 /* Model */,
 				6B21C2A429124B2200DF3662 /* Scene */,
 				6BC6304C291B9A050000AB1B /* SFX */,
+				39147B3129277AF70084D176 /* Video */,
 				A2ED0A1A290AE499009DA9FC /* Info.plist */,
 				3956B50528FD01840070B52C /* AppDelegate.swift */,
 				3956B50928FD01840070B52C /* Actions.sks */,
@@ -167,6 +191,7 @@
 				6B48960029241DD100902011 /* KapilerController.swift */,
 				3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */,
 				6B95EE982925701300578F22 /* AlveolusController.swift */,
+				3938015C29269E4900D3D7F6 /* EndingController.swift */,
 				3956B50B28FD01840070B52C /* GameController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				6B48960429241E2C00902011 /* GameUIController.swift */,
@@ -199,6 +224,7 @@
 				6B48960229241E0900902011 /* KapilerScene.sks */,
 				3965EEF52920F7D000AB1D39 /* GateParuParuScene.sks */,
 				6B95EE9629256BA500578F22 /* AlveolusScene.sks */,
+				3938015E29269E5C00D3D7F6 /* EndingScene.sks */,
 				3956B50728FD01840070B52C /* GameScene.sks */,
 				A2F78634291A62DD009D958E /* Riddle.sks */,
 				A293D5722922822300E52253 /* MissionJournal.sks */,
@@ -336,6 +362,7 @@
 				A2BC1CE8292413E900823809 /* GameOver.sks in Resources */,
 				3956B51128FD01840070B52C /* Main.storyboard in Resources */,
 				A2F78635291A62DD009D958E /* Riddle.sks in Resources */,
+				39147B3329277B170084D176 /* IntroVideo.mp4 in Resources */,
 				3956B50828FD01840070B52C /* GameScene.sks in Resources */,
 				3965EEF62920F7D000AB1D39 /* GateParuParuScene.sks in Resources */,
 				A2BC1CEA292433D500823809 /* NewDictionary.sks in Resources */,
@@ -345,6 +372,7 @@
 				A293D5732922822300E52253 /* MissionJournal.sks in Resources */,
 				A2ED0A19290ADEE2009DA9FC /* Acme-Regular.ttf in Resources */,
 				6B48960329241E0900902011 /* KapilerScene.sks in Resources */,
+				3938015F29269E5C00D3D7F6 /* EndingScene.sks in Resources */,
 				39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */,
 				3956B51328FD01850070B52C /* Assets.xcassets in Resources */,
 				3901D83728FE8FD300071442 /* IntroScene.sks in Resources */,
@@ -367,6 +395,7 @@
 			files = (
 				3956B50C28FD01840070B52C /* GameController.swift in Sources */,
 				3901D83D28FE912B00071442 /* IntroController.swift in Sources */,
+				3938015D29269E4900D3D7F6 /* EndingController.swift in Sources */,
 				A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
 				6B6D9BF42923E5DB00F736F1 /* Menu.swift in Sources */,

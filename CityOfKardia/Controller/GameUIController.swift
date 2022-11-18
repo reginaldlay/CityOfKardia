@@ -372,7 +372,60 @@ extension GameUIController {
     func contactWith(state: Bool, npcName: String) {
         inContact = state
         npcIncontact = npcName
-        positioningBubble(hideState: !state, npc: npcName)
+        
+        switch (npcName) {
+        case ("gatekeeper01"):
+            if (CoreDataManager.shared.erryMission == 1) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        case ("leona"):
+            if (CoreDataManager.shared.erryMission == 3) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        case ("senior"):
+            if (CoreDataManager.shared.erryMission == 4) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        case ("gatekeeper02"):
+            if (CoreDataManager.shared.erryMission == 5) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        case ("gatekeeper03"):
+            if (CoreDataManager.shared.erryMission == 7) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        case ("gatekeeper04"):
+            if (CoreDataManager.shared.erryMission == 9) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
+        default:
+            break
+        }
+        
     }
     
     func hideBubble(state: Bool) {

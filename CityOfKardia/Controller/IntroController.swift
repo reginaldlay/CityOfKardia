@@ -23,11 +23,16 @@ class IntroController: SKScene {
             addChild(introVideo)
             
             introVideo.play()
+            Timer.scheduledTimer(timeInterval: 25, target: self, selector: #selector(detect), userInfo: nil, repeats: false)
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let nextScene = SKScene(fileNamed: "GateSerambiKananScene") { //mau tanya mentor
+}
+
+extension IntroController {
+    
+    @objc func detect() {
+        if let nextScene = SKScene(fileNamed: "GateSerambiKananScene") {
             scene?.scaleMode = .aspectFill
             scene?.view?.presentScene(nextScene)
         }
