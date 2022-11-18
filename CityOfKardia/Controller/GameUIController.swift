@@ -565,7 +565,7 @@ extension GameUIController {
                 node.fontColor =  rgbColor(red: 157, green: 115, blue: 105)
             } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
                 node.fontColor =  rgbColor(red: 121, green: 135, blue: 171)
-            } else if (sceneName == "GateParuParuScene" || sceneName == "AlveolusScene" ){
+            } else if (sceneName == "GateParuParuScene" || sceneName == "Alveolus" ){
                 node.fontColor =  rgbColor(red: 131, green: 118, blue: 161)
             }
         }
@@ -586,7 +586,7 @@ extension GameUIController {
                 node.texture = SKTexture(imageNamed: "red_\(textureName)")
             } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
                 node.texture = SKTexture(imageNamed: "blue_\(textureName)")
-            } else if (sceneName == "GateParuParuScene" || sceneName == "AlveolusScene" ){
+            } else if (sceneName == "GateParuParuScene" || sceneName == "Alveolus" ){
                 node.texture = SKTexture(imageNamed: "purple_\(textureName)")
             }
         }
