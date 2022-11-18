@@ -119,24 +119,29 @@ extension GameUIController {
             
             if node.name == "menuExitButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "book_close_pressed")
                 }
             }
             
             if node.name == "menuKeluarButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "\(nodeName)Clicked")
                 }
             }
             
             if node.name == "menuKamusButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "\(nodeName)Clicked")
                 }
             }
             
             if node.name == "menuMusicButton" {
-                menu.didPressMusicButton(musicIsOn: musicIsOn)
+//                menu.didPressMusicButton(musicIsOn: musicIsOn)
+                if musicIsOn {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButtonClicked")
+                } else {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButtonClicked")
+                }
             }
             
             // Touch Dialogue
@@ -146,9 +151,6 @@ extension GameUIController {
                     hideControl(state: false)
                 }
             }
-            
-            //
-            
         }
     }
     
@@ -188,19 +190,19 @@ extension GameUIController {
                 }
                 menu.setupMenu()
                 
-                if let menu = self.camera {
-                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
-                    changeAssetsColor(parent: menu, nodeName: String)
-                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
-                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
-                }
+                //Change assets based on location
+                changeAssetsColor(parent: menu, nodeName: "menuFrame")
+                changeAssetsColor(parent: menu, nodeName: "menuExitButton", imageName: "book_close")
+                changeAssetsColor(parent: menu, nodeName: "menuKamusButton")
+                changeAssetsColor(parent: menu, nodeName: "menuKeluarButton")
+                changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
                 
                 self.hideControl(state: true)
             }
             
             if node.name == "menuExitButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "book_close_pressed")
                 }
                 
                 menu.removeAllChildren()
@@ -209,23 +211,23 @@ extension GameUIController {
             
             if node.name == "menuKeluarButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
             }
             
             if node.name == "menuKamusButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
             }
             
             if node.name == "menuMusicButton" {
                 if musicIsOn {
-                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
                     bgm.run(.stop())
                     musicIsOn = false
                 } else {
-                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
                     bgm.run(.play())
                     musicIsOn = true
                 }
@@ -287,6 +289,7 @@ extension GameUIController {
         addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
         addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 12)
         
+        //Change asset based on location
         if let camera = self.camera {
             changeAssetsColor(parent: camera, nodeName: "leftButton")
             changeAssetsColor(parent: camera, nodeName: "rightButton")

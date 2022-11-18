@@ -10,11 +10,11 @@ import SpriteKit
 class Menu : SKNode {
     
     // MARK: Inisialisai Element Menu
-    let menuExitButton = SKSpriteNode(imageNamed: "menuExitButton")
-    let menuKeluarButton = SKSpriteNode(imageNamed: "menuKeluarButton")
-    let menuKamusButton = SKSpriteNode(imageNamed: "menuKamusButton")
-    let menuMusicButton = SKSpriteNode(imageNamed: "menuMusicOnButton")
-    let menuFrame = SKSpriteNode(imageNamed: "menuFrame")
+    let menuExitButton = SKSpriteNode(imageNamed: "book_close")
+    let menuKeluarButton = SKSpriteNode(imageNamed: "red_menuKeluarButton")
+    let menuKamusButton = SKSpriteNode(imageNamed: "red_menuKamusButton")
+    let menuMusicButton = SKSpriteNode(imageNamed: "red_menuMusicOnButton")
+    let menuFrame = SKSpriteNode(imageNamed: "red_menuFrame")
     
     // MARK: Inisialisasi menu sebagai empty node
     override init() {
@@ -41,6 +41,7 @@ class Menu : SKNode {
         node.name = nodeName
         node.position = pos
         node.zPosition = zPos
+        if node == menuExitButton {node.size = CGSize(width: 40, height: 42)}
         self.addChild(node)
     }
     
