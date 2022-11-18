@@ -190,8 +190,8 @@ class DialogueBox: SKNode {
                     let location = touch.location(in: self)
                     let node = self.atPoint(location)
                     
-                    if (node.name == "optPD") {
-                        let rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat! Ambillah ini karena kamu telah menjawabnya dengan benar."
+                    if (node.name == "optPD" || node.name == "labelPD") {
+                        let rightResponse = "Hebat sekali, anak muda sepertimu sungguh berbakat!"
                         changeSpecificDialogueLabel(dialogue: rightResponse)
                         dialogueBefore = rightResponse
                         
@@ -199,7 +199,7 @@ class DialogueBox: SKNode {
                         wrongChoice = false
                         riddle.removeFromParent()
                     }
-                    else if (node.name == "optSDM" || node.name == "optSDP" || node.name == "optTrombosit"){
+                    else if (node.name == "optSDM" || node.name == "labelSDM" || node.name == "optSDP" || node.name == "labelSDP" || node.name == "optTrombosit" || node.name == "labelTrombosit"){
                         refLabel(name: "label").text = "Jawabanmu kurang tepat, coba lagi."
                         wrongChoice = true
                     }

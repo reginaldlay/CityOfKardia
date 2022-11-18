@@ -39,11 +39,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var missionJournal: SKReferenceNode?
     var missionJournalController = MissionJournalController()
     
-    // MARK: Popup New Dictionary
-    //    var newDictionary: SKReferenceNode?
-    //    var missionJournalController = MissionJournalController()
-    
-    
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
     
     // MARK: BGM init
@@ -111,41 +106,42 @@ extension GameUIController {
             }
             
             if (node.name == "book_close") {
-                let refChildren = missionJournal?.children.first
-                if let closeButton = refChildren?.childNode(withName: "book_close" ) as? SKSpriteNode {
-                    closeButton.texture = SKTexture(imageNamed: "menuExitButtonClicked")
-                } else {
-                    print("Error change exit button texture")
+                if let refChildren = missionJournal?.children.first {
+                    changeAssetsColor(parent: refChildren, nodeName: "book_close", imageName: "book_close_pressed")
                 }
             }
             
             if node.name == "burgerButton" {
-                if let burger = self.camera?.childNode(withName: "burgerButton") {
-                    let pressedTexture = SKTexture(imageNamed: "burgerButtonClicked")
-                    burger.run(SKAction.setTexture(pressedTexture))
+                if let burger = self.camera{
+                    changeAssetsColor(parent: burger, nodeName: "burgerButton", imageName: "burgerButtonClicked")
                 }
             }
             
             if node.name == "menuExitButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "book_close_pressed")
                 }
             }
             
             if node.name == "menuKeluarButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "\(nodeName)Clicked")
                 }
             }
             
             if node.name == "menuKamusButton" {
                 if let nodeName = node.name {
-                    menu.didPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "\(nodeName)Clicked")
                 }
             }
             
             if node.name == "menuMusicButton" {
-                menu.didPressMusicButton(musicIsOn: musicIsOn)
+//                menu.didPressMusicButton(musicIsOn: musicIsOn)
+                if musicIsOn {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButtonClicked")
+                } else {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButtonClicked")
+                }
             }
             
             // Touch Dialogue
@@ -155,9 +151,6 @@ extension GameUIController {
                     hideControl(state: false)
                 }
             }
-            
-            //
-            
         }
     }
     
@@ -192,17 +185,24 @@ extension GameUIController {
             }
             
             if node.name == "burgerButton" {
-                if let burger = self.camera?.childNode(withName: "burgerButton") {
-                    let pressedTexture = SKTexture(imageNamed: "burgerButton")
-                    burger.run(SKAction.setTexture(pressedTexture))
+                if let burger = self.camera{
+                    changeAssetsColor(parent: burger, nodeName: "burgerButton")
                 }
                 menu.setupMenu()
+                
+                //Change assets based on location
+                changeAssetsColor(parent: menu, nodeName: "menuFrame")
+                changeAssetsColor(parent: menu, nodeName: "menuExitButton", imageName: "book_close")
+                changeAssetsColor(parent: menu, nodeName: "menuKamusButton")
+                changeAssetsColor(parent: menu, nodeName: "menuKeluarButton")
+                changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
+                
                 self.hideControl(state: true)
             }
             
             if node.name == "menuExitButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName, imageName: "book_close_pressed")
                 }
                 
                 menu.removeAllChildren()
@@ -211,23 +211,23 @@ extension GameUIController {
             
             if node.name == "menuKeluarButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
             }
             
             if node.name == "menuKamusButton" {
                 if let nodeName = node.name {
-                    menu.didEndPressAnimation(nodeName: nodeName)
+                    changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
             }
             
             if node.name == "menuMusicButton" {
                 if musicIsOn {
-                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
                     bgm.run(.stop())
                     musicIsOn = false
                 } else {
-                    menu.didToggleMusicButton(musicIsOn: musicIsOn)
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
                     bgm.run(.play())
                     musicIsOn = true
                 }
@@ -288,6 +288,15 @@ extension GameUIController {
         addCameraChildNode(imageName: "burgerButton", name: "burgerButton", widthSize: 38, heightSize: 40, xPos: 378, yPos: 150)
         addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
         addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 12)
+        
+        //Change asset based on location
+        if let camera = self.camera {
+            changeAssetsColor(parent: camera, nodeName: "leftButton")
+            changeAssetsColor(parent: camera, nodeName: "rightButton")
+            changeAssetsColor(parent: camera, nodeName: "actionButton")
+            changeAssetsColor(parent: camera, nodeName: "burgerButton")
+
+        }
     }
     
     func addCameraChildNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat) {
@@ -524,6 +533,17 @@ extension GameUIController {
 extension GameUIController {
     func setupMissionJournal() {
         if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
+            
+            // Change asset berdasarkan lokasi
+            if let children = unwrapMissionJournal.children.first {
+                changeAssetsColor(parent: children, nodeName: "book")
+                changeAssetsColor(parent: children, nodeName: "book_close")
+                changeAssetsColor(parent: children, nodeName: "mission_selected")
+                changeAssetsColor(parent: children, nodeName: "dictionary_deselected")
+                changeAssetsColor(parent: children, nodeName: "mission2_locked")
+                changeLabelColor(parent: children, nodeName: "mission1_title")
+            }
+            
             hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
@@ -536,5 +556,52 @@ extension GameUIController {
         if let mission = self.camera?.childNode(withName: "missionLabel") as? SKLabelNode {
             mission.text = text.rawValue
         }
+    }
+    
+    func changeLabelColor(parent: SKNode, nodeName: String) {
+        if let node = parent.childNode(withName: nodeName) as? SKLabelNode {
+            let sceneName = getCurrentScene();
+            if (sceneName == "BilikKananScene" || sceneName == "GateSerambiKananScene") {
+                node.fontColor =  rgbColor(red: 157, green: 115, blue: 105)
+            } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
+                node.fontColor =  rgbColor(red: 121, green: 135, blue: 171)
+            } else if (sceneName == "GateParuParuScene" || sceneName == "Alveolus" ){
+                node.fontColor =  rgbColor(red: 131, green: 118, blue: 161)
+            }
+        }
+    }
+    
+    func changeAssetsColor(parent: SKNode, nodeName: String, imageName: String = "") {
+        var textureName = ""
+        
+        if (imageName != "") {
+            textureName = imageName
+        } else {
+            textureName = nodeName
+        }
+        
+        if let node = parent.childNode(withName: nodeName) as? SKSpriteNode {
+            let sceneName = getCurrentScene();
+            if (sceneName == "BilikKananScene" || sceneName == "GateSerambiKananScene") {
+                node.texture = SKTexture(imageNamed: "red_\(textureName)")
+            } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
+                node.texture = SKTexture(imageNamed: "blue_\(textureName)")
+            } else if (sceneName == "GateParuParuScene" || sceneName == "Alveolus" ){
+                node.texture = SKTexture(imageNamed: "purple_\(textureName)")
+            }
+        }
+    }
+    
+    func getCurrentScene() -> String {
+        if let view = self.view {
+            if let currentScene = view.scene {
+                return currentScene.name ?? "No node name"
+            }
+        }
+        return "Error get current scene"
+    }
+    
+    func rgbColor(red: Double, green: Double, blue: Double) -> UIColor {
+        return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
     }
 }
