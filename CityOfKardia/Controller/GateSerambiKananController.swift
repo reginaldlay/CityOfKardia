@@ -12,8 +12,12 @@ class GateSerambiKananController: GameUIController {
     
     var boundKanan: SKSpriteNode?
     
+    var validGatekeeper01 = false
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        CoreDataManager.shared.erryMission = 1
         
         guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
         else {
@@ -23,12 +27,12 @@ class GateSerambiKananController: GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(200)
         
-        CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
-        
         changeOngoingMission(text: .gateSK_1)
         
         // Add nama map
         addCameraChildNode(imageName: "lokasi_serambi_kanan", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        
+        CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
     }
     
 }
@@ -47,6 +51,11 @@ extension GateSerambiKananController {
                 case ("gatekeeper01"):
                     showDialogue(assets: ext_gate01)
                     changeOngoingMission(text: .gateSK_2)
+                    if (validGatekeeper01 == false) {
+                        CoreDataManager.shared.erryMission = 2
+                        validGatekeeper01 = true
+                    }
+                    
                 default:
                     print("EHHE")
                 }
@@ -76,9 +85,14 @@ extension GateSerambiKananController {
         
         switch (bodyA, bodyB) {
         case ("player", "bound_kanan"):
-            moveScene(sceneName: "BilikKananScene")
+            if (CoreDataManager.shared.erryMission == 2) {
+                moveScene(sceneName: "BilikKananScene")
+            }
+            
         case ("bound_kanan", "player"):
-            moveScene(sceneName: "BilikKananScene")
+            if (CoreDataManager.shared.erryMission == 2) {
+                moveScene(sceneName: "BilikKananScene")
+            }
             
         case ("player", "gatekeeper01"):
             contactWith(state: true, npcName: "gatekeeper01")

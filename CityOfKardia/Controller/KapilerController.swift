@@ -20,9 +20,9 @@ class KapilerController : GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(240)
         
-        CoreDataManager.shared.checkpoint(locationName: "Kapiler")
-        
         changeOngoingMission(text: .kapiler)
+        
+        CoreDataManager.shared.checkpoint(locationName: "Kapiler")
     }
     
 }

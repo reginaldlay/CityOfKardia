@@ -55,10 +55,10 @@ class ArteriPulmonalisController: GameUIController {
             bound02 = unwrapBound02
         }
         
-        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
-        
         //Setup change ongoing mission
         changeOngoingMission(text: .ap)
+        
+        CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
     }
     
     private func animateHorizontal (platform: SKSpriteNode, order: String, xMove: CGFloat, duration: TimeInterval) {

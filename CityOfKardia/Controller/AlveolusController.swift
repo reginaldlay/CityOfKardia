@@ -21,10 +21,10 @@ class AlveolusController : GameUIController {
         
         player?.playerStartingJumpImpulse = CGFloat(200)
         
-        CoreDataManager.shared.checkpoint(locationName: "Alveolus")
-        
         // Add nama map
         addCameraChildNode(imageName: "lokasi_alveolus", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
+        
+        CoreDataManager.shared.checkpoint(locationName: "Alveolus")
     }
     
 }
