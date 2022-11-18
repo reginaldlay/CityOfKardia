@@ -471,6 +471,19 @@ extension GameUIController {
 extension GameUIController {
     func setupMissionJournal() {
         if let unwrapMissionJournal = SKReferenceNode(fileNamed: "MissionJournal") {
+            
+            // Change asset berdasarkan lokasi
+            if let children = unwrapMissionJournal.children.first {
+                changeAssetsColor(parent: children, nodeName: "book")
+                changeAssetsColor(parent: children, nodeName: "book_close")
+                changeAssetsColor(parent: children, nodeName: "mission_selected")
+                changeAssetsColor(parent: children, nodeName: "dictionary_deselected")
+                changeAssetsColor(parent: children, nodeName: "mission2_locked")
+                if let title = children.childNode(withName: "mission1_title") as? SKLabelNode {
+                    title.fontColor = ColorLiteral
+                }
+            }
+
             hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
@@ -483,5 +496,27 @@ extension GameUIController {
         if let mission = self.camera?.childNode(withName: "missionLabel") as? SKLabelNode {
             mission.text = text.rawValue
         }
+    }
+    
+    func changeAssetsColor(parent: SKNode, nodeName: String) {
+        if let node = parent.childNode(withName: nodeName) as? SKSpriteNode {
+            let sceneName = getCurrentScene();
+            if (sceneName == "BilikKananScene" || sceneName == "GateSerambiKananScene") {
+                node.texture = SKTexture(imageNamed: "red_\(nodeName)")
+            } else if (sceneName == "PreArteriPulmonalisScene" || sceneName == "ArteriPulmonalisScene" || sceneName == "KapilerScene") {
+                node.texture = SKTexture(imageNamed: "blue_\(nodeName)")
+            } else if (sceneName == "GateParuParuScene" || sceneName == "AlveolusScene" ){
+                node.texture = SKTexture(imageNamed: "purple_\(nodeName)")
+            }
+        }
+    }
+    
+    func getCurrentScene() -> String {
+        if let view = self.view {
+            if let currentScene = view.scene {
+                return currentScene.name ?? "No node name"
+            }
+        }
+        return "Error get current scene"
     }
 }
