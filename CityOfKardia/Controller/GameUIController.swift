@@ -39,11 +39,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var missionJournal: SKReferenceNode?
     var missionJournalController = MissionJournalController()
     
-    // MARK: Popup New Dictionary
-    //    var newDictionary: SKReferenceNode?
-    //    var missionJournalController = MissionJournalController()
-    
-    
     let musicAudioNode = SKAudioNode(fileNamed: "typingSFX")
     
     // MARK: BGM init
@@ -113,15 +108,12 @@ extension GameUIController {
             if (node.name == "book_close") {
                 if let refChildren = missionJournal?.children.first {
                     changeAssetsColor(parent: refChildren, nodeName: "book_close", imageName: "book_close_pressed")
-                } else {
-                    print("Error close button texture")
                 }
             }
             
             if node.name == "burgerButton" {
-                if let burger = self.camera?.childNode(withName: "burgerButton") {
-                    let pressedTexture = SKTexture(imageNamed: "burgerButtonClicked")
-                    burger.run(SKAction.setTexture(pressedTexture))
+                if let burger = self.camera{
+                    changeAssetsColor(parent: burger, nodeName: "burgerButton", imageName: "burgerButtonClicked")
                 }
             }
             
@@ -191,11 +183,18 @@ extension GameUIController {
             }
             
             if node.name == "burgerButton" {
-                if let burger = self.camera?.childNode(withName: "burgerButton") {
-                    let pressedTexture = SKTexture(imageNamed: "burgerButton")
-                    burger.run(SKAction.setTexture(pressedTexture))
+                if let burger = self.camera{
+                    changeAssetsColor(parent: burger, nodeName: "burgerButton")
                 }
                 menu.setupMenu()
+                
+                if let menu = self.camera {
+                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
+                    changeAssetsColor(parent: menu, nodeName: String)
+                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
+                    changeAssetsColor(parent: menu, nodeName: <#T##String#>)
+                }
+                
                 self.hideControl(state: true)
             }
             
@@ -287,6 +286,14 @@ extension GameUIController {
         addCameraChildNode(imageName: "burgerButton", name: "burgerButton", widthSize: 38, heightSize: 40, xPos: 378, yPos: 150)
         addCameraChildNode(imageName: "ongoing_mission", name: "missionBg", widthSize: 325, heightSize: 96, xPos: -252, yPos: 135)
         addCameraLabelNode(xPos: -342, yPos: 133, zPos: 101, maxLayout: 100, lineAmount: 1, horizontal: .left, vertical: .baseline, name: "missionLabel", fontSize: 12)
+        
+        if let camera = self.camera {
+            changeAssetsColor(parent: camera, nodeName: "leftButton")
+            changeAssetsColor(parent: camera, nodeName: "rightButton")
+            changeAssetsColor(parent: camera, nodeName: "actionButton")
+            changeAssetsColor(parent: camera, nodeName: "burgerButton")
+
+        }
     }
     
     func addCameraChildNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat) {
