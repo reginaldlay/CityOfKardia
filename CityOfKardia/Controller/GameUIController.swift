@@ -250,6 +250,8 @@ extension GameUIController {
                 if let nodeName = node.name {
                     changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
+                
+                moveScene(sceneName: "GameScene")
             }
             
             if node.name == "menuKamusButton" {

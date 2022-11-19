@@ -61,6 +61,12 @@ class GameController: SKScene {
                         self.scene?.view?.presentScene(nextScene)
                     }
                     
+                case ("PreArteriPulmonalis"):
+                    if let nextScene = SKScene(fileNamed: "PreArteriPulmonalisScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
                 case ("ArteriPulmonalis"):
                     if let nextScene = SKScene(fileNamed: "ArteriPulmonalisScene") {
                         self.scene?.scaleMode = .aspectFill
@@ -81,6 +87,12 @@ class GameController: SKScene {
                     
                 case ("Alveolus"):
                     if let nextScene = SKScene(fileNamed: "AlveolusScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                    
+                case ("Ending"):
+                    if let nextScene = SKScene(fileNamed: "EndingScene") {
                         self.scene?.scaleMode = .aspectFill
                         self.scene?.view?.presentScene(nextScene)
                     }
