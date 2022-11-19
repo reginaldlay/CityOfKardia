@@ -48,7 +48,7 @@ extension GateParuParuController {
             
             if (node.name == "actionButton") {
                 switch (npcIncontact) {
-                case ("gatekeeper03"):
+                case ("gatekeeper04"):
                     showDialogue(assets: ext_gate03)
                     changeOngoingMission(text: .gateP_2)
                     if (validGatekeeper04 == false) {
@@ -89,11 +89,11 @@ extension GateParuParuController {
         print("Body B begin: \(bodyB)")
         
         switch (bodyA, bodyB) {
-        case ("player", "gatekeeper03"):
-            contactWith(state: true, npcName: "gatekeeper03")
+        case ("player", "gatekeeper04"):
+            contactWith(state: true, npcName: "gatekeeper04")
             
-        case ("gatekeeper03", "player"):
-            contactWith(state: true, npcName: "gatekeeper03")
+        case ("gatekeeper04", "player"):
+            contactWith(state: true, npcName: "gatekeeper04")
             
         case ("player", "gedung_alveolus_4"):
             npcIncontact = "gedung_alveolus_4"
