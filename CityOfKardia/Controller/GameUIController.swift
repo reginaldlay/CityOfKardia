@@ -461,6 +461,14 @@ extension GameUIController {
                 positioningBubble(hideState: state, npc: npcName)
             }
             
+        case ("teller"):
+            if (CoreDataManager.shared.erryMission == 11) {
+                positioningBubble(hideState: !state, npc: npcName)
+            }
+            else {
+                positioningBubble(hideState: state, npc: npcName)
+            }
+            
         default:
             break
         }

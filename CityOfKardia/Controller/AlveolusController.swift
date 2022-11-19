@@ -12,14 +12,20 @@ class AlveolusController : GameUIController {
     var boundKanan: SKNode?
     var puzzle = Puzzle()
     
+    var validTeller = false
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        
+        CoreDataManager.shared.erryMission = 11
         
         if let unwrapBoundKanan = childNode(withName: "bound02") {
             boundKanan = unwrapBoundKanan
         }
         
         player?.playerStartingJumpImpulse = CGFloat(200)
+        
+        changeOngoingMission(text: .alveolus_1)
         
         // Add nama map
         addCameraChildNode(imageName: "lokasi_alveolus", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
@@ -41,11 +47,18 @@ extension AlveolusController {
             if (node.name == "actionButton") {
                 switch (npcIncontact) {
                     
-                case ("machine")    :
+                case ("machine"):
                     self.camera?.addChild(puzzle)
                     puzzle.setupPuzzle()
                     hideControl(state: true)
-                case ("teller")     : showDialogue(assets: int_alveolus)
+                    
+                case ("teller"):
+                    showDialogue(assets: int_alveolus)
+                    changeOngoingMission(text: .alveolus_2)
+                    if (validTeller == false) {
+                        CoreDataManager.shared.erryMission = 12
+                        validTeller = true
+                    }
                     
                 default: break
                 }
@@ -119,8 +132,10 @@ extension AlveolusController {
         case ("teller", "player"):
             contactWith(state: true, npcName: "teller")
             
-        case ("player", "machine"): npcIncontact = "machine"
-        case ("machine", "player"): npcIncontact = "machine"
+        case ("player", "machine"):
+            npcIncontact = "machine"
+        case ("machine", "player"):
+            npcIncontact = "machine"
             
         default: break
         }

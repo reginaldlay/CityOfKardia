@@ -16,5 +16,7 @@ enum Mission: String {
     case kapiler = "Melalui rintangan di Kapiler"
     case gateP_1 = "Berbicara dengan Penjaga 04"
     case gateP_2 = "Masuk ke rumah urutan nomor 4"
-
+    case alveolus_1 = "Berbicara dengan Teller"
+    case alveolus_2 = "Perbaiki mesin di sebelah kiri Teller"
+    case alveolus_3 = "Keluar dari Alveolus"
 }
