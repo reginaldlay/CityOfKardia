@@ -26,6 +26,7 @@
 		3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */; };
 		39A3DF9F29150933003A53A9 /* GateSerambiKananController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */; };
 		39A3DFA129150953003A53A9 /* GateSerambiKananScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */; };
+		6B22DE8E292849EE000A0BB4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B22DE8D292849EE000A0BB4 /* Dictionary.swift */; };
 		6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FC29241D8A00902011 /* PlayerNode.swift */; };
 		6B4895FF29241DAC00902011 /* PlayerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4895FE29241DAC00902011 /* PlayerStateController.swift */; };
 		6B48960129241DD100902011 /* KapilerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B48960029241DD100902011 /* KapilerController.swift */; };
@@ -81,6 +82,7 @@
 		3965EEF72920F7E600AB1D39 /* GateParuParuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateParuParuController.swift; sourceTree = "<group>"; };
 		39A3DF9E29150933003A53A9 /* GateSerambiKananController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateSerambiKananController.swift; sourceTree = "<group>"; };
 		39A3DFA029150953003A53A9 /* GateSerambiKananScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GateSerambiKananScene.sks; sourceTree = "<group>"; };
+		6B22DE8D292849EE000A0BB4 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		6B4895FC29241D8A00902011 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		6B4895FE29241DAC00902011 /* PlayerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateController.swift; sourceTree = "<group>"; };
 		6B48960029241DD100902011 /* KapilerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KapilerController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,14 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		6B22DE8829284849000A0BB4 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				6B22DE8D292849EE000A0BB4 /* Dictionary.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
 		6B5BDC402925788C005B5A63 /* Puzzle */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +265,7 @@
 		6B6D9BF12923E5BF00F736F1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				6B22DE8829284849000A0BB4 /* Dictionary */,
 				6B5BDC402925788C005B5A63 /* Puzzle */,
 				6B6D9BF52923E66900F736F1 /* Dialogue */,
 				6B6D9BF22923E5CD00F736F1 /* Menu */,
@@ -398,6 +409,7 @@
 				3938015D29269E4900D3D7F6 /* EndingController.swift in Sources */,
 				A293D57529228E5B00E52253 /* MissionJournalController.swift in Sources */,
 				39642A29290A8EC000A82C34 /* PlayerModel.xcdatamodeld in Sources */,
+				6B22DE8E292849EE000A0BB4 /* Dictionary.swift in Sources */,
 				6B6D9BF42923E5DB00F736F1 /* Menu.swift in Sources */,
 				A295965229139EE100DE128A /* BilikKananController.swift in Sources */,
 				6B95EE992925701300578F22 /* AlveolusController.swift in Sources */,
