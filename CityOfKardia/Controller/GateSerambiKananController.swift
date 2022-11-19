@@ -17,6 +17,7 @@ class GateSerambiKananController: GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        
         CoreDataManager.shared.erryMission = 1
         
         guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
@@ -33,6 +34,7 @@ class GateSerambiKananController: GameUIController {
         addCameraChildNode(imageName: "lokasi_serambi_kanan", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
         
         CoreDataManager.shared.checkpoint(locationName: "GateSerambiKanan")
+        
     }
     
 }

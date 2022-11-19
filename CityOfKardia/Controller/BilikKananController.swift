@@ -71,7 +71,7 @@ extension BilikKananController {
                         showDialogue(assets: int_gate01)
                         boundLeona?.removeFromParent()
                         if (validLeona == false) {
-                            dialogue.showPopupNewDictionary(newWord: "sel_darah_putih")
+                            dialogue.showPopupNewDictionary(newWords: ["sel_darah_putih"])
                             CoreDataManager.shared.erryMission = 4
                             validLeona = true
                         }
@@ -114,7 +114,7 @@ extension BilikKananController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-    
+        
         switch (bodyA, bodyB) {
             
         case ("player", "leona"):
@@ -147,7 +147,7 @@ extension BilikKananController {
     
     override func didEnd(_ contact: SKPhysicsContact) {
         super.didEnd(contact)
-
+        
         inContact = false
         npcIncontact = ""
         hideBubble(state: true)
@@ -158,12 +158,12 @@ extension BilikKananController {
 extension BilikKananController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-                if let player = player {
-                    if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
-                        self.camera?.position = CGPoint(x: player.position.x, y: 0)
-                    }
-                }
-
+        if let player = player {
+            if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
+                self.camera?.position = CGPoint(x: player.position.x, y: 0)
+            }
+        }
+        
     }
 }
 

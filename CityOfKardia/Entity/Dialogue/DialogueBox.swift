@@ -39,14 +39,14 @@ class DialogueBox: SKNode {
     
     //New Dictionary
     var newDictionary: SKReferenceNode?
-    var newWord = ""
+    var newWords: [String] = []
+    var countCurrentWord = 1
     
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 0, yPos: -118.14, zPos: 3, width: 796, height: 135, name: "box")
-        //        createSprite(texture: "dialogue-image-bg", xPos: -335.3, yPos: -115.14, zPos: 10, width: 98, height: 98, name: "image_background")
         createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
-        createSprite(texture: "", xPos: -335.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
+        createSprite(texture: "", xPos: -336.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
         createLabel(text: "Dialogue text", xPos: -264.9, yPos: -80, zPos: 14, maxLayout: 600, lineAmount: 3, horizontal: .left, vertical: .top, name: "label", fontSize: 17)
@@ -175,15 +175,16 @@ class DialogueBox: SKNode {
                     count+=1
                 } else {
                     hideDialogue(state: true)
-                    dialogueVisibility = false
                     count = 1
                     dialogueBefore = dialogue_assets[count-1].label ?? "Empty string"
                     
                     //Pop up new dictionary
-                    if (newWord != "") {
-                        print("new Word \(newWord)")
-                        setupNewDictionary()
+                    if (newWords != []) {
+                        print("new Word \(newWords)")
+                        setupNewDictionary(newItem: newWords)
                     }
+                    dialogueVisibility = false
+
                 }
             } else if (riddleVisibility && !wrongChoice) {
                 for touch in touches {
@@ -212,10 +213,22 @@ class DialogueBox: SKNode {
             for touch in touches {
                 let location = touch.location(in: self)
                 let node = self.atPoint(location)
-                //                print("node name dialogue \(node.name)")
-                if (node.name == "newdict_continue") {
+                switch node.name {
+                case "newdict_continue":
                     newDictionary?.removeFromParent()
-                    newWord = ""
+                    newWords = []
+                case "newdict_leftArrow":
+                    if (countCurrentWord > 1) {
+                        countCurrentWord-=1
+                        changeNewDictionaryData(data: newWords[countCurrentWord-1])
+                    }
+                case "newdict_rightArrow":
+                    if (countCurrentWord < newWords.count) {
+                        countCurrentWord+=1
+                        changeNewDictionaryData(data: newWords[countCurrentWord-1])
+                    }
+                default:
+                    break
                 }
             }
         }
@@ -232,21 +245,13 @@ class DialogueBox: SKNode {
 
 extension DialogueBox {
     // New Dictionary
-    private func setupNewDictionary() {
+    public func setupNewDictionary(newItem: [String]) {
+        self.newWords = newItem
         if let unwrapNewDictionary = SKReferenceNode(fileNamed: "NewDictionary") {
             unwrapNewDictionary.name = "NewDictionary"
             self.addChild(unwrapNewDictionary)
-            
-            //Change image
-            let refChildren = childNode(withName: "NewDictionary")?.children.first
-            if let image = refChildren?.childNode(withName: "newdict_image") as? SKSpriteNode {
-                image.texture = SKTexture(imageNamed: newWord)
-            }
-            if let label = refChildren?.childNode(withName: "newdict_label") as? SKLabelNode {
-                label.text = getDictionaryItem(key: newWord)
-                print("label text \(getDictionaryItem(key: newWord))")
-            }
-            
+         
+            changeNewDictionaryData(data: newItem[0])
             newDictionary = unwrapNewDictionary
             
         } else {
@@ -254,8 +259,34 @@ extension DialogueBox {
         }
     }
     
-    public func showPopupNewDictionary(newWord: String) {
-        self.newWord = newWord
+    public func showPopupNewDictionary(newWords: [String]) {
+        self.newWords = newWords
+    }
+    
+    //Change image and label
+    public func changeNewDictionaryData(data: String) {
+        let refChildren = childNode(withName: "NewDictionary")?.children.first
+        if let image = refChildren?.childNode(withName: "newdict_image") as? SKSpriteNode {
+            image.texture = SKTexture(imageNamed: data)
+        }
+        if let label = refChildren?.childNode(withName: "newdict_label") as? SKLabelNode {
+            label.text = getDictionaryItem(key: data)
+            print("label text \(getDictionaryItem(key: data))")
+        }
+        if let leftArrow = refChildren?.childNode(withName: "newdict_leftArrow") as? SKSpriteNode {
+            if countCurrentWord > 1 {
+                leftArrow.texture = SKTexture(imageNamed: "red_newdict_leftArrow")
+            } else {
+                leftArrow.texture = SKTexture(imageNamed: "newdict_leftArrow_disabled")
+            }
+        }
         
+        if let rightArrow = refChildren?.childNode(withName: "newdict_rightArrow") as? SKSpriteNode {
+            if countCurrentWord < newWords.count {
+                rightArrow.texture = SKTexture(imageNamed: "red_newdict_rightArrow")
+            } else {
+                rightArrow.texture = SKTexture(imageNamed: "newdict_rightArrow_disabled")
+            }
+        }
     }
 }
