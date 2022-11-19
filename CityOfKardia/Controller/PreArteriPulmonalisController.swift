@@ -36,7 +36,7 @@ class PreArteriPulmonalisController: GameUIController {
                     case "gatekeeper03":
                         showDialogue(assets: ext_pre_pulmonalis)
                         if (validGatekeeper03 == false) {
-                            dialogue.showPopupNewDictionary(newWord: "penggumpalan_darah")
+                            dialogue.showPopupNewDictionary(newWords: ["penggumpalan_darah"])
                             CoreDataManager.shared.erryMission = 8
                             validGatekeeper03 = true
                         }

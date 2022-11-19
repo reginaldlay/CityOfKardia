@@ -163,7 +163,8 @@ extension GameUIController {
             }
             
             // Touch Dialogue
-            if (dialogue.dialogueVisibility || dialogue.newWord != "") {
+            if (dialogue.dialogueVisibility || dialogue.newWords != []) {
+                print("masuk touch dialogue new words")
                 dialogue.touchesBegan(touches, with: event);
                 if (!dialogue.dialogueVisibility) {
                     hideControl(state: false)
@@ -189,9 +190,7 @@ extension GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            
-            print(node.name)
-            
+                        
             for i in 1...13 {
                 if node.name == String(i) {
                     removeDictContent()
@@ -277,7 +276,23 @@ extension GameUIController {
                 hideControl(state: false)
             }
             
-            
+//            switch node.name {
+//            case "newdict_continue":
+//                dialogue.newDictionary?.removeFromParent()
+//                dialogue.newWords = []
+//            case "newdict_leftArrow":
+//                if (dialogue.countCurrentWord > 1) {
+//                    dialogue.countCurrentWord-=1
+//                    dialogue.changeNewDictionaryData(data: dialogue.newWords[dialogue.countCurrentWord-1])
+//                }
+//            case "newdict_rightArrow":
+//                if (dialogue.countCurrentWord < dialogue.newWords.count) {
+//                    dialogue.countCurrentWord+=1
+//                    dialogue.changeNewDictionaryData(data: dialogue.newWords[dialogue.countCurrentWord-1])
+//                }
+//            default:
+//                break
+//            }
         }
     }
 }
