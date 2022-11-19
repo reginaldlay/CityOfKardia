@@ -44,6 +44,14 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     // MARK: BGM init
     let bgm = SKAudioNode(fileNamed: "COK_BGM_01")
     
+    // MARK: Dict init
+    var startY: CGFloat = 0.0
+    var lastY: CGFloat = 0.0
+    var moveableArea = SKNode()
+    var dictTitle: SKNode?
+    var dictText: SKNode?
+    let dict = SKNode()
+    
     override func didMove(to view: SKView) {
         self.camera = cam
         
@@ -91,6 +99,11 @@ extension GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
+            
+            if location.x < 80 && location.x > -300 {
+                startY = location.y
+                lastY = location.y
+            }
             
             if (node.name == "leftButton") { leftBtnIsPressed = true }
             else if (node.name == "rightButton") { rightBtnIsPressed = true}
@@ -144,6 +157,11 @@ extension GameUIController {
                 }
             }
             
+            if node.name == "dictCloseButton" {
+                guard let closeButton = node as? SKSpriteNode else { return }
+                closeButton.texture = SKTexture(imageNamed: "red_book_close_pressed")
+            }
+            
             // Touch Dialogue
             if (dialogue.dialogueVisibility || dialogue.newWord != "") {
                 dialogue.touchesBegan(touches, with: event);
@@ -171,6 +189,25 @@ extension GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
+            
+            print(node.name)
+            
+            for i in 1...13 {
+                if node.name == String(i) {
+                    removeDictContent()
+                    parseDictContent(dictNo: i)
+                }
+            }
+            
+            if node.name == "dictCloseButton" {
+                guard let closeButton = node as? SKSpriteNode else { return }
+                
+                closeButton.texture = SKTexture(imageNamed: "red_book_close")
+                
+                hideControl(state: false)
+                dict.removeFromParent()
+                moveableArea.removeFromParent()
+            }
             
             if node.name == "leftButton" {
                 leftBtnIsPressed = false
@@ -219,6 +256,8 @@ extension GameUIController {
                 if let nodeName = node.name {
                     changeAssetsColor(parent: menu, nodeName: nodeName)
                 }
+                
+                setupDictionary()
             }
             
             if node.name == "menuMusicButton" {
