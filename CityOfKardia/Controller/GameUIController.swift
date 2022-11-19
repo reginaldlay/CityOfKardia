@@ -176,7 +176,6 @@ extension GameUIController {
         
         for touch in touches {
             let location = touch.location(in: self.camera!)
-            let node = self.atPoint(location)
             
             if location.x <= 0 {
                 leftBtnIsPressed = false
@@ -189,9 +188,7 @@ extension GameUIController {
         for touch in touches {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            
-            print(node.name)
-            
+                    
             for i in 1...13 {
                 if node.name == String(i) {
                     removeDictContent()
