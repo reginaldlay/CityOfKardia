@@ -17,8 +17,10 @@ class GateSerambiKananController: GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        
         CoreDataManager.shared.erryMission = 1
+        
+        dialogue.setupNewDictionary(newItem: ["sel_darah_merah"])
+        CoreDataManager.shared.erryDictionary = 1
         
         guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
         else {
@@ -55,6 +57,10 @@ extension GateSerambiKananController {
                     changeOngoingMission(text: .gateSK_2)
                     if (validGatekeeper01 == false) {
                         CoreDataManager.shared.erryMission = 2
+                        
+                        dialogue.showPopupNewDictionary(newWords: ["serambi_kanan", "gate_serambi_kanan"])
+                        CoreDataManager.shared.erryDictionary = 3
+                        
                         validGatekeeper01 = true
                     }
                     

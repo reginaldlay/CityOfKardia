@@ -27,6 +27,9 @@ class BilikKananController: GameUIController {
         
         CoreDataManager.shared.erryMission = 3
         
+        dialogue.setupNewDictionary(newItem: ["bilik_kanan"])
+        CoreDataManager.shared.erryDictionary = 4
+        
         guard let unwrapLeona = childNode(withName: "leona") as? SKSpriteNode,
               let unwrapSenior = childNode(withName: "senior") as? SKSpriteNode,
               let unwrapGatekeeper = childNode(withName: "gatekeeper02") as? SKSpriteNode,
@@ -71,8 +74,11 @@ extension BilikKananController {
                         showDialogue(assets: int_gate01)
                         boundLeona?.removeFromParent()
                         if (validLeona == false) {
-                            dialogue.showPopupNewDictionary(newWords: ["sel_darah_putih"])
                             CoreDataManager.shared.erryMission = 4
+                            
+                            dialogue.showPopupNewDictionary(newWords: ["sel_darah_putih"])
+                            CoreDataManager.shared.erryDictionary = 5
+                            
                             validLeona = true
                         }
                         
@@ -82,6 +88,10 @@ extension BilikKananController {
                         changeOngoingMission(text: .bk_guild)
                         if (validSenior == false) {
                             CoreDataManager.shared.erryMission = 5
+                            
+                            dialogue.showPopupNewDictionary(newWords: ["jantung", "peredaran_darah_kecil", "peredaran_darah_besar"])
+                            CoreDataManager.shared.erryDictionary = 8
+                            
                             validSenior = true
                         }
                         

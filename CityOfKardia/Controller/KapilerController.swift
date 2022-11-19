@@ -14,6 +14,9 @@ class KapilerController : GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        dialogue.setupNewDictionary(newItem: ["kapiler"])
+        CoreDataManager.shared.erryDictionary = 11
+        
         setupEnv()
         setupWall()
         setupObs()
