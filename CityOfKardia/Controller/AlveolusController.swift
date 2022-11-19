@@ -48,9 +48,12 @@ extension AlveolusController {
                 switch (npcIncontact) {
                     
                 case ("machine"):
-                    self.camera?.addChild(puzzle)
-                    puzzle.setupPuzzle()
-                    hideControl(state: true)
+                    if (CoreDataManager.shared.erryMission == 12) {
+                        self.camera?.addChild(puzzle)
+                        puzzle.setupPuzzle()
+                        hideControl(state: true)
+                    }
+                    
                     
                 case ("teller"):
                     showDialogue(assets: int_alveolus)
@@ -99,6 +102,12 @@ extension AlveolusController {
             let node = self.atPoint(location)
             
             if node.name == "exitButton" {
+                if (puzzle.winFlag) {
+                    changeOngoingMission(text: .alveolus_3)
+                    CoreDataManager.shared.erryMission = 13
+                }
+                
+//                puzzle.removeAllChildren()
                 puzzle.removeFromParent()
                 hideControl(state: false)
             }
@@ -136,6 +145,16 @@ extension AlveolusController {
             npcIncontact = "machine"
         case ("machine", "player"):
             npcIncontact = "machine"
+            
+        case ("player", "bound02"):
+            if (CoreDataManager.shared.erryMission == 13) {
+                moveScene(sceneName: "EndingScene")
+            }
+            
+        case ("bound02", "player"):
+            if (CoreDataManager.shared.erryMission == 13) {
+                moveScene(sceneName: "EndingScene")
+            }
             
         default: break
         }
