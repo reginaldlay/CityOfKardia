@@ -19,6 +19,9 @@ class GateParuParuController: GameUIController {
         
         CoreDataManager.shared.erryMission = 9
         
+        dialogue.setupNewDictionary(newItem: ["paru_paru"])
+        CoreDataManager.shared.erryDictionary = 12
+        
         guard let unwrapBoundKanan = childNode(withName: "bound_kanan") as? SKSpriteNode
         else {
             return
@@ -53,6 +56,10 @@ extension GateParuParuController {
                     changeOngoingMission(text: .gateP_2)
                     if (validGatekeeper04 == false) {
                         CoreDataManager.shared.erryMission = 10
+                        
+                        dialogue.showPopupNewDictionary(newWords: ["alveolus"])
+                        CoreDataManager.shared.erryDictionary = 13
+                        
                         validGatekeeper04 = true
                     }
                     

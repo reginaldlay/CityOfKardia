@@ -16,6 +16,9 @@ class PreArteriPulmonalisController: GameUIController {
         
         CoreDataManager.shared.erryMission = 7
         
+        dialogue.setupNewDictionary(newItem: ["arteri_pulmonalis"])
+        CoreDataManager.shared.erryDictionary = 9
+        
         changeOngoingMission(text: .pre_ap)
         
         // Add nama map
@@ -36,8 +39,11 @@ class PreArteriPulmonalisController: GameUIController {
                     case "gatekeeper03":
                         showDialogue(assets: ext_pre_pulmonalis)
                         if (validGatekeeper03 == false) {
-                            dialogue.showPopupNewDictionary(newWords: ["penggumpalan_darah"])
                             CoreDataManager.shared.erryMission = 8
+                            
+                            dialogue.showPopupNewDictionary(newWords: ["penggumpalan_darah"])
+                            CoreDataManager.shared.erryDictionary = 10
+                            
                             validGatekeeper03 = true
                         }
                         
