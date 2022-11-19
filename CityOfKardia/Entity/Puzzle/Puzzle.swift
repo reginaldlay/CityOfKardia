@@ -51,8 +51,6 @@ class Puzzle : SKNode {
             
             self.randomRotation(node: node)
             
-            print(node.zRotation)
-            
         }
     }
     
@@ -62,8 +60,6 @@ class Puzzle : SKNode {
         for i in 0..<arrOfCable.count {
             sumOfAngle += arrOfCable[i]
         }
-        
-        print(sumOfAngle)
         
         if sumOfAngle == 0 {
             return true
@@ -94,10 +90,7 @@ class Puzzle : SKNode {
         } else {
             arrOfCable[num] += 1
         }
-        
-        print(num)
-        print(arrOfCable[num])
-        
+
         node.run(rotateAction)
     }
 }

@@ -11,6 +11,7 @@ class AlveolusController : GameUIController {
     
     var boundKanan: SKNode?
     var puzzle = Puzzle()
+    var winState = false
     
     var validTeller = false
     
@@ -23,6 +24,10 @@ class AlveolusController : GameUIController {
             boundKanan = unwrapBoundKanan
         }
         
+        if let unwrapLeftWall = childNode(withName: "leftWall") {
+            unwrapLeftWall.zPosition = -1
+        }
+        
         player?.playerStartingJumpImpulse = CGFloat(200)
         
         changeOngoingMission(text: .alveolus_1)
@@ -31,6 +36,11 @@ class AlveolusController : GameUIController {
         addCameraChildNode(imageName: "lokasi_alveolus", name: "lokasi", widthSize: 200, heightSize: 92, xPos: 0, yPos: -(self.size.height/2) + (92/2))
         
         CoreDataManager.shared.checkpoint(locationName: "Alveolus")
+        
+        self.camera?.addChild(puzzle)
+        puzzle.setupPuzzle()
+        
+        puzzle.isHidden = true
     }
     
 }
@@ -48,9 +58,11 @@ extension AlveolusController {
                 switch (npcIncontact) {
                     
                 case ("machine"):
-                    self.camera?.addChild(puzzle)
-                    puzzle.setupPuzzle()
-                    hideControl(state: true)
+                    if (CoreDataManager.shared.erryMission == 12) {
+                        puzzle.isHidden = false
+                        hideControl(state: true)
+                    }
+                    
                     
                 case ("teller"):
                     showDialogue(assets: int_alveolus)
@@ -68,7 +80,8 @@ extension AlveolusController {
 
             }
             
-            if !puzzle.winFlag {
+            if !winState {
+                
                 switch node.name {
                 case "cable0": puzzle.rotateByHalfPi(node: node)
                 case "cable1": puzzle.rotateByHalfPi(node: node)
@@ -86,6 +99,8 @@ extension AlveolusController {
                 case "cable13": puzzle.rotateByHalfPi(node: node)
                     default: break
                 }
+                
+                winState = puzzle.checkWinCondition()
             }
         }
         
@@ -99,16 +114,15 @@ extension AlveolusController {
             let node = self.atPoint(location)
             
             if node.name == "exitButton" {
-                puzzle.removeFromParent()
+                
+                if winState {
+                    changeOngoingMission(text: .alveolus_3)
+                    CoreDataManager.shared.erryMission = 13
+                }
+                
+                puzzle.isHidden = true
                 hideControl(state: false)
             }
-        }
-        
-        for touch in touches {
-            let location = touch.location(in: self.puzzle)
-            let node = self.atPoint(location)
-            
-            puzzle.winFlag = puzzle.checkWinCondition()
         }
 
     }
@@ -136,6 +150,16 @@ extension AlveolusController {
             npcIncontact = "machine"
         case ("machine", "player"):
             npcIncontact = "machine"
+            
+        case ("player", "bound02"):
+            if (CoreDataManager.shared.erryMission == 13) {
+                moveScene(sceneName: "EndingScene")
+            }
+            
+        case ("bound02", "player"):
+            if (CoreDataManager.shared.erryMission == 13) {
+                moveScene(sceneName: "EndingScene")
+            }
             
         default: break
         }
