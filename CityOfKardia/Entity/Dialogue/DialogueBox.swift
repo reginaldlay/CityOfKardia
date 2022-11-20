@@ -45,7 +45,7 @@ class DialogueBox: SKNode {
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 0, yPos: -118.14, zPos: 3, width: 796, height: 135, name: "box")
-        createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
+        createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 85, height: 85, name: "image")
         createSprite(texture: "", xPos: -336.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         

@@ -171,6 +171,8 @@ extension BilikKananController {
         if let player = player {
             if(player.position.x > 0 && player.position.x < bound02!.position.x - 420 ) {
                 self.camera?.position = CGPoint(x: player.position.x, y: 0)
+            }  else if (player.position.x > bound02!.position.x - 420){
+                self.camera?.position = CGPoint(x: bound02!.position.x - 420, y: 0)
             }
         }
         
