@@ -14,7 +14,6 @@ class IntroController: SKScene {
     override func didMove(to view: SKView) {
         if let urlStr = Bundle.main.path(forResource: "IntroVideo", ofType: "mp4") {
             let url = NSURL(fileURLWithPath: urlStr)
-            print(url)
             let videoPlayer = AVPlayer(url: url as URL)
             
             let introVideo = SKVideoNode(avPlayer: videoPlayer)

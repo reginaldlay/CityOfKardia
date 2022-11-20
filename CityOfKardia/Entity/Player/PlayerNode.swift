@@ -17,7 +17,7 @@ class PlayerNode : SKSpriteNode {
     var playerStartingJumpImpulse = CGFloat(240)
     
     // MARK: Player texture
-    let WalkingTexture : Array<SKTexture> = (1...12).map({return "Erry_Run_\($0)"}).map(SKTexture.init)
+    let WalkingTexture : Array<SKTexture> = (1...10).map({return "Erry_Run_\($0)"}).map(SKTexture.init)
     let idleTexture : Array<SKTexture> = (1...4).map({return "Erry_Idle_\($0)"}).map(SKTexture.init)
     var flipTexture : SKAction?
     

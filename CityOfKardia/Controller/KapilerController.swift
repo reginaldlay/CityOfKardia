@@ -106,9 +106,6 @@ extension KapilerController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-
-        print("body A begin: \(bodyA )")
-        print("body B begin: \(bodyB )")
         
         switch (bodyA, bodyB) {
             case ("player", "clot"): terjebak = 1
@@ -194,9 +191,7 @@ extension KapilerController {
                     background.texture = SKTexture(imageNamed: "terjebak_bg")
                     self.camera?.addChild(gameOverScene)
                     hideControl(state: true)
-                } else {
-                    print("gagal masuk clot")
-                }
+                } 
             }
         }
     }

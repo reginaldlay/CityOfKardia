@@ -45,7 +45,7 @@ class DialogueBox: SKNode {
     
     public func createDialogueNode () {
         createSprite(texture: "dialogue-box", xPos: 0, yPos: -118.14, zPos: 3, width: 796, height: 135, name: "box")
-        createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 90, height: 83, name: "image")
+        createSprite(texture: "", xPos: -335.5, yPos: -106.3, zPos: 12, width: 85, height: 85, name: "image")
         createSprite(texture: "", xPos: -336.025, yPos: -149.5, zPos: 13, width: 90, height: 23, name: "name_box")
         createSprite(texture: "dialogue-arrow", xPos: 342, yPos: -149.144, zPos: 13, width: 28, height: 20, name: "arrow")
         
@@ -124,7 +124,7 @@ class DialogueBox: SKNode {
         refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
         self.addChild(typingSFX)
-        typingSFX.run(.changeVolume(to: 0.3, duration: 0))
+//        typingSFX.run(.changeVolume(to: 0.5, duration: 0))
         
         typeLetter()
         
@@ -180,7 +180,6 @@ class DialogueBox: SKNode {
                     
                     //Pop up new dictionary
                     if (newWords != []) {
-                        print("new Word \(newWords)")
                         setupNewDictionary(newItem: newWords)
                     }
                     dialogueVisibility = false
@@ -254,8 +253,6 @@ extension DialogueBox {
             changeNewDictionaryData(data: newItem[0])
             newDictionary = unwrapNewDictionary
             
-        } else {
-            print("Error init new dictionary!")
         }
     }
     
@@ -271,7 +268,6 @@ extension DialogueBox {
         }
         if let label = refChildren?.childNode(withName: "newdict_label") as? SKLabelNode {
             label.text = getDictionaryItem(key: data)
-            print("label text \(getDictionaryItem(key: data))")
         }
         if let leftArrow = refChildren?.childNode(withName: "newdict_leftArrow") as? SKSpriteNode {
             if countCurrentWord > 1 {

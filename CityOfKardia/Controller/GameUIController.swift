@@ -83,7 +83,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         addChild(bgm)
         bgm.isPositional = false
-        bgm.run(.changeVolume(to: 0.1, duration: 0))
+        bgm.run(.changeVolume(to: 0.5, duration: 0))
         runBGM()
     }
     
@@ -171,7 +171,6 @@ extension GameUIController {
             
             // Touch Dialogue
             if (dialogue.dialogueVisibility || dialogue.newWords != []) {
-                print("masuk touch dialogue new words")
                 dialogue.touchesBegan(touches, with: event);
                 if (!dialogue.dialogueVisibility) {
                     hideControl(state: false)
@@ -293,24 +292,6 @@ extension GameUIController {
                 missionJournal?.removeFromParent()
                 hideControl(state: false)
             }
-            
-//            switch node.name {
-//            case "newdict_continue":
-//                dialogue.newDictionary?.removeFromParent()
-//                dialogue.newWords = []
-//            case "newdict_leftArrow":
-//                if (dialogue.countCurrentWord > 1) {
-//                    dialogue.countCurrentWord-=1
-//                    dialogue.changeNewDictionaryData(data: dialogue.newWords[dialogue.countCurrentWord-1])
-//                }
-//            case "newdict_rightArrow":
-//                if (dialogue.countCurrentWord < dialogue.newWords.count) {
-//                    dialogue.countCurrentWord+=1
-//                    dialogue.changeNewDictionaryData(data: dialogue.newWords[dialogue.countCurrentWord-1])
-//                }
-//            default:
-//                break
-//            }
         }
     }
 }
@@ -337,10 +318,28 @@ extension GameUIController {
             let bodyB = contact.bodyB.node?.name
         else { return }
         
+        var bound = ""
+
+        if bodyA.contains("bound") || bodyA.contains("platform_") || bodyA.contains("gate_") {
+            bound = bodyA
+        } else if bodyB.contains("bound") || bodyB.contains("platform_") || bodyB.contains("gate_") {
+            bound = bodyB
+        }
+
         switch (bodyA, bodyB) {
-        case ("player", "ground") : grounded = true
-        case ("ground", "player") : grounded = true
-        default : break
+            case ("player", "ground") : grounded = true
+            case ("ground", "player") : grounded = true
+
+            case ("player", bound) : return
+            case (bound, "player") : return
+            
+            case("player", "wall"): return
+            case("wall", "player"): return
+
+        default:
+            if let camera = self.camera {
+                changeAssetsColor(parent: camera, nodeName: "actionButton", imageName: "interactButton")
+            }
         }
 
     }
@@ -350,6 +349,10 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
+        
+        if let camera = self.camera {
+            changeAssetsColor(parent: camera, nodeName: "actionButton")
+        }
         
         switch (bodyA, bodyB) {
         case ("player", "ground") : grounded = false
@@ -629,9 +632,7 @@ extension GameUIController {
             hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
-        } else {
-            print("Error init mission journal!")
-        }
+        } 
     }
     
     func changeOngoingMission(text: Mission) {
