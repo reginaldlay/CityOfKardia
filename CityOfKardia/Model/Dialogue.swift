@@ -112,7 +112,7 @@ let int_gate01 = [
     Dialogue(image: leona.happy.value, label: "Aku Leona. Kebetulan, hari ini juga hari pertama aku bekerja.", name: nameBox.leona.value),
     Dialogue(image: leona.normal.value, label: "Namun, divisi sel darah putih bertugas untuk patroli dan melawan virus atau bakteri yang masuk ke dalam tubuh.", name: nameBox.leona.value),
     Dialogue(image: erry.happy.value, label: "Wah, halo Leona. Kalau begitu, saya melanjutkan perjalanan ya, sampai jumpa lagi. Senang berkenalan dengan kamu!", name: nameBox.erry.value),
-    Dialogue(image: leona.normal.value, label: "Iya, hati-hati selalu ya. Jika bertemu dengan virus dan bakteri, tolong segera beritahu aku atau sel darah putih yang lain, ya. Sampai jumpa di lain waktu!", name: nameBox.leona.value),
+    Dialogue(image: leona.normal.value, label: "Iya, hati-hati selalu ya. Jika bertemu dengan virus dan bakteri, tolong segera beritahu aku atau sel darah putih yang lain, ya.", name: nameBox.leona.value),
     Dialogue(image: leona.happy.value, label: "Sampai jumpa di lain waktu!", name: nameBox.leona.value)
 ]
 

@@ -66,8 +66,7 @@ extension GateSerambiKananController {
                         validGatekeeper01 = true
                     }
                     
-                default:
-                    print("EHHE")
+                default: break
                 }
             }
         }
@@ -89,9 +88,6 @@ extension GateSerambiKananController {
         else {
             return
         }
-        
-        print("Body A begin: \(bodyA)")
-        print("Body B begin: \(bodyB)")
         
         switch (bodyA, bodyB) {
         case ("player", "bound_kanan"):

@@ -7,20 +7,6 @@
 
 import Foundation
 
-//enum Dictionary: String {
-//    case penggumpalan_darah = "Penggumpalan Darah"
-//    case sel_darah_putih = "Sel Darah Putih"
-//
-//    init(key: String) {
-//        switch key {
-//        case :
-//            <#code#>
-//        default:
-//            <#code#>
-//        }
-//    }
-//
-//}
 
 public func getDictionaryItem(key: String) -> String {
     var value = ""
