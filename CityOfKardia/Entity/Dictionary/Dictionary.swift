@@ -10,7 +10,7 @@ import SpriteKit
 extension GameUIController {
     
     func setupDictionary() {
-        var xPos : CGFloat = -285
+        var xPos : CGFloat = -287.5
         var yPos : CGFloat = 70
         
         let upperFrame = SKSpriteNode(imageNamed: "dictFrameTop")
@@ -24,6 +24,7 @@ extension GameUIController {
         
         moveableArea.position = CGPointMake(0, 0)
         self.camera?.addChild(moveableArea)
+        moveableArea.name = "moveableArea"
         
         upperFrame.zPosition = 101
         lowerFrame.zPosition = 101
@@ -54,7 +55,7 @@ extension GameUIController {
                     setupLockedDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
                 }
                 
-                xPos = -285
+                xPos = -287.5
                 yPos -= 120
                 
             } else {
@@ -84,6 +85,7 @@ extension GameUIController {
         item.position = CGPoint(x: posX, y: posY)
         
         let itemFrame = SKSpriteNode(imageNamed: imageName)
+        itemFrame.size = CGSize(width: 80, height: 100)
         itemFrame.position = CGPoint(x: 0, y: 0)
         
         item.addChild(itemFrame)
@@ -104,6 +106,7 @@ extension GameUIController {
         item.position = CGPoint(x: posX, y: posY)
         
         let itemFrame = SKSpriteNode(imageNamed: imageName)
+        itemFrame.size = CGSize(width: 80, height: 100)
         itemFrame.position = CGPoint(x: 0, y: 0)
         
         item.addChild(itemFrame)
@@ -117,9 +120,12 @@ extension GameUIController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         for touch in touches {
-            let location = touch.location(in: self)
             
-            if location.x < 80 && location.x > -300 {
+            guard let scrollLocation = self.camera else { return }
+            
+            let location = touch.location(in: scrollLocation)
+                        
+            if location.x < -40 && location.x > -330 {
                 
                 // set the new location of touch
                 let currentY = location.y
@@ -147,6 +153,7 @@ extension GameUIController {
 
                 // Set new last location for next time
                 lastY = currentY
+                
             }
 
         }
