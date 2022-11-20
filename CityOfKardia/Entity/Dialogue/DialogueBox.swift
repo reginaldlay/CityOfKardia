@@ -124,7 +124,7 @@ class DialogueBox: SKNode {
         refSprite(name: "name_box").texture = SKTexture(imageNamed: dialogue_assets[count].name ?? "")
         
         self.addChild(typingSFX)
-        typingSFX.run(.changeVolume(to: 0.3, duration: 0))
+//        typingSFX.run(.changeVolume(to: 0.5, duration: 0))
         
         typeLetter()
         

@@ -83,7 +83,7 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         addChild(bgm)
         bgm.isPositional = false
-        bgm.run(.changeVolume(to: 0.1, duration: 0))
+        bgm.run(.changeVolume(to: 0.5, duration: 0))
         runBGM()
     }
     
@@ -319,9 +319,9 @@ extension GameUIController {
         
         var bound = ""
 
-        if bodyA.contains("bound") || bodyA.contains("platform_") {
+        if bodyA.contains("bound") || bodyA.contains("platform_") || bodyA.contains("gate_") {
             bound = bodyA
-        } else if bodyB.contains("bound") || bodyB.contains("platform_") {
+        } else if bodyB.contains("bound") || bodyB.contains("platform_") || bodyB.contains("gate_") {
             bound = bodyB
         }
 
