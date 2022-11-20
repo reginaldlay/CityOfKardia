@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "teller.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "teller.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -331,6 +331,7 @@ extension GameUIController {
 // MARK: Fungsi saat terjadi kontak antara dua node
 extension GameUIController {
     func didBegin(_ contact: SKPhysicsContact) {
+        
         guard
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
@@ -341,6 +342,7 @@ extension GameUIController {
         case ("ground", "player") : grounded = true
         default : break
         }
+
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
