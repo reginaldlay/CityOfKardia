@@ -140,6 +140,7 @@ extension KapilerController {
             let node = self.atPoint(location)
             if (node.name == "gameover_quit") {
                 terjebak = 0
+                moveScene(sceneName: "GameScene")
             } else if (node.name == "gameover_tryagain") {
                 if let child = self.camera?.childNode(withName: "gameOver") {
                     child.removeFromParent()
