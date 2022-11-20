@@ -11,6 +11,9 @@ import GameplayKit
 
 class KapilerController : GameUIController {
     
+    var playerInitPos = CGPoint(x: -350, y: -58) //apabila player jatuh -> ulang ke posisi awal
+    var terjebak = 0
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
@@ -108,8 +111,11 @@ extension KapilerController {
         print("body B begin: \(bodyB )")
         
         switch (bodyA, bodyB) {
-            case ("player", "clot") : resetScene()
-            case ("clot", "player") : resetScene()
+            case ("player", "clot"): terjebak = 1
+            case ("clot", "player"): terjebak = 1
+            
+            case ("player", "bound02"): moveScene(sceneName: "GateParuParuScene")
+            case ("bound02", "player"): moveScene(sceneName: "GateParuParuScene")
             default : break
         }
     }
@@ -129,9 +135,68 @@ extension KapilerController {
 }
 
 extension KapilerController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            if (node.name == "gameover_quit") {
+                terjebak = 0
+            } else if (node.name == "gameover_tryagain") {
+                if let child = self.camera?.childNode(withName: "gameOver") {
+                    child.removeFromParent()
+                    terjebak = 0
+                }
+                
+                if let cam = self.camera {
+                    cam.position = CGPoint(x: 0, y: 0)
+                }
+                
+                hideControl(state: false)
+            }
+        }
+
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+    }
+}
+
+extension KapilerController {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
         playerYPos = player?.position.y ?? 0
+        
+        guard let bound02 = childNode(withName: "bound02") else { return }
+        
+        if let player = player {
+            if(player.position.x > 0 && player.position.x < bound02.position.x - 475 ) {
+                self.camera?.position = CGPoint(x: player.position.x, y: playerYPos)
+            } else {
+                self.camera?.position.y = playerYPos
+            }
+        }
+        
+        if (terjebak == 1) {
+            
+            guard let unwrapPlayer = player else { return }
+            
+            unwrapPlayer.position = playerInitPos
+            if let gameOverScene = SKReferenceNode(fileNamed: "GameOver") {
+                terjebak = 2
+                gameOverScene.name = "gameOver"
+                let children = gameOverScene.children.first
+                if let background = children?.childNode(withName: "gameover_bg") as? SKSpriteNode {
+                    background.texture = SKTexture(imageNamed: "terjebak_bg")
+                    self.camera?.addChild(gameOverScene)
+                    hideControl(state: true)
+                } else {
+                    print("gagal masuk clot")
+                }
+            }
+        }
     }
 }

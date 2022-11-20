@@ -17,6 +17,8 @@ class GateSerambiKananController: GameUIController {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        userDefault.set(true, forKey: "music")
+        
         CoreDataManager.shared.erryMission = 1
         
         dialogue.setupNewDictionary(newItem: ["sel_darah_merah"])

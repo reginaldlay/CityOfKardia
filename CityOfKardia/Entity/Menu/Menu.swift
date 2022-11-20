@@ -15,7 +15,7 @@ class Menu : SKNode {
     let menuKamusButton = SKSpriteNode(imageNamed: "red_menuKamusButton")
     let menuMusicButton = SKSpriteNode(imageNamed: "red_menuMusicOnButton")
     let menuFrame = SKSpriteNode(imageNamed: "red_menuFrame")
-    
+        
     // MARK: Inisialisasi menu sebagai empty node
     override init() {
         super.init()
@@ -34,6 +34,7 @@ class Menu : SKNode {
         addMenuItem(node: menuKamusButton, nodeName: "menuKamusButton", pos: CGPoint(x: 0, y: 0), zPos: 201)
         addMenuItem(node: menuKeluarButton, nodeName: "menuKeluarButton", pos: CGPoint(x: 0, y: -64), zPos: 201)
         addMenuItem(node: menuMusicButton, nodeName: "menuMusicButton", pos: CGPoint(x: 0, y: 64), zPos: 201)
+        
     }
     
     // MARK: Fungsi untuk membuat node

@@ -17,7 +17,6 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     let cam = SKCameraNode()
     var playerYPos: CGFloat = 0 //Untuk camera supaya tidak ngikutin saat loncat
     var menu = Menu()
-    var musicIsOn = true
     
     // MARK: Flag untuk player
     var inContact = false // True saat playerNode melakukan contact dengan node lain
@@ -52,6 +51,8 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
     var dictText: SKNode?
     let dict = SKNode()
     
+    let userDefault = UserDefaults.standard
+    
     override func didMove(to view: SKView) {
         self.camera = cam
         
@@ -82,8 +83,8 @@ class GameUIController: SKScene, SKPhysicsContactDelegate {
         
         addChild(bgm)
         bgm.isPositional = false
-        bgm.run(.play())
         bgm.run(.changeVolume(to: 0.1, duration: 0))
+        runBGM()
     }
     
     public func distance(first: CGPoint, second: CGPoint) -> CGFloat {
@@ -97,13 +98,19 @@ extension GameUIController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in touches {
-            let location = touch.location(in: self)
-            let node = self.atPoint(location)
-            
-            if location.x < 80 && location.x > -300 {
+            guard let scrollLocation = self.camera else { return }
+
+            let location = touch.location(in: scrollLocation)
+
+            if location.x > -40 && location.x < -330 {
                 startY = location.y
                 lastY = location.y
             }
+        }
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
             
             if (node.name == "leftButton") { leftBtnIsPressed = true }
             else if (node.name == "rightButton") { rightBtnIsPressed = true}
@@ -150,7 +157,7 @@ extension GameUIController {
             
             if node.name == "menuMusicButton" {
 //                menu.didPressMusicButton(musicIsOn: musicIsOn)
-                if musicIsOn {
+                if userDefault.bool(forKey: "music") {
                     changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButtonClicked")
                 } else {
                     changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButtonClicked")
@@ -230,7 +237,12 @@ extension GameUIController {
                 changeAssetsColor(parent: menu, nodeName: "menuExitButton", imageName: "book_close")
                 changeAssetsColor(parent: menu, nodeName: "menuKamusButton")
                 changeAssetsColor(parent: menu, nodeName: "menuKeluarButton")
-                changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
+                
+                if userDefault.bool(forKey: "music") {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
+                } else {
+                    changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
+                }
                 
                 self.hideControl(state: true)
             }
@@ -266,14 +278,14 @@ extension GameUIController {
             }
             
             if node.name == "menuMusicButton" {
-                if musicIsOn {
+                if userDefault.bool(forKey: "music") {
                     changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
                     bgm.run(.stop())
-                    musicIsOn = false
+                    userDefault.set(false, forKey: "music")
                 } else {
                     changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
                     bgm.run(.play())
-                    musicIsOn = true
+                    userDefault.set(true, forKey: "music")
                 }
             }
             
@@ -306,7 +318,13 @@ extension GameUIController {
 // MARK: Fungsi untuk menjalankan BGM
 extension GameUIController {
     func runBGM() {
-        
+        if userDefault.bool(forKey: "music") {
+            bgm.run(.play())
+            changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOnButton")
+        } else {
+            bgm.run(.stop())
+            changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
+        }
     }
 }
 
@@ -538,13 +556,7 @@ extension GameUIController {
 // MARK: Fungsi update
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
-        
-        if let player = player {
-            if(player.position.x > 0 ) {
-                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
-            }
-        }
-        
+                
         if grounded {
             if actionBtnIsPressed {
                 playerState?.enter(IsJumpingState.self)
