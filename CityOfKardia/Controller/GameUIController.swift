@@ -260,6 +260,11 @@ extension GameUIController {
                 setupDictionary()
             }
             
+            if node.name == "newdict_buka" {
+                setupDictionary()
+                dialogue.newDictionary?.removeFromParent()
+            }
+            
             if node.name == "menuMusicButton" {
                 if musicIsOn {
                     changeAssetsColor(parent: menu, nodeName: "menuMusicButton", imageName: "menuMusicOffButton")
@@ -534,11 +539,11 @@ extension GameUIController {
 extension GameUIController {
     override func update(_ currentTime: TimeInterval) {
         
-        //        if let player = player {
-        //            if(player.position.x > 0 ) {
-        //                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
-        //            }
-        //        }
+        if let player = player {
+            if(player.position.x > 0 ) {
+                self.camera?.position = CGPoint(x: player.position.x , y: playerYPos)
+            }
+        }
         
         if grounded {
             if actionBtnIsPressed {

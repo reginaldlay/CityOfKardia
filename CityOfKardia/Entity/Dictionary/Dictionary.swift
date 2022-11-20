@@ -10,7 +10,7 @@ import SpriteKit
 extension GameUIController {
     
     func setupDictionary() {
-        var xPos : CGFloat = -290
+        var xPos : CGFloat = -285
         var yPos : CGFloat = 70
         
         let upperFrame = SKSpriteNode(imageNamed: "dictFrameTop")
@@ -48,14 +48,22 @@ extension GameUIController {
             
             if (i % 3 == 0) {
                 
-                setupDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                if i <= CoreDataManager.shared.erryDictionary {
+                    setupDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                } else if i > CoreDataManager.shared.erryDictionary && i != 1 {
+                    setupLockedDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                }
                 
-                xPos = -290
+                xPos = -285
                 yPos -= 120
                 
             } else {
                 
-                setupDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                if i <= CoreDataManager.shared.erryDictionary {
+                    setupDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                } else if i > CoreDataManager.shared.erryDictionary && i != 1 {
+                    setupLockedDictionaryItem(posX: xPos, posY: yPos, imageNo: i)
+                }
                 
                 xPos += 100
                 
@@ -70,26 +78,37 @@ extension GameUIController {
     
     func setupDictionaryItem(posX: CGFloat, posY: CGFloat, imageNo: Int) {
         
-        let imageName = parseDictImage(dictNo: imageNo)
+        let imageName = "item\(imageNo)"
         
         let item = SKNode()
         item.position = CGPoint(x: posX, y: posY)
         
-        let itemFrame = SKSpriteNode(color: .white, size: CGSize(width: 80, height: 100))
+        let itemFrame = SKSpriteNode(imageNamed: imageName)
         itemFrame.position = CGPoint(x: 0, y: 0)
         
-        let itemImage = SKSpriteNode(imageNamed: imageName)
-        itemImage.size = CGSize(width: 70, height: 70)
-        itemImage.position = CGPoint(x: 0, y: 10)
-        
         item.addChild(itemFrame)
-        item.addChild(itemImage)
         item.name = String(imageNo)
         itemFrame.name = String(imageNo)
-        itemImage.name = String(imageNo)
         
         itemFrame.zPosition = 100
-        itemImage.zPosition = 100
+        
+        moveableArea.addChild(item)
+        
+    }
+    
+    func setupLockedDictionaryItem(posX: CGFloat, posY: CGFloat, imageNo: Int) {
+        
+        let imageName = "locked\(imageNo)"
+        
+        let item = SKNode()
+        item.position = CGPoint(x: posX, y: posY)
+        
+        let itemFrame = SKSpriteNode(imageNamed: imageName)
+        itemFrame.position = CGPoint(x: 0, y: 0)
+        
+        item.addChild(itemFrame)
+        
+        itemFrame.zPosition = 100
         
         moveableArea.addChild(item)
         
