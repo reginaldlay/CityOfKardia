@@ -14,9 +14,6 @@ class ArteriPulmonalisController: GameUIController {
     var gameOverScene: SKReferenceNode?
     var bound02: SKSpriteNode?
     var terjebak = 0
-    var currentPlatform = ""
-    
-    var platform01test: SKSpriteNode?
     
     enum Order: String {
         case right = "right", left = "left", up = "up", down = "down"
@@ -110,7 +107,6 @@ class ArteriPulmonalisController: GameUIController {
         
         enumerateChildNodes(withName: "platform*") { node, _ in
             if(bodyA == node.name || bodyB == node.name){
-                self.currentPlatform = node.name ?? ""
                 self.grounded = true
                 guard let platform = self.childNode(withName: node.name ?? "") else { return }
                 guard let platformSpeed = platform.physicsBody?.velocity.dx else { return }
@@ -144,7 +140,7 @@ class ArteriPulmonalisController: GameUIController {
         enumerateChildNodes(withName: "platform*") { node, _ in
             if(bodyA == node.name || bodyB == node.name){
                 self.grounded = false
-                self.currentPlatform = ""
+                self.player?.physicsBody?.velocity.dx = 0
             }
         }
         
@@ -171,10 +167,10 @@ class ArteriPulmonalisController: GameUIController {
                let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
                let platform12 = childNode(withName: "platform_12") as? SKSpriteNode
             {
-                animateHorizontal(platform: platform01, xMove: 70, duration: 0.6, direction: direction)
+                animateHorizontal(platform: platform01, xMove: 120, duration: 0.6, direction: direction)
                 animateHorizontal(platform: platform12, xMove: 140, duration: 0.6, direction: direction)
                 animateHorizontal(platform: platform02, xMove: 70, duration: 0.6, direction: -direction)
-                animateHorizontal(platform: platform03, xMove: 120, duration: 0.6, direction: direction)
+                animateHorizontal(platform: platform03, xMove: 70, duration: 0.6, direction: direction)
             }
             
             lastTime = currentTime
