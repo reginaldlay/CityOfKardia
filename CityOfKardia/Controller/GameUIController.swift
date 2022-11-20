@@ -608,9 +608,7 @@ extension GameUIController {
             hideControl(state: true)
             self.camera?.addChild(unwrapMissionJournal)
             missionJournal = unwrapMissionJournal
-        } else {
-            print("Error init mission journal!")
-        }
+        } 
     }
     
     func changeOngoingMission(text: Mission) {

@@ -180,7 +180,6 @@ class DialogueBox: SKNode {
                     
                     //Pop up new dictionary
                     if (newWords != []) {
-                        print("new Word \(newWords)")
                         setupNewDictionary(newItem: newWords)
                     }
                     dialogueVisibility = false
@@ -254,8 +253,6 @@ extension DialogueBox {
             changeNewDictionaryData(data: newItem[0])
             newDictionary = unwrapNewDictionary
             
-        } else {
-            print("Error init new dictionary!")
         }
     }
     
@@ -271,7 +268,6 @@ extension DialogueBox {
         }
         if let label = refChildren?.childNode(withName: "newdict_label") as? SKLabelNode {
             label.text = getDictionaryItem(key: data)
-            print("label text \(getDictionaryItem(key: data))")
         }
         if let leftArrow = refChildren?.childNode(withName: "newdict_leftArrow") as? SKSpriteNode {
             if countCurrentWord > 1 {

@@ -102,8 +102,7 @@ extension BilikKananController {
                             validGatekeeper02 = true
                         }
                         
-                    default:
-                        print("NPC not found")
+                    default: break
                     }
                 }
             }

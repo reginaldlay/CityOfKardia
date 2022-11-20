@@ -47,8 +47,7 @@ class PreArteriPulmonalisController: GameUIController {
                             validGatekeeper03 = true
                         }
                         
-                    default:
-                        print("NPC not found")
+                    default: break
                     }
                 }
             }

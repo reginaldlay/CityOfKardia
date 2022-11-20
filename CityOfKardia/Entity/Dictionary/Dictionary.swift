@@ -44,9 +44,7 @@ extension GameUIController {
         self.camera?.addChild(dict)
         
         for i in 1...13 {
-            
-            print(i)
-            
+                        
             if (i % 3 == 0) {
                 
                 if i <= CoreDataManager.shared.erryDictionary {

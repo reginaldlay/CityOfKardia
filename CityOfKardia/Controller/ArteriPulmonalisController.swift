@@ -29,7 +29,6 @@ class ArteriPulmonalisController: GameUIController {
         
         // Setup player's initial position
         playerInitPos = player?.position ?? CGPoint(x: 0, y: 0)
-        print(playerInitPos)
         xPosCamera = 680
         yPosCamera = 300
         camera?.run(SKAction.scale(to: 2.5, duration: 0))
@@ -162,13 +161,10 @@ class ArteriPulmonalisController: GameUIController {
         if let player = player {
             //diambil dari else if kedua dulu utk 952 nya, baru dimasukin ke kondisi atas2nya
             if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < bound02!.position.x - xPosCamera - 1045.739 ) {
-                //                print("masuk 1 \(lastGround!.position.x) - \(player.position.x)")
                 self.camera?.position = CGPoint(x: xPosCamera + player.position.x , y: yPosCamera)
             } else if (player.position.y > -(self.size.height/2) && player.position.x > bound02!.position.x - xPosCamera - 1045.739) {
-                //                print("masuk 2")
                 self.camera?.position = CGPoint(x: bound02!.position.x - 1045.739, y: yPosCamera)
             } else {
-                //                                print("masuk 3")
                 self.camera?.position = CGPoint(x: xPosCamera , y: yPosCamera)
             }
             
@@ -192,9 +188,7 @@ class ArteriPulmonalisController: GameUIController {
                         background.texture = SKTexture(imageNamed: "terjebak_bg")
                         self.camera?.addChild(gameOverScene)
                         hideControl(state: true)
-                    } else {
-                        print("gagal masuk clot")
-                    }
+                    } 
                 }
             }
             

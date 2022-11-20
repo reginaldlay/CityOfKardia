@@ -68,8 +68,7 @@ extension GateParuParuController {
                         moveScene(sceneName: "AlveolusScene")
                     }
                     
-                default:
-                    print("EHHE")
+                default: break
                 }
             }
         }
@@ -91,9 +90,6 @@ extension GateParuParuController {
         else {
             return
         }
-        
-        print("Body A begin: \(bodyA)")
-        print("Body B begin: \(bodyB)")
         
         switch (bodyA, bodyB) {
         case ("player", "gatekeeper04"):
