@@ -14,7 +14,6 @@ class ArteriPulmonalisController: GameUIController {
     var gameOverScene: SKReferenceNode?
     var bound02: SKSpriteNode?
     var terjebak = 0
-    var currentPlatform = ""
     
     enum Order: String {
         case right = "right", left = "left", up = "up", down = "down"
@@ -35,20 +34,11 @@ class ArteriPulmonalisController: GameUIController {
         camera?.run(SKAction.scale(to: 2.5, duration: 0))
         
         //Setup Nodes
-        if let platform01 = childNode(withName: "platform_1") as? SKSpriteNode,
-           let platform02 = childNode(withName: "platform_2") as? SKSpriteNode,
-           let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
-           let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
+        if let platform04 = childNode(withName: "platform_4") as? SKSpriteNode,
            let platform05 = childNode(withName: "platform_5") as? SKSpriteNode,
            let platform06 = childNode(withName: "platform_6") as? SKSpriteNode,
-           let platform12 = childNode(withName: "platform_12") as? SKSpriteNode,
            let unwrapBound02 = childNode(withName: "bound02") as? SKSpriteNode
         {
-            animateHorizontal(platform: platform01, order: Order.right.rawValue, xMove: 70, duration: 0.6)
-            animateHorizontal(platform: platform12, order: Order.right.rawValue, xMove: 140, duration: 0.7)
-            animateHorizontal(platform: platform02, order: Order.left.rawValue, xMove: 70, duration: 0.6)
-            animateHorizontal(platform: platform03, order: Order.right.rawValue, xMove: 120, duration: 0.7)
-            
             animateVertical(platform: platform04, order: Order.up.rawValue)
             animateVertical(platform: platform05, order: Order.down.rawValue)
             animateVertical(platform: platform06, order: Order.up.rawValue)
@@ -61,17 +51,13 @@ class ArteriPulmonalisController: GameUIController {
         CoreDataManager.shared.checkpoint(locationName: "ArteriPulmonalis")
     }
     
-    private func animateHorizontal (platform: SKSpriteNode, order: String, xMove: CGFloat, duration: TimeInterval) {
-        var sequence: SKAction
-        let right = SKAction.moveBy(x: xMove, y: 0, duration: duration)
-        let left =  SKAction.moveBy(x: -xMove, y: 0, duration: duration)
-        if order == "right" {
-            sequence = SKAction.sequence([right, left])
-        } else {
-            sequence = SKAction.sequence([left, right])
-        }
-        let repeated = SKAction.repeatForever(sequence)
-        platform.run(repeated)
+    private func animateHorizontal (platform: SKSpriteNode, xMove: CGFloat, duration: TimeInterval, direction: Double) {
+        let moveSpeed = xMove / duration
+        
+        platform.physicsBody?.isDynamic = true
+        platform.physicsBody?.mass = 1000000
+        
+        platform.physicsBody?.velocity.dx = moveSpeed * direction
     }
     
     private func animateVertical (platform: SKSpriteNode, order: String) {
@@ -121,12 +107,19 @@ class ArteriPulmonalisController: GameUIController {
         
         enumerateChildNodes(withName: "platform*") { node, _ in
             if(bodyA == node.name || bodyB == node.name){
-                self.currentPlatform = node.name ?? ""
                 self.grounded = true
+                guard let platform = self.childNode(withName: node.name ?? "") else { return }
+                guard let platformSpeed = platform.physicsBody?.velocity.dx else { return }
+                guard let playerSpeed = self.player?.physicsBody?.velocity.dx else { return }
+                
+                if playerSpeed < platformSpeed {
+                    self.player?.physicsBody?.velocity.dx = platformSpeed
+                }
             }
             
         }
         switch (bodyA, bodyB) {
+
         case ("player", "clot"): terjebak = 1
         case ("clot", "player"): terjebak = 1
             
@@ -147,7 +140,7 @@ class ArteriPulmonalisController: GameUIController {
         enumerateChildNodes(withName: "platform*") { node, _ in
             if(bodyA == node.name || bodyB == node.name){
                 self.grounded = false
-                self.currentPlatform = ""
+                self.player?.physicsBody?.velocity.dx = 0
             }
         }
         
@@ -158,13 +151,33 @@ class ArteriPulmonalisController: GameUIController {
         }
     }
     
+    var lastTime: TimeInterval?
+    var direction = 1.0
+    
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-        if let player = player {
+        
+        if currentTime - (lastTime ?? 0.0) >= 0.6 {
             
-//            if (currentPlatform != "") {
-//                player.position.x = childNode(withName: currentPlatform)?.position.x ?? 0
-//            }
+            direction *= -1.0
+            
+            //Setup Nodes
+            if let platform01 = childNode(withName: "platform_1") as? SKSpriteNode,
+               let platform02 = childNode(withName: "platform_2") as? SKSpriteNode,
+               let platform03 = childNode(withName: "platform_3") as? SKSpriteNode,
+               let platform12 = childNode(withName: "platform_12") as? SKSpriteNode
+            {
+                animateHorizontal(platform: platform01, xMove: 120, duration: 0.6, direction: direction)
+                animateHorizontal(platform: platform12, xMove: 140, duration: 0.6, direction: direction)
+                animateHorizontal(platform: platform02, xMove: 70, duration: 0.6, direction: -direction)
+                animateHorizontal(platform: platform03, xMove: 70, duration: 0.6, direction: direction)
+            }
+            
+            lastTime = currentTime
+            
+        }
+        
+        if let player = player {
             
             //diambil dari else if kedua dulu utk 952 nya, baru dimasukin ke kondisi atas2nya
             if (player.position.x > 0 && player.position.y > -(self.size.height/2) && player.position.x < bound02!.position.x - xPosCamera - 1045.739 ) {
