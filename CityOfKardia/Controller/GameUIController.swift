@@ -317,10 +317,28 @@ extension GameUIController {
             let bodyB = contact.bodyB.node?.name
         else { return }
         
+        var bound = ""
+
+        if bodyA.contains("bound") || bodyA.contains("platform_") {
+            bound = bodyA
+        } else if bodyB.contains("bound") || bodyB.contains("platform_") {
+            bound = bodyB
+        }
+
         switch (bodyA, bodyB) {
-        case ("player", "ground") : grounded = true
-        case ("ground", "player") : grounded = true
-        default : break
+            case ("player", "ground") : grounded = true
+            case ("ground", "player") : grounded = true
+
+            case ("player", bound) : return
+            case (bound, "player") : return
+            
+            case("player", "wall"): return
+            case("wall", "player"): return
+
+        default:
+            if let camera = self.camera {
+                changeAssetsColor(parent: camera, nodeName: "actionButton", imageName: "interactButton")
+            }
         }
     }
     
@@ -329,6 +347,10 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
+        
+        if let camera = self.camera {
+            changeAssetsColor(parent: camera, nodeName: "actionButton")
+        }
         
         switch (bodyA, bodyB) {
         case ("player", "ground") : grounded = false
