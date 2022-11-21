@@ -325,7 +325,7 @@ extension GameUIController {
         } else if bodyB.contains("bound") || bodyB.contains("platform_") || bodyB.contains("gate_") {
             bound = bodyB
         }
-
+    
         switch (bodyA, bodyB) {
             case ("player", "ground") : grounded = true
             case ("ground", "player") : grounded = true
@@ -341,6 +341,8 @@ extension GameUIController {
                 changeAssetsColor(parent: camera, nodeName: "actionButton", imageName: "interactButton")
             }
         }
+        print(grounded)
+
 
     }
     
@@ -359,6 +361,8 @@ extension GameUIController {
         case ("ground", "player") : grounded = false
         default : break
         }
+        print(grounded)
+
     }
 }
 
@@ -508,8 +512,9 @@ extension GameUIController {
         case ("teller"):
             if (CoreDataManager.shared.erryMission == 11) {
                 positioningBubble(hideState: !state, npc: npcName)
-            }
-            else {
+            } else if (CoreDataManager.shared.erryMission == 13) {
+                positioningBubble(hideState: !state, npc: npcName)
+            } else {
                 positioningBubble(hideState: state, npc: npcName)
             }
             

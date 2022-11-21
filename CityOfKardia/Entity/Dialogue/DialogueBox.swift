@@ -177,7 +177,7 @@ class DialogueBox: SKNode {
                     hideDialogue(state: true)
                     count = 1
                     dialogueBefore = dialogue_assets[count-1].label ?? "Empty string"
-                    
+        
                     //Pop up new dictionary
                     if (newWords != []) {
                         setupNewDictionary(newItem: newWords)

@@ -62,15 +62,25 @@ extension AlveolusController {
                         puzzle.isHidden = false
                         hideControl(state: true)
                     }
-                    
-                    
+
                 case ("teller"):
-                    showDialogue(assets: int_alveolus)
-                    changeOngoingMission(text: .alveolus_2)
+                    
+                    if (CoreDataManager.shared.erryMission == 13) {
+                        showDialogue(assets: int_alveolus_puzzle_solved)
+                        CoreDataManager.shared.erryMission = 14
+                        changeOngoingMission(text: .alveolus_3)
+
+                    } else {
+                        showDialogue(assets: int_alveolus)
+                        changeOngoingMission(text: .alveolus_2)
+                    }
+                    
                     if (validTeller == false) {
                         CoreDataManager.shared.erryMission = 12
                         validTeller = true
                     }
+                    
+                  
                     
                 default: break
                 }
@@ -116,7 +126,7 @@ extension AlveolusController {
             if node.name == "exitButton" {
                 
                 if winState {
-                    changeOngoingMission(text: .alveolus_3)
+                    changeOngoingMission(text: .alveolus_4)
                     CoreDataManager.shared.erryMission = 13
                 }
                 
@@ -152,12 +162,12 @@ extension AlveolusController {
             npcIncontact = "machine"
             
         case ("player", "bound02"):
-            if (CoreDataManager.shared.erryMission == 13) {
+            if (CoreDataManager.shared.erryMission == 14) {
                 moveScene(sceneName: "EndingScene")
             }
             
         case ("bound02", "player"):
-            if (CoreDataManager.shared.erryMission == 13) {
+            if (CoreDataManager.shared.erryMission == 14) {
                 moveScene(sceneName: "EndingScene")
             }
             
