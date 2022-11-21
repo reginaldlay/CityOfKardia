@@ -162,7 +162,9 @@ let ext_gate03 = [
 let int_alveolus = [
     Dialogue(image: erry.normal.value, label: "Permisi, Saya ditugaskan mengambil oksigen. Apakah benar disini?", name: nameBox.erry.value),
     Dialogue(image: teller.uncertain.value, label: "Iya, benar. Tapi mohon maaf, mesinnya sedang rusak sehingga proses pengambilan oksigen tidak bisa dilakukan sekarang.", name: nameBox.teller.value),
-    Dialogue(image: erry.shocked.value, label: "Apakah saya boleh mencoba untuk memperbaikinya?", name: nameBox.erry.value)
+    Dialogue(image: erry.shocked.value, label: "Apakah saya boleh mencoba untuk memperbaikinya?", name: nameBox.erry.value),
+    Dialogue(image: teller.happy.value, label: "Wah, terima kasih banyak!", name: nameBox.teller.value),
+    Dialogue(image: teller.normal.value, label: "Mesinnya ada di sebelah kiri, ya.", name: nameBox.teller.value),
 ]
 
 let int_alveolus_puzzle_solved = [

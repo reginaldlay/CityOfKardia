@@ -317,7 +317,7 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-        
+
         var bound = ""
 
         if bodyA.contains("bound") || bodyA.contains("platform_") || bodyA.contains("gate_") {
@@ -325,7 +325,7 @@ extension GameUIController {
         } else if bodyB.contains("bound") || bodyB.contains("platform_") || bodyB.contains("gate_") {
             bound = bodyB
         }
-
+    
         switch (bodyA, bodyB) {
             case ("player", "ground") : grounded = true
             case ("ground", "player") : grounded = true
@@ -341,7 +341,6 @@ extension GameUIController {
                 changeAssetsColor(parent: camera, nodeName: "actionButton", imageName: "interactButton")
             }
         }
-
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
@@ -349,6 +348,8 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
+        print("body A end \(bodyA)")
+        print("body B end \(bodyB)")
         
         if let camera = self.camera {
             changeAssetsColor(parent: camera, nodeName: "actionButton")
@@ -359,6 +360,7 @@ extension GameUIController {
         case ("ground", "player") : grounded = false
         default : break
         }
+        print("\(player?.position) - \(grounded)")
     }
 }
 
@@ -508,8 +510,9 @@ extension GameUIController {
         case ("teller"):
             if (CoreDataManager.shared.erryMission == 11) {
                 positioningBubble(hideState: !state, npc: npcName)
-            }
-            else {
+            } else if (CoreDataManager.shared.erryMission == 13) {
+                positioningBubble(hideState: !state, npc: npcName)
+            } else {
                 positioningBubble(hideState: state, npc: npcName)
             }
             

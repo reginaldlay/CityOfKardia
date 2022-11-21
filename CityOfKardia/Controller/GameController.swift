@@ -24,6 +24,7 @@ class GameController: SKScene {
         else {
             return
         }
+        unwrapPlayerNode.size = CGSize(width: 220, height: 300)
         
         playerNode = unwrapPlayerNode
         

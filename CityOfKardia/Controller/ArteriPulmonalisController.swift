@@ -119,7 +119,6 @@ class ArteriPulmonalisController: GameUIController {
             
         }
         switch (bodyA, bodyB) {
-
         case ("player", "clot"): terjebak = 1
         case ("clot", "player"): terjebak = 1
             
@@ -142,12 +141,6 @@ class ArteriPulmonalisController: GameUIController {
                 self.grounded = false
                 self.player?.physicsBody?.velocity.dx = 0
             }
-        }
-        
-        switch (bodyA, bodyB) {
-        case ("player", "ground") : grounded = false
-        case ("ground", "player") : grounded = false
-        default : break
         }
     }
     

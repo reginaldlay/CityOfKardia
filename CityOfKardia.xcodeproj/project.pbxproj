@@ -50,7 +50,6 @@
 		A2AA169129269D8A00C528A9 /* StarParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2AA169029269D8A00C528A9 /* StarParticles.sks */; };
 		A2BC1CE8292413E900823809 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE7292413E900823809 /* GameOver.sks */; };
 		A2BC1CEA292433D500823809 /* NewDictionary.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CE9292433D500823809 /* NewDictionary.sks */; };
-		A2BC1CEC29243BA300823809 /* NewDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */; };
 		A2BC1CEE2924E1DD00823809 /* PreArteriPulmonalisScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */; };
 		A2BC1CF02924E4DB00823809 /* PreArteriPulmonalisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */; };
 		A2E8CFBE29251BAA0092C4C9 /* DictionaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E8CFBD29251BAA0092C4C9 /* DictionaryData.swift */; };
@@ -106,7 +105,6 @@
 		A2AA169029269D8A00C528A9 /* StarParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticles.sks; sourceTree = "<group>"; };
 		A2BC1CE7292413E900823809 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		A2BC1CE9292433D500823809 /* NewDictionary.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewDictionary.sks; sourceTree = "<group>"; };
-		A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDictionaryController.swift; sourceTree = "<group>"; };
 		A2BC1CED2924E1DD00823809 /* PreArteriPulmonalisScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PreArteriPulmonalisScene.sks; sourceTree = "<group>"; };
 		A2BC1CEF2924E4DB00823809 /* PreArteriPulmonalisController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreArteriPulmonalisController.swift; sourceTree = "<group>"; };
 		A2E8CFBD29251BAA0092C4C9 /* DictionaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryData.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				3956B50B28FD01840070B52C /* GameController.swift */,
 				3956B50D28FD01840070B52C /* GameViewController.swift */,
 				6B48960429241E2C00902011 /* GameUIController.swift */,
-				A2BC1CEB29243BA300823809 /* NewDictionaryController.swift */,
 				A293D57429228E5B00E52253 /* MissionJournalController.swift */,
 			);
 			path = Controller;
@@ -426,7 +423,6 @@
 				39642A30290A91FB00A82C34 /* CoreDataManager.swift in Sources */,
 				3956B50628FD01840070B52C /* AppDelegate.swift in Sources */,
 				3965EEF82920F7E600AB1D39 /* GateParuParuController.swift in Sources */,
-				A2BC1CEC29243BA300823809 /* NewDictionaryController.swift in Sources */,
 				A2ED0A16290AC218009DA9FC /* Dialogue.swift in Sources */,
 				6B4895FD29241D8A00902011 /* PlayerNode.swift in Sources */,
 				6B48960129241DD100902011 /* KapilerController.swift in Sources */,
@@ -575,27 +571,32 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KMB6GC5NVA;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = FD4B7DH8HN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityOfKardia/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "City of Kardia";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = makroni.CityOfKardia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -605,27 +606,32 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KMB6GC5NVA;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = FD4B7DH8HN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityOfKardia/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "City of Kardia";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = makroni.CityOfKardia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
