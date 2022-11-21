@@ -317,7 +317,7 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-        
+
         var bound = ""
 
         if bodyA.contains("bound") || bodyA.contains("platform_") || bodyA.contains("gate_") {
@@ -341,9 +341,6 @@ extension GameUIController {
                 changeAssetsColor(parent: camera, nodeName: "actionButton", imageName: "interactButton")
             }
         }
-        print(grounded)
-
-
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
@@ -351,6 +348,8 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
+        print("body A end \(bodyA)")
+        print("body B end \(bodyB)")
         
         if let camera = self.camera {
             changeAssetsColor(parent: camera, nodeName: "actionButton")
@@ -361,8 +360,7 @@ extension GameUIController {
         case ("ground", "player") : grounded = false
         default : break
         }
-        print(grounded)
-
+        print("\(player?.position) - \(grounded)")
     }
 }
 
