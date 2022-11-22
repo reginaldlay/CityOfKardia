@@ -14,7 +14,7 @@ class Puzzle : SKNode {
     
     func setupPuzzle() {
         addPuzzleItem(node: "puzzleFrame", nodeName: "puzzleFrame", pos: CGPoint(x: 0, y: 0), zPos: 10)
-        addPuzzleItem(node: "purpleExitButton", nodeName: "exitButton", pos: CGPoint(x: 390, y: 159), zPos: 13)
+        addPuzzleItem(node: "purple_book_close", nodeName: "exitButton", pos: CGPoint(x: 390, y: 159), zPos: 13)
         addPuzzleItem(node: "cable01", nodeName: "startCable", pos: CGPoint(x: -30, y: 0), zPos: 11)
         addPuzzleItem(node: "cable02", nodeName: "endCable", pos: CGPoint(x: 270, y: 0), zPos: 11)
         addPuzzleItem(node: "cable07", nodeName: "cable0", pos: CGPoint(x: -30, y: 60), zPos: 11)
@@ -31,6 +31,7 @@ class Puzzle : SKNode {
         addPuzzleItem(node: "cable08", nodeName: "cable11", pos: CGPoint(x: 150, y: -60), zPos: 11)
         addPuzzleItem(node: "cable04", nodeName: "cable12", pos: CGPoint(x: 210, y: -60), zPos: 11)
         addPuzzleItem(node: "cable05", nodeName: "cable13", pos: CGPoint(x: 270, y: -60), zPos: 11)
+        addOverlay()
         
         countCable()
     }
@@ -71,7 +72,7 @@ class Puzzle : SKNode {
             
             let node2 = SKSpriteNode(imageNamed: "puzzleContinueButton")
             node2.name = "pContinueButton"
-            node2.position = CGPoint(x: 0, y: -100)
+            node2.position = CGPoint(x: 0, y: -30)
             node2.zPosition = 13
             node2.size = CGSize(width: 134, height: 40)
             self.addChild(node2)
@@ -106,6 +107,14 @@ class Puzzle : SKNode {
         }
 
         node.run(rotateAction)
+    }
+    
+    func addOverlay() {
+        let node = SKSpriteNode(color: .black, size: CGSize(width: 950, height: 450))
+        node.alpha = 0.5
+        node.position = CGPoint(x: 0, y: 0)
+        node.zPosition = 1
+        self.addChild(node)
     }
 }
 
