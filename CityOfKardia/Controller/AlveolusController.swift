@@ -64,13 +64,14 @@ extension AlveolusController {
                     }
 
                 case ("teller"):
-                    
                     if (CoreDataManager.shared.erryMission == 13) {
+                        //Bicara dgn Teller setelah selesai puzzle
                         showDialogue(assets: int_alveolus_puzzle_solved)
                         CoreDataManager.shared.erryMission = 14
-                        changeOngoingMission(text: .alveolus_3)
+                        changeOngoingMission(text: .alveolus_4)
 
                     } else {
+                        //Disuruh selesaiin puzzle
                         showDialogue(assets: int_alveolus)
                         changeOngoingMission(text: .alveolus_2)
                     }
@@ -126,7 +127,7 @@ extension AlveolusController {
             if node.name == "exitButton" {
                 
                 if winState {
-                    changeOngoingMission(text: .alveolus_4)
+                    changeOngoingMission(text: .alveolus_3)
                     CoreDataManager.shared.erryMission = 13
                 }
                 
