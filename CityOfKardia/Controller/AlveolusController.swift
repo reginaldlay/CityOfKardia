@@ -124,7 +124,7 @@ extension AlveolusController {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
             
-            if node.name == "exitButton" {
+            if node.name == "exitButton" || node.name == "pContinueButton" {
                 
                 if winState {
                     changeOngoingMission(text: .alveolus_3)

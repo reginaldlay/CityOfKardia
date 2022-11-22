@@ -14,7 +14,7 @@ class Puzzle : SKNode {
     
     func setupPuzzle() {
         addPuzzleItem(node: "puzzleFrame", nodeName: "puzzleFrame", pos: CGPoint(x: 0, y: 0), zPos: 10)
-        addPuzzleItem(node: "purpleExitButton", nodeName: "exitButton", pos: CGPoint(x: 390, y: 159), zPos: 11)
+        addPuzzleItem(node: "purpleExitButton", nodeName: "exitButton", pos: CGPoint(x: 390, y: 159), zPos: 13)
         addPuzzleItem(node: "cable01", nodeName: "startCable", pos: CGPoint(x: -30, y: 0), zPos: 11)
         addPuzzleItem(node: "cable02", nodeName: "endCable", pos: CGPoint(x: 270, y: 0), zPos: 11)
         addPuzzleItem(node: "cable07", nodeName: "cable0", pos: CGPoint(x: -30, y: 60), zPos: 11)
@@ -62,6 +62,20 @@ class Puzzle : SKNode {
         }
         
         if sumOfAngle == 0 {
+            let node = SKSpriteNode(imageNamed: "puzzleWinOverlay")
+            node.name = "pWinOverlay"
+            node.position = CGPoint(x: 0, y: 0)
+            node.zPosition = 12
+            node.size = CGSize(width: 800, height: 340)
+            self.addChild(node)
+            
+            let node2 = SKSpriteNode(imageNamed: "puzzleContinueButton")
+            node2.name = "pContinueButton"
+            node2.position = CGPoint(x: 0, y: -100)
+            node2.zPosition = 13
+            node2.size = CGSize(width: 134, height: 40)
+            self.addChild(node2)
+            
             return true
         }
         
