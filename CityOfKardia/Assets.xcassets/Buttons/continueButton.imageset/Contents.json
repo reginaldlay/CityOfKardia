@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "continueButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Property 1=Default@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

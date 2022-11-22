@@ -348,9 +348,7 @@ extension GameUIController {
             let bodyA = contact.bodyA.node?.name,
             let bodyB = contact.bodyB.node?.name
         else { return }
-        print("body A end \(bodyA)")
-        print("body B end \(bodyB)")
-        
+    
         if let camera = self.camera {
             changeAssetsColor(parent: camera, nodeName: "actionButton")
         }
@@ -360,7 +358,6 @@ extension GameUIController {
         case ("ground", "player") : grounded = false
         default : break
         }
-        print("\(player?.position) - \(grounded)")
     }
 }
 

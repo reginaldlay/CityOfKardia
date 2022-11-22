@@ -99,7 +99,7 @@ class Menu : SKNode {
         let node = SKSpriteNode(color: .black, size: CGSize(width: 950, height: 450))
         node.alpha = 0.5
         node.position = CGPoint(x: 0, y: 0)
-        node.zPosition = 1
+        node.zPosition = 50
         self.addChild(node)
     }
     

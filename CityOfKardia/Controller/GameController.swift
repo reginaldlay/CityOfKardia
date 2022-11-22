@@ -43,6 +43,25 @@ class GameController: SKScene {
             let node = self.atPoint(location)
             
             if (node.name == "newGameButton") {
+                if let child = childNode(withName: "newGameButton") as? SKSpriteNode {
+                    child.texture = SKTexture(imageNamed: "newGameButtonClicked")
+                }
+            }
+            else if (node.name == "continueButton") {
+                if let child = childNode(withName: "continueButton") as? SKSpriteNode {
+                    child.texture = SKTexture(imageNamed: "continueButtonClicked")
+                }
+            }
+        }
+                
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+            
+            if (node.name == "newGameButton") {
                 if let nextScene = SKScene(fileNamed: "IntroScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
@@ -102,11 +121,6 @@ class GameController: SKScene {
                 }
             }
         }
-                
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //ganti button newGameButton jadi newGameButtonClicked
     }
  
     func addNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
