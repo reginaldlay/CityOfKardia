@@ -34,7 +34,7 @@ class Menu : SKNode {
         addMenuItem(node: menuKamusButton, nodeName: "menuKamusButton", pos: CGPoint(x: 0, y: 0), zPos: 201)
         addMenuItem(node: menuKeluarButton, nodeName: "menuKeluarButton", pos: CGPoint(x: 0, y: -64), zPos: 201)
         addMenuItem(node: menuMusicButton, nodeName: "menuMusicButton", pos: CGPoint(x: 0, y: 64), zPos: 201)
-        
+        addOverlay()
     }
     
     // MARK: Fungsi untuk membuat node
@@ -93,6 +93,14 @@ class Menu : SKNode {
         }
         
         menuMusicButton.run(changeTexture ?? SKAction.setTexture(musicOnTexture))
+    }
+    
+    func addOverlay() {
+        let node = SKSpriteNode(color: .black, size: CGSize(width: 950, height: 450))
+        node.alpha = 0.5
+        node.position = CGPoint(x: 0, y: 0)
+        node.zPosition = 1
+        self.addChild(node)
     }
     
 }
